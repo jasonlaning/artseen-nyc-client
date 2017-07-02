@@ -5,8 +5,8 @@ import Footer from '../footer/footer';
 import UserProfile from './user-profile';
 import UserNav from './user-nav';
 import CommunityActivity from './community-activity';
-import SearchModal from './search-modal';
-import UserProfileModal from './user-profile-modal';
+// import SearchModal from './search-modal';
+// import UserProfileModal from './user-profile-modal';
 
 const Dashboard = (props) => (
 	<div>
