@@ -1,0 +1,15 @@
+.banner {
+	background: url('/banner-image.jpg');
+	height: 400px;
+	line-height: 400px;
+	text-align: center;
+	color: white;
+	font-size: 30px;
+	font-family: sans-serif;
+}
+
+.overlay {
+	background-color: rgba(0,0,0,.4);
+	height: 100%;
+}
+

@@ -1,0 +1,13 @@
+section {
+  padding: 30px 15px;
+  background-color: #bbb;
+}
+
+section p {
+  text-align: left;
+  margin-top: 16px;
+}
+
+section:nth-child(even) {
+  background-color: #ddd;
+}

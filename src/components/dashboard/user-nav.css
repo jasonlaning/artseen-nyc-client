@@ -1,0 +1,14 @@
+h2.inactive, h2.active {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+h2.active {
+  border-bottom: 2px solid #444;
+}
+
+h2.inactive {
+  color: #bbb;
+  border-bottom: 2px solid #bbb;
+}

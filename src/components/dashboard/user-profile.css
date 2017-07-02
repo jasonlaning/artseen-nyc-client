@@ -1,0 +1,11 @@
+.user-profile img {
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+	float: left;
+	margin-right: 35px;
+}
+
+.user-profile {
+	min-height: 200px;
+}
