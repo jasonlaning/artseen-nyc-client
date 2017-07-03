@@ -6,12 +6,12 @@ import Home from './landing/home';
 import Dashboard from './dashboard/dashboard';
 
 function App() {
-
-    return (
+ 
+    return ( 
       <Router>
         <div>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/dashboard" component={Dashboard} />
+			<Route exact path="/" component={Home} />
+			<Route exact path="/dashboard" component={Dashboard} />
         </div>
       </Router>
     );

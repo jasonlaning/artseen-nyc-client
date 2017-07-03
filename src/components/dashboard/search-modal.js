@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchModal = (props) => (
 	<div>
-		<div className="modal-background">
+		<div className="modal-overlay">
 		{document.body.classList.toggle('modal-open')}
 		</div>  
 	    <form className="search-form modal-form">

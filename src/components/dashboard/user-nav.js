@@ -2,13 +2,24 @@ import React from 'react';
 
 import './user-nav.css';
 
-const UserNav = (props) => (
-	<section>
-		<header className="wrapper user-nav">
-	        <h2 className="active">Community Activity</h2>{/*
-	     */}<h2 className="inactive">Discussions</h2>
-      	</header>
-	</section>
-);
+import UserNavCommunityView from './user-nav-community-view';
+import UserNavDiscussionsView from './user-nav-discussions-view';
+
+const UserNav = (props) => {
+
+	const navView = (view) => {
+		if (view === 'community-activity') {
+			return <UserNavCommunityView />
+		} else {
+			return <UserNavDiscussionsView />
+		}
+	}
+
+	return (
+		<section>
+		   {navView(props.userFeedView)}   
+		</section>
+	);
+}
 
 export default UserNav;

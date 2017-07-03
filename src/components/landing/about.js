@@ -6,7 +6,7 @@ import AboutCommunity from './about-community';
 import './about.css';
 
 const About = (props) => (
-	<div>
+	<div id="about" className="hash-anchor">
 		<AboutExhibitions />
 		<AboutCommunity />		
 	</div>

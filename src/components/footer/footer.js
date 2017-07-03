@@ -4,7 +4,7 @@ import './footer.css';
 
 const Footer = (props) => (
 	<footer>
-		<p>Footer (Exhibition listings powered by NY Art Beat)</p>
+		<p>Exhibition listings powered by NY Art Beat</p>
 	</footer>
 );
 

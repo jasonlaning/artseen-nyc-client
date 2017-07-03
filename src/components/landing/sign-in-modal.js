@@ -4,7 +4,7 @@ import './sign-in-modal.css';
 
 const SignInModal = (props) => ( 
 	<div>
-		<div className="modal-background">
+		<div className="modal-overlay">
 		</div>      
 	    <form className="sign-in-form modal-form">
 	        <h2>Sign In</h2>

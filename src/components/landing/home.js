@@ -7,6 +7,7 @@ import About from './about';
 import SignUp from './sign-up';
 import Footer from '../footer/footer';
 import SignInModal from './sign-in-modal';
+import ScrollToTop from '../scroll-to-top';
 
 import './home.css';
 
@@ -22,10 +23,12 @@ const Home = (props) => {
 
 	return (
 		<div>
+			<ScrollToTop />
 			{signInModal}
 			<NavBar>
 				<div className="nav-item"><Link to="/dashboard">Log in</Link></div>
-				<div className="nav-item search-glass">&#9906;</div>
+				<div className="nav-item"><a href="#sign-up">Sign up</a></div>
+				<div className="nav-item"><a href="#about">About</a></div>
 			</NavBar>
 			<main>
 				<Banner />
