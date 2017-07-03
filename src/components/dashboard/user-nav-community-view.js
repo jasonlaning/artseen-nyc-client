@@ -1,10 +1,13 @@
 import React from 'react';
+import {updateUserFeedView, fetchDiscussions} from '../../actions';
+import store from '../../store';
 
 const UserNavCommunityView = (props) => {
 
 	const onClickDiscussions = e => {
 		e.preventDefault();
-		// update state.userFeedView
+		store.dispatch(updateUserFeedView('discussions'));
+		store.dispatch(fetchDiscussions());
 	}
 
 	return (

@@ -1,19 +1,12 @@
 import React from 'react';
 
 const SearchModal = (props) => (
-	<div>
-		<div className="modal-overlay">
-		{document.body.classList.toggle('modal-open')}
-		</div>  
-	    <form className="search-form modal-form">
-			<h2>Search</h2>
-			<div>
-				<label htmlFor="search">Find an Exhibition</label>
-				<input type="text" name="search" id="search" placeholder="artist, title, medium, etc." />
-			</div>
-			<button type="submit">Search</button>
-	    </form>
-	</div>
+	<li>
+              <h2>1 hour ago</h2>
+              <p><Link to="/:userId" className="user-profile-link">Ozzy Osbourne</Link> commented on 
+              <Link to="/:discussionId" className="discussion-link"> Miguel Calderon: Caida libre (Free fall)</Link></p>
+              <p className="snippet">I found that the ancient sport of hunting with falcons becomes a metaphor for the interdependence of man and animal in this Mexican artist’s film and sculptural installation...</p>
+            </li>
 );
 
 export default SearchModal;

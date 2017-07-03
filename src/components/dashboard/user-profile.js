@@ -1,16 +1,21 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './user-profile.css';
 
 const UserProfile = (props) => (
 	<section className="user-profile">
 		<div className="wrapper">
-			<img src="/blank-profile-pic.png" alt="profile" />
-	        <h1>Username</h1>
-	        <p>[User location]</p>
-	        <p>[About user] My aesthetic interests center around post-conceptual blah blah blah.</p>
+			<img src={props.user.profilePicURL} alt="profile" />
+	        <h1>{props.user.username}</h1>
+	        <p>{props.user.location}</p>
+	        <p>{props.user.about}</p>
         </div>
     </section>
 );
 
-export default UserProfile;
+const mapStateToProps = (state, props) => ({
+	user: state.user
+})
+
+export default connect(mapStateToProps)(UserProfile);

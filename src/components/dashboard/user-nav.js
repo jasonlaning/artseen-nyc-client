@@ -8,7 +8,7 @@ import UserNavDiscussionsView from './user-nav-discussions-view';
 const UserNav = (props) => {
 
 	const navView = (view) => {
-		if (view === 'community-activity') {
+		if (view === 'community') {
 			return <UserNavCommunityView />
 		} else {
 			return <UserNavDiscussionsView />

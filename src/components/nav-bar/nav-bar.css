@@ -29,11 +29,3 @@ nav {
   padding: 0 26px;
   font-size: 16px;
 }
-
-.search-glass {
-  font-size: 26px;
-  -webkit-transform: rotate(45deg); 
-  -moz-transform: rotate(45deg); 
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}

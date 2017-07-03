@@ -9,20 +9,8 @@ const SignUp = (props) => (
       (or try the Demo)
       <form className="signup-form">
         <div>
-          <label htmlFor="first-name">First name</label>
-          <input placeholder="First Name" type="text" name="first-name" id="first-name" />
-        </div>
-        <div>
-          <label htmlFor="last-name">Last name</label>
-          <input type="text" name="last-name" id="last-name" placeholder="Last Name" />
-        </div>
-        <div>
           <label htmlFor="username">Username</label>
           <input type="text" name="username" id="username" />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" />
         </div>
         <div>
           <label htmlFor="password">Password</label>

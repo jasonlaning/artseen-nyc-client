@@ -13,7 +13,7 @@ import './home.css';
 
 const Home = (props) => {
 
-	//fix all this with state later
+	//fix all this with state later (state.modals.showSignInModal)
 	let signInModal;
 	let showSignInModal = false;
 	if (showSignInModal) {

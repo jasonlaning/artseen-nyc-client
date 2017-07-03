@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import ScrollToTop from '../scroll-to-top';
 
 import NavBar from '../nav-bar/nav-bar';
@@ -9,35 +10,59 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
+import {fetchUser, fetchCommunity, fetchDiscussions} from '../../actions';
+
 // import SearchModal from './search-modal';
 // import UserProfileModal from './user-profile-modal';
 
-const Dashboard = (props) => {
-	const userFeedView = (feedView) => {
-		if (feedView === 'discussions') {
-			return <Discussions />
-		} else if (feedView === 'single-discussion') {
-			return <SingleDiscussion />
-		}
-		return <CommunityActivity />
+export class Dashboard extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.props.dispatch(fetchUser());
+		this.props.dispatch(fetchCommunity());
 	}
 
-	return (
-		<div>
-			<ScrollToTop />
-			{/*<SearchModal />*/}
-			{/*<UserProfileModal />*/}
-			<NavBar>
-				<div className="nav-item search-glass">&#9906;</div>
-			</NavBar>
-			<main>
-				<UserProfile />
-				<UserNav userFeedView="community-activity" />
-				{userFeedView(props.userFeedView)}
-			</main>
-			<Footer />
-		</div>
-	);
+	componentDidMount() {
+		if (this.props.userFeedView === 'community') {
+			//this.props.dispatch(fetchCommunity());
+		}
+	}
+
+	render() {
+		const userFeedView = (feedView) => {
+			if (feedView === 'discussions') {
+				return <Discussions />
+			} else if (feedView === 'single-discussion') {
+				return <SingleDiscussion />
+			}
+			return <CommunityActivity />
+		}
+
+
+
+		return (
+			<div>{console.log('reloaded and userFeedView: ', this.props.userFeedView)}
+				<ScrollToTop />
+				{/*<SearchModal />*/}
+				{/*<UserProfileModal />*/}
+				<NavBar>
+					<div className="nav-item">Search</div>
+				</NavBar>
+				<main>
+					<UserProfile  />
+					<UserNav userFeedView={this.props.userFeedView} />
+					{userFeedView(this.props.userFeedView)}
+				</main>
+				<Footer />
+			</div>
+		);
+	}
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+	user: state.user,
+	userFeedView: state.userFeedView
+});
+
+export default connect(mapStateToProps)(Dashboard);
