@@ -1,0 +1,8 @@
+.comment-form label {
+  display: block;
+}
+
+.comment-form textarea {
+  width: 100%;
+  height: 200px;
+}
