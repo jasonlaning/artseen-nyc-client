@@ -1,3 +1,7 @@
+.comment-form {
+	max-width: 100%;
+}
+
 .comment-form label {
   display: block;
 }

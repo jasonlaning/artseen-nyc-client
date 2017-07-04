@@ -10,7 +10,7 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {fetchUser, fetchCommunity, fetchDiscussions} from '../../actions';
+import {fetchUser, fetchCommunity} from '../../actions';
 
 // import SearchModal from './search-modal';
 // import UserProfileModal from './user-profile-modal';
@@ -21,12 +21,6 @@ export class Dashboard extends React.Component {
 
 		this.props.dispatch(fetchUser());
 		this.props.dispatch(fetchCommunity());
-	}
-
-	componentDidMount() {
-		if (this.props.userFeedView === 'community') {
-			//this.props.dispatch(fetchCommunity());
-		}
 	}
 
 	render() {
@@ -42,7 +36,8 @@ export class Dashboard extends React.Component {
 
 
 		return (
-			<div>{console.log('reloaded and userFeedView: ', this.props.userFeedView)}
+
+			<div key="0">{console.log('reloaded and userFeedView: ', this.props.userFeedView)}
 				<ScrollToTop />
 				{/*<SearchModal />*/}
 				{/*<UserProfileModal />*/}
@@ -56,6 +51,7 @@ export class Dashboard extends React.Component {
 				</main>
 				<Footer />
 			</div>
+
 		);
 	}
 }

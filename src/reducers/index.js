@@ -45,9 +45,15 @@ export const artseenReducer = (state=initialState, action) => {
 			userFeedView: action.userFeedView
 		})
 	} else if (action.type === actions.UPDATE_DISCUSSION_TO_VIEW) {
-		console.log('discussion to view: ', action.discussionToView);
+		let discussionToView = {};
+		if (action.list === 'community') {
+			discussionToView = Object.assign({}, state.community[action.index].discussion)
+		} else {
+			discussionToView = Object.assign({}, state.discussions[action.index])
+		}
+		console.log('discussion to view: ', discussionToView.title);
 		return Object.assign({}, state, {
-			discussionToView: action.discussionToView
+			discussionToView
 		})
 	}
 	return state;

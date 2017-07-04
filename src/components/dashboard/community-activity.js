@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import CommunityItem from './community-item';
 
 import './community-activity.css';
@@ -8,17 +7,17 @@ import './community-activity.css';
 const CommunityActivity = (props) => {
 
   const community = props.community.map((item, index) => 
-    <CommunityItem key={index} {...item} />
+    <CommunityItem key={index} index={index} {...item} />
   )
 
   return (
       <section className="community-activity">
-      <div className="wrapper">
+        <div className="wrapper">
           <ul>
-              {community}
-  	   </ul>
-  	</div>
-	</section>
+            {community}
+          </ul>
+      	</div>
+    	</section>
   );
 }
 

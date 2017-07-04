@@ -49,7 +49,8 @@ export const fetchCommunity = () => dispatch => {
 }
 
 export const UPDATE_DISCUSSION_TO_VIEW = 'UPDATE_DISCUSSION_TO_VIEW';
-export const updateDiscussionToView = discussionToView => ({
+export const updateDiscussionToView = (index, list) => ({
 	type: UPDATE_DISCUSSION_TO_VIEW,
-	discussionToView
+	index,
+	list
 })

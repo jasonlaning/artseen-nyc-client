@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import DiscussionsItem from './discussions-item';
 
 import './discussions.css';
@@ -16,9 +15,9 @@ const Discussions = (props) => {
 			<div className="wrapper">
 				<ul>	
 					{discussions}
-			             </ul> 
-	      		</div> 
-	    	</section>
+	            </ul> 
+			</div> 
+	    </section>
 	);
 }
 

@@ -7,9 +7,9 @@ const UserProfile = (props) => (
 	<section className="user-profile">
 		<div className="wrapper">
 			<img src={props.user.profilePicURL} alt="profile" />
-	        <h1>{props.user.username}</h1>
-	        <p>{props.user.location}</p>
-	        <p>{props.user.about}</p>
+	        <h2>{props.user.username}</h2>
+	        <p className="location">{props.user.location}</p>
+	        <p className="about">{props.user.about}</p>
         </div>
     </section>
 );
