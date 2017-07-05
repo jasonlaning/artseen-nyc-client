@@ -12,7 +12,7 @@ export const fetchUserSuccess = user => ({
 	user
 })
 
-export const fetchUser = () => dispatch => {
+export const fetchUser = (username, password) => dispatch => {
  /*   fetch('/users/me').then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
@@ -21,9 +21,42 @@ export const fetchUser = () => dispatch => {
     }).then(user => {
         dispatch(fetchUserSuccess(user));
     });*/
+    const delay = () => new Promise (resolve =>
+    	setTimeout(resolve, 1000)
+    );
+
 	const user = Object.assign ({}, mockUser);
 
-	dispatch(fetchUserSuccess(user));
+	return (
+		delay()
+			.then(() => {
+				dispatch(fetchUserSuccess(user));
+			})
+			.then(() => {
+				dispatch(fetchCommunity());
+			})
+	)
+}
+
+export const LOG_OUT_USER_SUCCESS = 'LOG_OUT_USER_SUCCESS';
+export const logOutUserSuccess = user => ({
+	type: LOG_OUT_USER_SUCCESS,
+	user
+})
+
+export const logOutUser = user => dispatch => {
+    const delay = () => new Promise (resolve =>
+    	setTimeout(resolve, 1000)
+    );
+
+	return (
+		delay()
+			.then(() => {
+				console.log('dispatching log out');
+				dispatch(logOutUserSuccess(user));
+				//window.location = '/';
+			})
+	)
 }
 
 export const FETCH_DISCUSSIONS_SUCCESS = 'FETCH_DISCUSSIONS_SUCCESS';
@@ -53,4 +86,10 @@ export const updateDiscussionToView = (index, list) => ({
 	type: UPDATE_DISCUSSION_TO_VIEW,
 	index,
 	list
+})
+
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const toggleModal = (modal) => ({
+	type: TOGGLE_MODAL,
+	modal
 })

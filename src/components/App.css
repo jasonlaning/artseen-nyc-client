@@ -42,12 +42,22 @@ form, form button {
   border-radius: 5px;
 }
 
+form button {
+  width: 100%;
+  border: 1px solid gray;
+  padding: 3%;
+  font-size: 100%;
+  font: inherit;
+  cursor: pointer;
+}
+
 form {
+  position: relative;
   margin: 25px auto;
   max-width: 300px;
   background-color: #eee;
   border: 2px solid #bbb;
-  padding: 25px;
+  padding: 30px;
 }
 
 form label {
@@ -85,6 +95,21 @@ form input {
   z-index: 1000;
 }
 
-.modal-open {
-  overflow: hidden;
+.modal-form h2 {
+  text-align: center;
+}
+
+.modal-x {
+  position: absolute;
+  background: url('/x.png');
+  background-size: 15px;
+  height: 15px;
+  width: 15px;
+  opacity: .4;
+  top: 10px;
+  right: 10px;
+}
+
+.page-not-found {
+  padding-left: 25px;
 }

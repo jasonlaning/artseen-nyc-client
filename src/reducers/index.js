@@ -10,6 +10,7 @@ const initialState = {
 		favoriteUsers: ''
 	},
 	loggedIn: false,
+	sessionEnded: false,
 	userFeedView: 'community',
 	exhibitions: [],
 	community: [],
@@ -26,8 +27,20 @@ const initialState = {
 export const artseenReducer = (state=initialState, action) => {
 	if (action.type === actions.FETCH_USER_SUCCESS) {
 		console.log('user fetched');
+		let modals = Object.assign({}, state.modals);
+		modals.showSignInModal = false;
 		return Object.assign({}, state, {
-			user: action.user
+			user: action.user,
+			loggedIn: true,
+			sessionEnded: false,
+			modals
+		})
+	} else if (action.type === actions.LOG_OUT_USER_SUCCESS) {
+		console.log('user logged out');
+		return Object.assign({}, state, {
+			user: {},
+			loggedIn: false,
+			sessionEnded: true
 		})
 	} else if (action.type === actions.FETCH_DISCUSSIONS_SUCCESS) {
 		console.log('discussions fetched');
@@ -55,6 +68,10 @@ export const artseenReducer = (state=initialState, action) => {
 		return Object.assign({}, state, {
 			discussionToView
 		})
-	}
+	} else if (action.type === actions.TOGGLE_MODAL) {
+		let modals = Object.assign({}, state.modals);
+		modals[action.modal] = !(state.modals[action.modal]);
+		return Object.assign({}, state, { modals })
+		}
 	return state;
 }

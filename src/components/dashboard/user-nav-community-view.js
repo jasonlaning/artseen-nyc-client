@@ -1,13 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {updateUserFeedView, fetchDiscussions} from '../../actions';
-import store from '../../store';
 
 const UserNavCommunityView = (props) => {
 
 	const onClickDiscussions = e => {
 		e.preventDefault();
-		store.dispatch(updateUserFeedView('discussions'));
-		store.dispatch(fetchDiscussions());
+		props.dispatch(updateUserFeedView('discussions'));
+		props.dispatch(fetchDiscussions());
 	}
 
 	return (
@@ -18,4 +18,8 @@ const UserNavCommunityView = (props) => {
 	);
 }
 
-export default UserNavCommunityView;
+const mapStateToProps = (state, props) => ({
+	user: state.user,
+});
+
+export default connect(mapStateToProps)(UserNavCommunityView);

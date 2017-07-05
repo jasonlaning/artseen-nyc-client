@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ScrollToTop from '../scroll-to-top';
+import {Redirect} from 'react-router-dom';
 
 import NavBar from '../nav-bar/nav-bar';
 import Footer from '../footer/footer';
@@ -10,55 +10,60 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {fetchUser, fetchCommunity} from '../../actions';
+import {fetchUser, toggleModal, logOutUser} from '../../actions';
 
 // import SearchModal from './search-modal';
 // import UserProfileModal from './user-profile-modal';
 
-export class Dashboard extends React.Component {
-	constructor(props) {
-		super(props);
+export const Dashboard = (props) => {
 
-		this.props.dispatch(fetchUser());
-		this.props.dispatch(fetchCommunity());
+	// insert something to attempt to fetch user with cookie for each mount
+
+	const onClickLogOut = (e) => {
+		e.preventDefault();
+		console.log('log out function')
+		props.dispatch(logOutUser());
 	}
 
-	render() {
-		const userFeedView = (feedView) => {
-			if (feedView === 'discussions') {
-				return <Discussions />
-			} else if (feedView === 'single-discussion') {
-				return <SingleDiscussion />
-			}
-			return <CommunityActivity />
+	const userFeedView = (feedView) => {
+		if (feedView === 'discussions') {
+			return <Discussions />
+		} else if (feedView === 'single-discussion') {
+			return <SingleDiscussion />
 		}
+		return <CommunityActivity />
+	}
 
+	if (props.sessionEnded || !(props.loggedIn)) {
+		return <Redirect to='/' />
+	}
 
+	return (
 
-		return (
-
-			<div key="0">{console.log('reloaded and userFeedView: ', this.props.userFeedView)}
-				<ScrollToTop />
+			<div>{console.log('rendered and userFeedView: ', props.userFeedView)}
+				{console.log('current state: ', props.state)}
 				{/*<SearchModal />*/}
 				{/*<UserProfileModal />*/}
 				<NavBar>
-					<div className="nav-item">Search</div>
+					<div className="nav-item"><a href="" onClick={(e) => onClickLogOut(e)}>Log out</a></div>
+					<div className="nav-item">Search Exhibitions</div>
 				</NavBar>
 				<main>
 					<UserProfile  />
-					<UserNav userFeedView={this.props.userFeedView} />
-					{userFeedView(this.props.userFeedView)}
+					<UserNav userFeedView={props.userFeedView} />
+					{userFeedView(props.userFeedView)}
 				</main>
 				<Footer />
 			</div>
-
-		);
-	}
+	);		
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
 	user: state.user,
-	userFeedView: state.userFeedView
+	userFeedView: state.userFeedView,
+	loggedIn: state.loggedIn,
+	sessionEnded: state.sessionEnded,
+	state: state
 });
 
 export default connect(mapStateToProps)(Dashboard);

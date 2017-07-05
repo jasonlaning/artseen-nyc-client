@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import NavBar from '../nav-bar/nav-bar';
 import Banner from './banner';
@@ -7,37 +8,60 @@ import About from './about';
 import SignUp from './sign-up';
 import Footer from '../footer/footer';
 import SignInModal from './sign-in-modal';
-import ScrollToTop from '../scroll-to-top';
+import {toggleModal} from '../../actions';
 
 import './home.css';
 
-const Home = (props) => {
+export class Home extends React.Component {
 
-	//fix all this with state later (state.modals.showSignInModal)
-	let signInModal;
-	let showSignInModal = false;
-	if (showSignInModal) {
-		document.body.classList.toggle('modal-open');
-		signInModal = <SignInModal onClose={() => console.log('put something here')} />;
+	onSignInClick = (e, modal) => {
+		e.preventDefault();
+		e.stopPropagation();
+		this.props.dispatch(toggleModal(modal));
 	}
 
-	return (
-		<div>
-			<ScrollToTop />
-			{signInModal}
-			<NavBar>
-				<div className="nav-item"><Link to="/dashboard">Log in</Link></div>
-				<div className="nav-item"><a href="#sign-up">Sign up</a></div>
-				<div className="nav-item"><a href="#about">About</a></div>
-			</NavBar>
-			<main>
-				<Banner />
-				<About />
-				<SignUp />
-			</main>
-			<Footer />
-		</div>
-	);
+	render() {
+
+		let signInModal;
+		if (this.props.showSignInModal) {
+			signInModal = <SignInModal />;
+		}
+
+		if (this.props.loggedIn) {
+			return <Redirect to='/dashboard' />
+		}
+
+		return (
+			<div>
+				{console.log('rendered Home')}
+				{console.log('state: ', this.props.state)}
+				<NavBar>
+					<div className="nav-item">
+						<a href="" onClick={(e) => this.onSignInClick(e, 'showSignInModal')}>Log in</a>
+					</div>
+					<div className="nav-item">
+						<a href="#sign-up">Sign up</a>
+					</div>
+					<div className="nav-item">
+						<a href="#about">About</a>
+					</div>
+				</NavBar>
+				<main>
+					<Banner />
+					<About />
+					<SignUp />
+				</main>
+				<Footer />
+				{signInModal}
+			</div>
+		);
+	}
 }
 
-export default Home;
+const mapStateToProps = (state, props) => ({
+	showSignInModal: state.modals.showSignInModal,
+	loggedIn: state.loggedIn,
+	state: state
+})
+
+export default connect(mapStateToProps)(Home);
