@@ -8,20 +8,20 @@ import Dashboard from './dashboard/dashboard';
 import PageNotFound from './page-not-found';
 
 const App = () => {
- 
-    return (  
-      <Router>
-        <ScrollToTop>
-        <div>
-        <Switch>
-  				<Route exact path="/" component={Home} />
-  				<Route exact path="/dashboard" component={Dashboard} />
-  				<Route component={PageNotFound} />
-			  </Switch>
-        </div>
-        </ScrollToTop>
-      </Router>
-    );
+
+	return (  
+		<Router>
+		<ScrollToTop>
+		<div>
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/dashboard" component={Dashboard} />
+				<Route component={PageNotFound} />
+			</Switch>
+		</div>
+		</ScrollToTop>
+		</Router>
+	);
 }
 
 export default App;
