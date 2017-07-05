@@ -1,0 +1,14 @@
+.follow-user-form {
+	width: 500px;
+}
+
+.follow-user-form img {
+	width: 30%;
+	float: left;
+	padding: 0 25px 25px 0;
+}
+
+.follow-user-form button {
+	width: 20%;
+	margin: 10px;
+}

@@ -1,0 +1,7 @@
+.comment-username {
+	font-weight: bold;
+}
+
+.comment-item a:hover {
+	border-bottom: 2px solid black;
+}
