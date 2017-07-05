@@ -1,4 +1,4 @@
-import {mockUser, mockDiscussions, mockCommunity} from '../mock-data';
+import {mockUser, mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
 
 export const UPDATE_USER_FEED_VIEW = 'UPDATE_FEED_VIEW';
 export const updateUserFeedView = userFeedView => ({
@@ -22,7 +22,7 @@ export const fetchUser = (username, password) => dispatch => {
         dispatch(fetchUserSuccess(user));
     });*/
     const delay = () => new Promise (resolve =>
-    	setTimeout(resolve, 1000)
+    	setTimeout(resolve, 10)
     );
 
 	const user = Object.assign ({}, mockUser);
@@ -46,7 +46,7 @@ export const logOutUserSuccess = user => ({
 
 export const logOutUser = user => dispatch => {
     const delay = () => new Promise (resolve =>
-    	setTimeout(resolve, 1000)
+    	setTimeout(resolve, 10)
     );
 
 	return (
@@ -79,6 +79,17 @@ export const fetchCommunitySuccess = community => ({
 export const fetchCommunity = () => dispatch => {
 
 	dispatch(fetchCommunitySuccess(mockCommunity));
+}
+
+export const FETCH_USER_TO_FOLLOW_SUCCESS = 'FETCH_USER_TO_FOLLOW_SUCCESS';
+export const fetchUserToFollowSuccess = userToFollow => ({
+	type: FETCH_USER_TO_FOLLOW_SUCCESS,
+	userToFollow
+})
+
+export const fetchUserToFollow = () => dispatch => {
+	//get the user to follow
+	dispatch(fetchUserToFollowSuccess(mockUserToFollow));
 }
 
 export const UPDATE_DISCUSSION_TO_VIEW = 'UPDATE_DISCUSSION_TO_VIEW';

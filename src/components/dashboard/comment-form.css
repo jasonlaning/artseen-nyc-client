@@ -1,12 +1,12 @@
 .comment-form {
-	max-width: 100%;
+	width: initial;
 }
 
 .comment-form label {
-  display: block;
+	display: block;
 }
 
 .comment-form textarea {
-  width: 100%;
-  height: 200px;
+	max-width: 100%;
+	height: 200px;
 }

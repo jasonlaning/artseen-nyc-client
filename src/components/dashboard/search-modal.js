@@ -1,12 +1,40 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-const SearchModal = (props) => (
-	<li>
-      <h2>1 hour ago</h2>
-      <p><Link to="/:userId" className="user-profile-link">Ozzy Osbourne</Link> commented on 
-      <Link to="/:discussionId" className="discussion-link"> Miguel Calderon: Caida libre (Free fall)</Link></p>
-      <p className="snippet">I found that the ancient sport of hunting with falcons becomes a metaphor for the interdependence of man and animal in this Mexican artist’s film and sculptural installation...</p>
-    </li>
-);
+import {toggleModal} from '../../actions';
+import './search-modal.css';
 
-export default SearchModal;
+export const SearchModal = (props) => {
+
+	const onCloseModal = (e, modal) => {
+		e.preventDefault();
+		props.dispatch(toggleModal(modal));
+	}
+
+	const onSearchSubmit = (e) => {
+		e.preventDefault();
+	}
+
+	return (
+		<div>
+			<div className="modal-overlay" onClick={e => onCloseModal(e, 'showSearchModal')} >
+			</div>      
+			<form className="search-form modal-form" onSubmit={e => onSearchSubmit(e)} >
+				<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showSearchModal')} > </a>
+				<div>
+					<label htmlFor="search-exhibitions">Search Exhibitions</label>
+					<input type="text" name="search-exhibitions" id="search-exhibitions"
+						placeholder="artist, exhibition, title, media, etc..." />
+					<button type="submit">Search</button>
+				</div>
+			</form>
+		</div>
+	);
+}
+
+const mapStateToProps = (state, props) => ({
+	user: state.user,
+	loggedIn: state.loggedIn,
+});
+
+export default connect(mapStateToProps)(SearchModal);

@@ -16,10 +16,10 @@ const initialState = {
 	community: [],
 	discussions: [],
 	discussionToView: {},
-	userToView: {},
+	userToFollow: {},
 	modals: {
 		showSignInModal: false,
-		showUserProfileModal: false,
+		showFollowUserModal: false,
 		showSearchModal: false
 	}
 };
@@ -33,6 +33,14 @@ export const artseenReducer = (state=initialState, action) => {
 			user: action.user,
 			loggedIn: true,
 			sessionEnded: false,
+			modals
+		})
+	} else if (action.type === actions.FETCH_USER_TO_FOLLOW_SUCCESS) {
+		let modals = Object.assign({}, state.modals);
+		modals.showFollowUserModal = true;
+		console.log(action.userToFollow)
+		return Object.assign({}, state, {
+			userToFollow: action.userToFollow,
 			modals
 		})
 	} else if (action.type === actions.LOG_OUT_USER_SUCCESS) {

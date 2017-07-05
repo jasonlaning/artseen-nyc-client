@@ -13,7 +13,7 @@ const UserNavCommunityView = (props) => {
 	return (
 		<header className="wrapper user-nav">
 			<h2 className="active">Community Activity</h2>
-			<h2 className="inactive"><a href="" onClick={e => onClickDiscussions(e)} >Discussions</a></h2>
+			<a href="" onClick={e => onClickDiscussions(e)} ><h2 className="inactive">Discussions</h2></a>
 		</header>
 	);
 }

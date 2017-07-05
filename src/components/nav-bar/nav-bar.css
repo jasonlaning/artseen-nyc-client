@@ -24,6 +24,10 @@ nav {
   float: right;
 }
 
+.nav-items-container a:hover {
+  border-bottom: 2px solid #fff;
+}
+
 .nav-item {
   float: right;
   padding: 0 26px;

@@ -13,3 +13,7 @@
 	color: gray;
 	font-style: italic;
 }
+
+.community-activity a:hover {
+	border-bottom: 2px solid black;
+}

@@ -10,10 +10,10 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {fetchUser, toggleModal, logOutUser} from '../../actions';
+import {toggleModal, logOutUser} from '../../actions';
 
-// import SearchModal from './search-modal';
-// import UserProfileModal from './user-profile-modal';
+import SearchModal from './search-modal';
+import FollowUserModal from './follow-user-modal';
 
 export const Dashboard = (props) => {
 
@@ -25,6 +25,11 @@ export const Dashboard = (props) => {
 		props.dispatch(logOutUser());
 	}
 
+	const onClickSearch = (e, modal) => {
+		e.preventDefault();
+		props.dispatch(toggleModal(modal));
+	}
+
 	const userFeedView = (feedView) => {
 		if (feedView === 'discussions') {
 			return <Discussions />
@@ -34,6 +39,16 @@ export const Dashboard = (props) => {
 		return <CommunityActivity />
 	}
 
+	let searchModal;
+	if (props.modals.showSearchModal) {
+		searchModal = <SearchModal />;
+	}
+
+	let followUserModal;
+		if (props.modals.showFollowUserModal) {
+			followUserModal = <FollowUserModal />;
+	}	
+
 	if (props.sessionEnded || !(props.loggedIn)) {
 		return <Redirect to='/' />
 	}
@@ -42,11 +57,11 @@ export const Dashboard = (props) => {
 
 			<div>{console.log('rendered and userFeedView: ', props.userFeedView)}
 				{console.log('current state: ', props.state)}
-				{/*<SearchModal />*/}
-				{/*<UserProfileModal />*/}
+				{searchModal}
+				{followUserModal}
 				<NavBar>
 					<div className="nav-item"><a href="" onClick={(e) => onClickLogOut(e)}>Log out</a></div>
-					<div className="nav-item">Search Exhibitions</div>
+					<div className="nav-item"><a href="" onClick={(e) => onClickSearch(e, 'showSearchModal')}>Search</a></div>
 				</NavBar>
 				<main>
 					<UserProfile  />
@@ -63,6 +78,7 @@ const mapStateToProps = (state, props) => ({
 	userFeedView: state.userFeedView,
 	loggedIn: state.loggedIn,
 	sessionEnded: state.sessionEnded,
+	modals: state.modals,
 	state: state
 });
 

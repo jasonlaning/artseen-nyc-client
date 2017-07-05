@@ -7,6 +7,14 @@ export const mockUser = {
 	favoriteUsers: ''
 }
 
+export const mockUserToFollow = {
+	username: 'SnakePlissken',
+	location: 'LA/NYC',
+	about: 'I shut down the third world, you win they lose. I shut down America, they win, you lose. The more things change, the more they stay the same',
+	profilePicURL: '/blank-profile-pic.png',
+	comments: []
+}
+
 export const mockDiscussions = [
 	{
 		id: '123',
@@ -20,13 +28,13 @@ export const mockDiscussions = [
 		comments: [
 			{
 				id: '765',
-				author: 'Jimbo',
+				username: 'SnakePlissken',
 				date: 'yesterday',
 				text: 'Yeah this is really great, love it.'
 			},
 			{
 				id: '766',
-				author: 'Jimbo bob',
+				username: 'SnakePlissken',
 				date: 'last week',
 				text: 'This is dumb, hate it.'
 			}
@@ -59,7 +67,7 @@ export const mockDiscussions = [
 
 export const mockCommunity = [
 	{
-		username: 'OzzyOsbourne',
+		username: 'SnakePlissken',
 		discussion: {
 			id: '124',
 			title: '2Caida libre (Free fall)',
