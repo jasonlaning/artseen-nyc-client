@@ -15,9 +15,9 @@ const Discussions = (props) => {
 			<div className="wrapper">
 				<ul>	
 					{discussions}
-	            </ul> 
+				</ul> 
 			</div> 
-	    </section>
+		</section>
 	);
 }
 

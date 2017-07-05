@@ -99,5 +99,39 @@ export const mockCommunity = [
 		commentId: '777',
 		date: '2 hours ago',		
 		comment: 'I still found that the ancient sport of hunting with falcons becomes a metaphor for the interdependence of man and animal in this Mexican artist’s film and sculptural installation'
+	},
+	{
+		username: 'SnakePlissken',
+		discussion: {
+			id: '124',
+			title: '2Caida libre (Free fall)',
+			artist: '2Miguel Calderon',
+			gallery: 'Luhring Augustine Bushwick',
+			address: '25 Knickerbocker Ave',
+			openDate: 'July 22, 2017',
+			closeDate: 'July 29, 2017',
+			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+			comments: []
+		},
+		commentId: '765',
+		date: '2 minutes ago',
+		comment: 'I found that the ancient sport of hunting with falcons becomes a metaphor for the interdependence of man and animal in this Mexican artist’s film and sculptural installation'
+	},
+	{
+		username: 'SnakePlissken',
+		discussion: {
+			id: '124',
+			title: '2Caida libre (Free fall)',
+			artist: '2Miguel Calderon',
+			gallery: 'Luhring Augustine Bushwick',
+			address: '25 Knickerbocker Ave',
+			openDate: 'July 22, 2017',
+			closeDate: 'July 29, 2017',
+			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+			comments: []
+		},
+		commentId: '765',
+		date: '2 minutes ago',
+		comment: 'I found that the ancient sport of hunting with falcons becomes a metaphor for the interdependence of man and animal in this Mexican artist’s film and sculptural installation'
 	}
 ]

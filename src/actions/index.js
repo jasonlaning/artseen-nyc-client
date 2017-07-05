@@ -76,7 +76,7 @@ export const fetchCommunitySuccess = community => ({
 	community
 })
 
-export const fetchCommunity = () => dispatch => {
+export const fetchCommunity = (username) => dispatch => {
 
 	dispatch(fetchCommunitySuccess(mockCommunity));
 }
@@ -87,7 +87,7 @@ export const fetchUserToFollowSuccess = userToFollow => ({
 	userToFollow
 })
 
-export const fetchUserToFollow = () => dispatch => {
+export const fetchUserToFollow = (username) => dispatch => {
 	//get the user to follow
 	dispatch(fetchUserToFollowSuccess(mockUserToFollow));
 }
@@ -104,3 +104,14 @@ export const toggleModal = (modal) => ({
 	type: TOGGLE_MODAL,
 	modal
 })
+
+export const HANDLE_NEW_COMMENT_SUCCESS = 'HANDLE_NEW_COMMENT_SUCCESS';
+export const handleNewCommentSuccess = (comment) => ({
+	type: HANDLE_NEW_COMMENT_SUCCESS,
+	comment
+})
+
+export const handleNewComment = (comment) => dispatch => {
+	//post comment to discussion and to user who made it
+	dispatch(handleNewCommentSuccess(comment));
+}
