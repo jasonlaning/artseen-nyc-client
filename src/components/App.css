@@ -7,6 +7,10 @@ body {
   color: #222;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .wrapper {
   max-width: 1000px;
   margin: 0 auto;
@@ -54,7 +58,7 @@ form button {
 form {
   position: relative;
   margin: 25px auto;
-  width: 300px;
+  width: 350px;
   background-color: #eee;
   border: 2px solid #bbb;
   padding: 30px;
@@ -66,7 +70,7 @@ form label {
 }
 
 form input {
-  width: 94%;
+  width: 100%;
   margin-bottom: 15px;
   padding: 3%;
   border: 0;
