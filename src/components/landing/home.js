@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 import NavBar from '../nav-bar/nav-bar';
 import Banner from './banner';
@@ -26,11 +25,11 @@ export class Home extends React.Component {
 		if (this.props.showSignInModal) {
 			signInModal = <SignInModal />;
 		}
-
+/*
 		if (this.props.loggedIn) {
 			return <Redirect to='/dashboard' />
 		}
-
+*/
 		return (
 			<div>
 				{console.log('rendered Home')}

@@ -117,3 +117,10 @@ form input {
 .page-not-found {
   padding-left: 25px;
 }
+
+.loading {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #bbb;
+}

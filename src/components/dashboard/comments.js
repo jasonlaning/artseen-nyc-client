@@ -2,11 +2,11 @@ import React from 'react';
 
 import CommentItem from './comment-item';
 
-const Comments = (props) => {
+export const Comments = (props) => {
 
 	const comments = props.comments.map((item, index) => 
 		<CommentItem key={index} {...item} />
-	)
+		)
 
 	return (
 		<section>

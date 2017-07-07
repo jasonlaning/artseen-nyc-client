@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import NavBar from '../nav-bar/nav-bar';
 import Footer from '../footer/footer';
@@ -10,14 +10,34 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {toggleModal, logOutUser} from '../../actions';
+import {toggleModal, logOutUser, updateDiscussionToView, fetchUser} from '../../actions';
 
 import SearchModal from './search-modal';
 import FollowUserModal from './follow-user-modal';
 
+import './dashboard.css';
+
 export const Dashboard = (props) => {
 
+	const feedView = props.match.params.feedView;
+	const loaded = props.loggedIn;
+
 	// insert something to attempt to fetch user with cookie for each mount
+	// but not the following, which should be replaced!!
+	// below is for page refresh
+	if (!loaded) {
+		if (feedView === ('discussion')) {
+		props.dispatch(fetchUser())
+			.then(() => {
+				if (props.match.params.feedView === 'discussion') {
+					console.log('fetching discussion');
+					props.dispatch(updateDiscussionToView(props.match.params.discussionId));
+				}
+			})
+		} else {
+			props.dispatch(fetchUser());
+		}
+	}
 
 	const onClickLogOut = (e) => {
 		e.preventDefault();
@@ -32,9 +52,9 @@ export const Dashboard = (props) => {
 
 	const userFeedView = (feedView) => {
 		if (feedView === 'discussions') {
-			return <Discussions />
-		} else if (feedView === 'single-discussion') {
-			return <SingleDiscussion />
+				return <Discussions />
+		} else if (feedView === 'discussion') {
+				return <SingleDiscussion />
 		}
 		return <CommunityActivity />
 	}
@@ -45,17 +65,31 @@ export const Dashboard = (props) => {
 	}
 
 	let followUserModal;
-		if (props.modals.showFollowUserModal) {
-			followUserModal = <FollowUserModal />;
-	}	
+	if (props.modals.showFollowUserModal) {
+		followUserModal = <FollowUserModal />;
+	}
 
-	if (props.sessionEnded || !(props.loggedIn)) {
-		return <Redirect to='/' />
+	const fadeIn = () => {
+		if (!loaded) {
+			return (
+				<div key="loading-wrapper">
+					<section className="loading" key="loading"> </section>			
+				</div>
+			)
+		} else {
+			return (
+				<main key="main">
+					<UserProfile  />
+					<UserNav userFeedView={feedView} />
+					<div key="feed-wrapper">{userFeedView(feedView)}</div>
+				</main>
+			)
+		}
 	}
 
 	return (
 
-			<div>{console.log('rendered and userFeedView: ', props.userFeedView)}
+			<div>
 				{console.log('current state: ', props.state)}
 				{searchModal}
 				{followUserModal}
@@ -63,11 +97,13 @@ export const Dashboard = (props) => {
 					<div className="nav-item"><a href="" onClick={(e) => onClickLogOut(e)}>Log out</a></div>
 					<div className="nav-item"><a href="" onClick={(e) => onClickSearch(e, 'showSearchModal')}>Search</a></div>
 				</NavBar>
-				<main>
-					<UserProfile  />
-					<UserNav userFeedView={props.userFeedView} />
-					{userFeedView(props.userFeedView)}
-				</main>
+				<ReactCSSTransitionGroup
+				      transitionName="dashboard-fade"
+				      transitionEnter={true}
+				      transitionEnterTimeout={500}
+				      transitionLeave={false}>
+					{fadeIn()}
+				</ReactCSSTransitionGroup>
 				<Footer />
 			</div>
 	);		
@@ -75,9 +111,8 @@ export const Dashboard = (props) => {
 
 const mapStateToProps = (state, props) => ({
 	user: state.user,
-	userFeedView: state.userFeedView,
+	discussionToView: state.discussionToView,
 	loggedIn: state.loggedIn,
-	sessionEnded: state.sessionEnded,
 	modals: state.modals,
 	state: state
 });

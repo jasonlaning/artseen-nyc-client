@@ -1,15 +1,11 @@
 import {mockUser, mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
 
-export const UPDATE_USER_FEED_VIEW = 'UPDATE_FEED_VIEW';
-export const updateUserFeedView = userFeedView => ({
-	type: 'UPDATE_FEED_VIEW',
-	userFeedView
-})
-
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
-export const fetchUserSuccess = user => ({
+export const fetchUserSuccess = (user, community, discussions) => ({
 	type: FETCH_USER_SUCCESS,
-	user
+	user,
+	community,
+	discussions
 })
 
 export const fetchUser = (username, password) => dispatch => {
@@ -30,10 +26,7 @@ export const fetchUser = (username, password) => dispatch => {
 	return (
 		delay()
 			.then(() => {
-				dispatch(fetchUserSuccess(user));
-			})
-			.then(() => {
-				dispatch(fetchCommunity());
+				dispatch(fetchUserSuccess(user, mockCommunity, mockDiscussions));
 			})
 	)
 }
@@ -53,8 +46,8 @@ export const logOutUser = user => dispatch => {
 		delay()
 			.then(() => {
 				console.log('dispatching log out');
+				window.location='/';
 				dispatch(logOutUserSuccess(user));
-				//window.location = '/';
 			})
 	)
 }
@@ -93,9 +86,9 @@ export const fetchUserToFollow = (username) => dispatch => {
 }
 
 export const UPDATE_DISCUSSION_TO_VIEW = 'UPDATE_DISCUSSION_TO_VIEW';
-export const updateDiscussionToView = (index, list) => ({
+export const updateDiscussionToView = (id, list) => ({
 	type: UPDATE_DISCUSSION_TO_VIEW,
-	index,
+	id,
 	list
 })
 

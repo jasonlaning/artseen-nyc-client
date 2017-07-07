@@ -7,7 +7,7 @@ import './discussions.css';
 const Discussions = (props) => {
 
 	const discussions = props.discussions.map((item, index) =>
-		<DiscussionsItem key={index} index={index} {...item} />
+		<DiscussionsItem key={index} id={item.id} {...item} />
 	)
 
 	return(

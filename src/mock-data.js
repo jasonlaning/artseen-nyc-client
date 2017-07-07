@@ -17,7 +17,7 @@ export const mockUserToFollow = {
 
 export const mockDiscussions = [
 	{
-		id: '123',
+		id: '121',
 		title: '1Caida libre (Free fall)',
 		artist: '1Miguel Calderon',
 		gallery: 'Luhring Augustine Bushwick',
@@ -41,7 +41,7 @@ export const mockDiscussions = [
 		]
 	},
 	{
-		id: '124',
+		id: '122',
 		title: '2Caida libre (Free fall)',
 		artist: '2Miguel Calderon',
 		gallery: 'Luhring Augustine Bushwick',
@@ -52,7 +52,7 @@ export const mockDiscussions = [
 		comments: []
 	},
 	{
-		id: '125',
+		id: '123',
 		title: '3Caida libre (Free fall)',
 		artist: '3Miguel Calderon',
 		gallery: 'Luhring Augustine Bushwick',
@@ -60,7 +60,20 @@ export const mockDiscussions = [
 		openDate: 'July 22, 2017',
 		closeDate: 'July 29, 2017',
 		description: '3Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
-		comments: []
+		comments: [
+			{
+				id: '765',
+				username: 'SnakePlissken',
+				date: 'yesterday',
+				text: 'Yeah this is really great, love it.'
+			},
+			{
+				id: '766',
+				username: 'SnakePlissken',
+				date: 'last week',
+				text: 'This is dumb, hate it.'
+			}
+		]
 	}
 
 ]
@@ -69,9 +82,9 @@ export const mockCommunity = [
 	{
 		username: 'SnakePlissken',
 		discussion: {
-			id: '124',
-			title: '2Caida libre (Free fall)',
-			artist: '2Miguel Calderon',
+			id: '121',
+			title: '1Caida libre (Free fall)',
+			artist: '1Miguel Calderon',
 			gallery: 'Luhring Augustine Bushwick',
 			address: '25 Knickerbocker Ave',
 			openDate: 'July 22, 2017',
@@ -86,7 +99,7 @@ export const mockCommunity = [
 	{
 		username: 'Jake the Snake',
 		discussion: {
-			id: '125',
+			id: '123',
 			title: '3Caida libre (Free fall)',
 			artist: '3Miguel Calderon',
 			gallery: 'Luhring Augustine Bushwick',
@@ -94,7 +107,20 @@ export const mockCommunity = [
 			openDate: 'July 22, 2017',
 			closeDate: 'July 29, 2017',
 			description: '3Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
-			comments: []
+			comments: [
+			{
+				id: '765',
+				username: 'SnakePlissken',
+				date: 'yesterday',
+				text: 'Yeah this is really great, love it.'
+			},
+			{
+				id: '766',
+				username: 'SnakePlissken',
+				date: 'last week',
+				text: 'This is dumb, hate it.'
+			}
+		]
 		},
 		commentId: '777',
 		date: '2 hours ago',		
@@ -103,7 +129,7 @@ export const mockCommunity = [
 	{
 		username: 'SnakePlissken',
 		discussion: {
-			id: '124',
+			id: '122',
 			title: '2Caida libre (Free fall)',
 			artist: '2Miguel Calderon',
 			gallery: 'Luhring Augustine Bushwick',
@@ -120,7 +146,7 @@ export const mockCommunity = [
 	{
 		username: 'SnakePlissken',
 		discussion: {
-			id: '124',
+			id: '122',
 			title: '2Caida libre (Free fall)',
 			artist: '2Miguel Calderon',
 			gallery: 'Luhring Augustine Bushwick',

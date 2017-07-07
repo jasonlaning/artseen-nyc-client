@@ -1,19 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateUserFeedView, fetchCommunity, fetchDiscussions} from '../../actions';
+import {withRouter} from 'react-router-dom';
+import {fetchCommunity, fetchDiscussions} from '../../actions';
 
 const UserNavDiscussionsView = (props) => {
 
 	const onClickCommunity = e => {
 		e.preventDefault();
-		props.dispatch(updateUserFeedView('community'));
 		props.dispatch(fetchCommunity());
+		props.history.push('/dashboard');
 	}
 
 	const onClickDiscussions = e => {
 		e.preventDefault();
-		props.dispatch(updateUserFeedView('discussions'));
 		props.dispatch(fetchDiscussions());
+		props.history.push('/dashboard/discussions');
 	}
 
 	return (
@@ -28,4 +29,4 @@ const mapStateToProps = (state, props) => ({
 	user: state.user,
 });
 
-export default connect(mapStateToProps)(UserNavDiscussionsView);
+export default connect(mapStateToProps)(withRouter(UserNavDiscussionsView));

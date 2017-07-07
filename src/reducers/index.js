@@ -10,12 +10,12 @@ const initialState = {
 		favoriteUsers: ''
 	},
 	loggedIn: false,
-	sessionEnded: false,
-	userFeedView: 'community',
 	exhibitions: [],
 	community: [],
 	discussions: [],
-	discussionToView: {},
+	discussionToView: {
+		id: '',
+	},
 	userToFollow: {},
 	modals: {
 		showSignInModal: false,
@@ -32,8 +32,9 @@ export const artseenReducer = (state=initialState, action) => {
 		modals.showSignInModal = false;
 		return Object.assign({}, state, {
 			user: action.user,
+			community: action.community,
+			discussions: action.discussions,
 			loggedIn: true,
-			sessionEnded: false,
 			modals,
 			prevAction: action.type
 		})
@@ -51,7 +52,6 @@ export const artseenReducer = (state=initialState, action) => {
 		return Object.assign({}, state, {
 			user: {},
 			loggedIn: false,
-			sessionEnded: true,
 			prevAction: action.type
 		})
 	} else if (action.type === actions.FETCH_DISCUSSIONS_SUCCESS) {
@@ -66,19 +66,20 @@ export const artseenReducer = (state=initialState, action) => {
 			community: action.community,
 			prevAction: action.type
 		})
-	} else if (action.type === actions.UPDATE_USER_FEED_VIEW) {
-		console.log('user feed view set to: ', action.userFeedView)
-		return Object.assign({}, state, {
-			userFeedView: action.userFeedView,
-			prevAction: action.type
-		})
 	} else if (action.type === actions.UPDATE_DISCUSSION_TO_VIEW) {
-		let discussionToView = {};
-		if (action.list === 'community') {
-			discussionToView = Object.assign({}, state.community[action.index].discussion)
-		} else {
-			discussionToView = Object.assign({}, state.discussions[action.index])
+		let discussionIndex;
+		console.log('action id', action.id);
+		console.log(state.discussions);
+		console.log(state.discussions[0]);
+		console.log(state.discussions[0].id);
+		console.log(action.id === state.discussions[0].id)
+
+		for (let i=0; i < state.discussions.length; i++ ) {
+			if (state.discussions[i].id === action.id) {
+				discussionIndex = i;
+			}
 		}
+		const discussionToView = Object.assign({}, state.discussions[discussionIndex]);
 		console.log('discussion to view: ', discussionToView.title);
 		return Object.assign({}, state, {
 			discussionToView,

@@ -7,7 +7,7 @@ import Home from './landing/home';
 import Dashboard from './dashboard/dashboard';
 import PageNotFound from './page-not-found';
 
-const App = () => {
+const App = (props) => {
 
 	return (  
 		<Router>
@@ -16,6 +16,8 @@ const App = () => {
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/dashboard/:feedView" component={Dashboard} />
+				<Route exact path="/dashboard/:feedView/:discussionId" component ={Dashboard} />
 				<Route component={PageNotFound} />
 			</Switch>
 		</div>

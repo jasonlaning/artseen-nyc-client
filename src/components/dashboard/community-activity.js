@@ -7,7 +7,7 @@ import './community-activity.css';
 const CommunityActivity = (props) => {
 
   const community = props.community.map((item, index) => 
-    <CommunityItem key={index} index={index} {...item} />
+    <CommunityItem key={index} id={item.discussion.id} {...item} />
   )
 
   return (

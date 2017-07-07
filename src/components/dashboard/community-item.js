@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
-import {updateUserFeedView, updateDiscussionToView, fetchUserToFollow} from '../../actions';
+import {fetchUserToFollow} from '../../actions';
 
 import './community-item.css';
 
@@ -9,8 +10,8 @@ const CommunityItem = (props) => {
 
 	const onTitleClick = e => {
 		e.preventDefault();
-		props.dispatch(updateUserFeedView('single-discussion'));
-		props.dispatch(updateDiscussionToView(e.currentTarget.name, 'community'));
+		//props.dispatch(updateDiscussionToView(e.currentTarget.name, 'community'));
+		props.history.push(`/dashboard/discussion/${e.currentTarget.name}`);
 	}
 
 	const onClickUserToFollow = e => {
@@ -25,7 +26,7 @@ const CommunityItem = (props) => {
 			<h2>{props.date}</h2>
 			<p><a href="" onClick={(e) => onClickUserToFollow(e)} 
 					className="community-username">{props.username}</a> commented on 
-				<a href="" name={props.index} onClick={e => onTitleClick(e)} 
+				<a href="" name={props.id} onClick={e => onTitleClick(e)} 
 					className="community-title"> {props.discussion.artist}: {props.discussion.title}</a></p>
 			<p className="snippet">{props.comment}...</p>
 		</li>
@@ -38,4 +39,4 @@ const mapStateToProps = (state, props) => ({
 	modals: state.modals
 });
 
-export default connect(mapStateToProps)(CommunityItem);
+export default connect(mapStateToProps)(withRouter(CommunityItem));

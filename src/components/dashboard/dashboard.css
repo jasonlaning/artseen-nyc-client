@@ -1,0 +1,17 @@
+.dashboard-fade-enter {
+  opacity: 0.01;
+}
+
+.dashboard-fade-enter.dashboard-fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.dashboard-fade-leave {
+  opacity: 1;
+}
+
+.dashboard-fade-leave.dashboard-fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
