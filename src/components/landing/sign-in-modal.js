@@ -27,7 +27,7 @@ export const SignInModal = (props) => {
 			<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showSignInModal')} > </a>
 				<div>
 					<label htmlFor="username">Username</label>
-					<input type="text" name="username" id="username" />
+					<input autoFocus type="text" name="username" id="username" />
 				</div>
 				<div>
 					<label htmlFor="password">Password</label>

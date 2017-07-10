@@ -12,9 +12,9 @@ const DiscussionsItem = (props) => {
 
 	return (
 		<li>
-			<h2><a href="discussion" name={props.id} onClick={(e) => onTitleClick(e)} >{props.artist}: {props.title}</a></h2>
-		              <p>{props.gallery} / {props.address}</p>
-		              <p>{props.openDate} - {props.closeDate}</p>
+			<h2><a href="discussion" name={props.id} onClick={(e) => onTitleClick(e)} >{props.name}</a></h2>
+		              <p>{props.venue.name} / {props.venue.address}</p>
+		              <p>{props.dateStart} - {props.dateEnd}</p>
 		              <p><b>Description:</b> {props.description}</p>
 		              <p>{props.comments.length} Comments</p>
 		</li>

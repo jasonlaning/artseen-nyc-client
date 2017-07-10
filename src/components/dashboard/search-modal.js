@@ -23,7 +23,7 @@ export const SearchModal = (props) => {
 				<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showSearchModal')} > </a>
 				<div>
 					<label htmlFor="search-exhibitions">Search Exhibitions</label>
-					<input type="text" name="search-exhibitions" id="search-exhibitions"
+					<input autoFocus type="text" name="search-exhibitions" id="search-exhibitions"
 						placeholder="artist, exhibition, title, media, etc..." />
 					<button type="submit">Search</button>
 				</div>

@@ -73,15 +73,15 @@ export const Dashboard = (props) => {
 		if (!loaded) {
 			return (
 				<div key="loading-wrapper">
-					<section className="loading" key="loading"> </section>			
+					<section className="loading"></section>			
 				</div>
 			)
 		} else {
 			return (
 				<main key="main">
-					<UserProfile  />
+					<UserProfile />
 					<UserNav userFeedView={feedView} />
-					<div key="feed-wrapper">{userFeedView(feedView)}</div>
+					<div>{userFeedView(feedView)}</div>
 				</main>
 			)
 		}
@@ -91,17 +91,21 @@ export const Dashboard = (props) => {
 
 			<div>
 				{console.log('current state: ', props.state)}
-				{searchModal}
-				{followUserModal}
+				<ReactCSSTransitionGroup 
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={500}
+					transitionName="modal-fade">
+					{searchModal}
+					{followUserModal}
+				</ReactCSSTransitionGroup>
 				<NavBar>
 					<div className="nav-item"><a href="" onClick={(e) => onClickLogOut(e)}>Log out</a></div>
 					<div className="nav-item"><a href="" onClick={(e) => onClickSearch(e, 'showSearchModal')}>Search</a></div>
 				</NavBar>
-				<ReactCSSTransitionGroup
-				      transitionName="dashboard-fade"
-				      transitionEnter={true}
-				      transitionEnterTimeout={500}
-				      transitionLeave={false}>
+				<ReactCSSTransitionGroup 
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={500}
+					transitionName="dashboard-fade">
 					{fadeIn()}
 				</ReactCSSTransitionGroup>
 				<Footer />

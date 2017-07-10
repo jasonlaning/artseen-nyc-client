@@ -20,7 +20,7 @@ export const SingleDiscussion = (props) => {
 		if (props.prevAction !== 'HANDLE_NEW_COMMENT_SUCCESS' 
 			&& props.prevAction !== 'FETCH_USER_TO_FOLLOW_SUCCESS'
 			&& props.prevAction !== 'TOGGLE_MODAL') {
-			scroll.animateScroll.scrollToTop({duration: 500});
+			scroll.animateScroll.scrollTo(200, {duration: 1000});
 		} 
 	}
 

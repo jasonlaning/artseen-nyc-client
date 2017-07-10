@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import NavBar from '../nav-bar/nav-bar';
 import Banner from './banner';
@@ -51,7 +52,12 @@ export class Home extends React.Component {
 					<SignUp />
 				</main>
 				<Footer />
-				{signInModal}
+				<ReactCSSTransitionGroup 
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={500}
+					transitionName="modal-fade">
+					{signInModal}
+				</ReactCSSTransitionGroup>
 			</div>
 		);
 	}

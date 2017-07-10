@@ -3,7 +3,6 @@ export const mockUser = {
 	location: 'Brooklyn, NY',
 	about: 'My aesthetic interests center around post-conceptual blah blah blah.',
 	profilePicURL: '/blank-profile-pic.png',
-	comments: [],
 	favoriteUsers: ''
 }
 
@@ -11,20 +10,18 @@ export const mockUserToFollow = {
 	username: 'SnakePlissken',
 	location: 'LA/NYC',
 	about: 'I shut down the third world, you win they lose. I shut down America, they win, you lose. The more things change, the more they stay the same',
-	profilePicURL: '/blank-profile-pic.png',
-	comments: []
+	profilePicURL: '/blank-profile-pic.png'
 }
 
 export const mockDiscussions = [
 	{
 		id: '121',
-		title: '1Caida libre (Free fall)',
-		artist: '1Miguel Calderon',
-		gallery: 'Luhring Augustine Bushwick',
-		address: '25 Knickerbocker Ave',
-		openDate: 'July 22, 2017',
-		closeDate: 'July 29, 2017',
-		description: '1Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+		name: 'Miguel Calderon: 1Caida libre (Free fall)',
+		venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+		
+		dateStart: 'July 22, 2017',
+		dateEnd: 'July 29, 2017',
+		description: '1Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 		comments: [
 			{
 				id: '765',
@@ -42,24 +39,22 @@ export const mockDiscussions = [
 	},
 	{
 		id: '122',
-		title: '2Caida libre (Free fall)',
-		artist: '2Miguel Calderon',
-		gallery: 'Luhring Augustine Bushwick',
-		address: '25 Knickerbocker Ave',
-		openDate: 'July 22, 2017',
-		closeDate: 'July 29, 2017',
-		description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+		name: 'Miguel Calderon: 2Caida libre (Free fall)',
+		venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+		
+		dateStart: 'July 22, 2017',
+		dateEnd: 'July 29, 2017',
+		description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 		comments: []
 	},
 	{
 		id: '123',
-		title: '3Caida libre (Free fall)',
-		artist: '3Miguel Calderon',
-		gallery: 'Luhring Augustine Bushwick',
-		address: '25 Knickerbocker Ave',
-		openDate: 'July 22, 2017',
-		closeDate: 'July 29, 2017',
-		description: '3Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+		name: 'Miguel Calderon: 3Caida libre (Free fall)',
+		venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+		
+		dateStart: 'July 22, 2017',
+		dateEnd: 'July 29, 2017',
+		description: '3Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 		comments: [
 			{
 				id: '765',
@@ -83,13 +78,12 @@ export const mockCommunity = [
 		username: 'SnakePlissken',
 		discussion: {
 			id: '121',
-			title: '1Caida libre (Free fall)',
-			artist: '1Miguel Calderon',
-			gallery: 'Luhring Augustine Bushwick',
-			address: '25 Knickerbocker Ave',
-			openDate: 'July 22, 2017',
-			closeDate: 'July 29, 2017',
-			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+			name: 'Miguel Calderon: 1Caida libre (Free fall)',
+			venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+			
+			dateStart: 'July 22, 2017',
+			dateEnd: 'July 29, 2017',
+			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 			comments: []
 		},
 		commentId: '765',
@@ -100,13 +94,12 @@ export const mockCommunity = [
 		username: 'Jake the Snake',
 		discussion: {
 			id: '123',
-			title: '3Caida libre (Free fall)',
-			artist: '3Miguel Calderon',
-			gallery: 'Luhring Augustine Bushwick',
-			address: '25 Knickerbocker Ave',
-			openDate: 'July 22, 2017',
-			closeDate: 'July 29, 2017',
-			description: '3Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+			name: 'Miguel Calderon: 3Caida libre (Free fall)',
+			venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+			
+			dateStart: 'July 22, 2017',
+			dateEnd: 'July 29, 2017',
+			description: '3Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 			comments: [
 			{
 				id: '765',
@@ -130,13 +123,12 @@ export const mockCommunity = [
 		username: 'SnakePlissken',
 		discussion: {
 			id: '122',
-			title: '2Caida libre (Free fall)',
-			artist: '2Miguel Calderon',
-			gallery: 'Luhring Augustine Bushwick',
-			address: '25 Knickerbocker Ave',
-			openDate: 'July 22, 2017',
-			closeDate: 'July 29, 2017',
-			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+			name: 'Miguel Calderon: 2Caida libre (Free fall)',
+			venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+			
+			dateStart: 'July 22, 2017',
+			dateEnd: 'July 29, 2017',
+			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 			comments: []
 		},
 		commentId: '765',
@@ -147,13 +139,12 @@ export const mockCommunity = [
 		username: 'SnakePlissken',
 		discussion: {
 			id: '122',
-			title: '2Caida libre (Free fall)',
-			artist: '2Miguel Calderon',
-			gallery: 'Luhring Augustine Bushwick',
-			address: '25 Knickerbocker Ave',
-			openDate: 'July 22, 2017',
-			closeDate: 'July 29, 2017',
-			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
+			name: 'Miguel Calderon: 2Caida libre (Free fall)',
+			venue: { name: 'Luhring Augustine Bushwick', address: '25 Knickerbocker Ave' },
+			
+			dateStart: 'July 22, 2017',
+			dateEnd: 'July 29, 2017',
+			description: '2Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the venue’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.',
 			comments: []
 		},
 		commentId: '765',

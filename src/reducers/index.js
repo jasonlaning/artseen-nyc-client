@@ -6,7 +6,6 @@ const initialState = {
 		location: '',
 		about: '',
 		profilePicURL: '',
-		comments: '',
 		favoriteUsers: ''
 	},
 	loggedIn: false,
