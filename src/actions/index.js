@@ -1,4 +1,6 @@
 import {mockUser, mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
+import $ from 'jquery';
+const {API_BASE_URL} = require('../config');
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = (user, community, discussions) => ({
@@ -8,19 +10,33 @@ export const fetchUserSuccess = (user, community, discussions) => ({
 	discussions
 })
 
+export const FETCH_USER_ERROR = 'FETCH_USER_ERROR';
+export const fetchUserError = (error) => ({
+	type: FETCH_USER_ERROR,
+	error
+})
+
 export const fetchUser = (username, password) => dispatch => {
- /*   fetch('/users/me').then(res => {
+
+	const headers = {
+		'content-type': 'application/json',
+	    authorization: 'Basic ' + btoa(username + ':' + password)
+	}
+ 	fetch(`${API_BASE_URL}/users/login`, {headers})
+ 	.then(res => {
+ 		console.log("response: ", res);
+ 		console.log("response.user: ", res.user)
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
         return res.json();
-    }).then(user => {
-        dispatch(fetchUserSuccess(user));
-    });*/
-    const delay = () => new Promise (resolve =>
-    	setTimeout(resolve, 10)
-    );
+    })
+    .then(user => {
+        dispatch(fetchUserSuccess(user, mockCommunity, mockDiscussions));
+    })
+    .catch(err => dispatch(fetchUserError(err)));   
 
+/*
 	const user = Object.assign ({}, mockUser);
 
 	return (
@@ -28,7 +44,7 @@ export const fetchUser = (username, password) => dispatch => {
 			.then(() => {
 				dispatch(fetchUserSuccess(user, mockCommunity, mockDiscussions));
 			})
-	)
+	) */
 }
 
 export const LOG_OUT_USER_SUCCESS = 'LOG_OUT_USER_SUCCESS';

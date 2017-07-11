@@ -16,8 +16,11 @@ export const SignInModal = (props) => {
 	const onSignIn = e => {
 		e.preventDefault();
 		props.dispatch(fetchUser(e.target.username.value, e.target.password.value));
-		props.history.push('/dashboard');
 	} 
+
+	if (props.loggedIn) {
+		props.history.push('/dashboard');
+	}
 
 	return ( 
 		<div>
