@@ -1,5 +1,6 @@
 import {/*mockUser, */mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
 import axios from 'axios';
+import $ from 'jquery';
 
 const {API_BASE_URL} = require('../config');
 
@@ -25,10 +26,13 @@ export const signInUser = (username, password) => dispatch => {
 		headers: {
 			'content-type': 'application/json',
 			authorization: 'Basic ' + btoa(username + ':' + password)
-		}
+		},
+	 	withCredentials: true
 	};
 
- 	axios(settings)
+ 	axios(settings).then(()=> window.location ='/dashboard');
+ 	
+/*
  	.then(res => {
  		console.log(res);
 	        if (res.statusText !== 'OK') {
@@ -44,7 +48,7 @@ export const signInUser = (username, password) => dispatch => {
 	.catch(err => {
 		console.log('error: ', err);
 		return dispatch(signInUserError(err))
-	});   
+	});*/   
 }
 
 export const getUserSession = () => dispatch => {
@@ -55,12 +59,16 @@ export const getUserSession = () => dispatch => {
 		headers: {
 			'content-type': 'application/json'
 	 	},
-	 	withCredentials: true
+	 	withCredentials: true,
+	 	cache: false
 	}
 
 	axios(settings)
  	.then(res => {
  		console.log(res);
+
+ 		return dispatch(signInUserSuccess(res.data.user, mockCommunity, mockDiscussions))
+ 	/*	
 	        if (res.statusText !== 'OK') {
 			return Promise.reject(res.statusText);
 	       } else if (res.data.message === 'Please sign in') {
@@ -75,7 +83,7 @@ export const getUserSession = () => dispatch => {
 	.catch(err => {
 		console.log('error: ', err);
 	//	window.location = '/';
-		return dispatch(signInUserError(err))
+		return dispatch(signInUserError(err))*/
 	});   
 }
 
@@ -86,18 +94,24 @@ export const logOutUserSuccess = user => ({
 })
 
 export const logOutUser = user => dispatch => {
-    const delay = () => new Promise (resolve =>
-    	setTimeout(resolve, 10)
-    );
+    const settings = {
+		url: `${API_BASE_URL}/users/logout`,
+		method: 'GET',
+		headers: {
+			'content-type': 'application/json'
+	 	},
+	 	xhrFields: {
+	 		withCredentials: true
+	 	},
+		crossDomain: true
+	}
 
-	return (
-		delay()
-			.then(() => {
-				console.log('dispatching log out');
-				window.location='/';
-				dispatch(logOutUserSuccess(user));
-			})
-	)
+	$.ajax(settings)
+ 	.done(res => {
+ 		console.log(res);
+		window.location.replace('/');
+		//dispatch(logOutUserSuccess(user));
+	})
 }
 
 export const GET_DISCUSSIONS_SUCCESS = 'GET_DISCUSSIONS_SUCCESS';
