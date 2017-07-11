@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {handleNewComment} from '../../actions';
+import {postNewComment} from '../../actions';
 import './comment-form.css'
 
 const CommentForm = (props) => (
@@ -15,7 +15,7 @@ const CommentForm = (props) => (
 					text: e.target.comment.value,
 					discussionId: props.discussionId
 				}
-				props.dispatch(handleNewComment(comment))
+				props.dispatch(postNewComment(comment))
 				e.target.comment.value = '';
 			}}>
 			<div>

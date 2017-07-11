@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchUserToFollow} from '../../actions';
+import {getUserToFollow} from '../../actions';
 
 import './comment-item.css';
 
@@ -9,7 +9,7 @@ export const CommentItem = (props) => (
 	    <h3>{props.date}</h3>
 	    <p><a href="" className="comment-username" onClick={e => {
 		    		e.preventDefault();
-		    		props.dispatch(fetchUserToFollow(props.username))
+		    		props.dispatch(getUserToFollow(props.username))
 	    		}} >
 	    		{props.username}</a> wrote:</p>
 	    <p className="snippet">{props.text}</p>

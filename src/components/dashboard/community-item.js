@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {fetchUserToFollow} from '../../actions';
+import {getUserToFollow} from '../../actions';
 
 import './community-item.css';
 
@@ -16,7 +16,7 @@ const CommunityItem = (props) => {
 
 	const onClickUserToFollow = e => {
 		e.preventDefault();
-		props.dispatch(fetchUserToFollow(props.username));
+		props.dispatch(getUserToFollow(props.username));
 		//dispatch get the user data
 		//reducer should change state to open modal
 	}

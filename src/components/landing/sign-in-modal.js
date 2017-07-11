@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {toggleModal, fetchUser} from '../../actions';
+import {toggleModal, signInUser} from '../../actions';
 
 import './sign-in-modal.css';
 
@@ -15,12 +15,12 @@ export const SignInModal = (props) => {
 
 	const onSignIn = e => {
 		e.preventDefault();
-		props.dispatch(fetchUser(e.target.username.value, e.target.password.value));
+		props.dispatch(signInUser(e.target.username.value, e.target.password.value))
 	} 
 
-	if (props.loggedIn) {
+	/*if (props.loggedIn) {
 		props.history.push('/dashboard');
-	}
+	}*/
 
 	return ( 
 		<div>

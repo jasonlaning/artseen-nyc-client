@@ -25,8 +25,8 @@ const initialState = {
 };
 
 export const artseenReducer = (state=initialState, action) => {
-	if (action.type === actions.FETCH_USER_SUCCESS) {
-		console.log('user fetched');
+	if (action.type === actions.SIGN_IN_USER_SUCCESS) {
+		console.log('user signed in');
 		let modals = Object.assign({}, state.modals);
 		modals.showSignInModal = false;
 		return Object.assign({}, state, {
@@ -37,7 +37,7 @@ export const artseenReducer = (state=initialState, action) => {
 			modals,
 			prevAction: action.type
 		})
-	} else if (action.type === actions.FETCH_USER_TO_FOLLOW_SUCCESS) {
+	} else if (action.type === actions.GET_USER_TO_FOLLOW_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
 		modals.showFollowUserModal = true;
 		console.log(action.userToFollow)
@@ -53,13 +53,13 @@ export const artseenReducer = (state=initialState, action) => {
 			loggedIn: false,
 			prevAction: action.type
 		})
-	} else if (action.type === actions.FETCH_DISCUSSIONS_SUCCESS) {
+	} else if (action.type === actions.GET_DISCUSSIONS_SUCCESS) {
 		console.log('discussions fetched');
 		return Object.assign({}, state, {
 			discussions: action.discussions,
 			prevAction: action.type
 		})
-	} else if (action.type === actions.FETCH_COMMUNITY_SUCCESS) {
+	} else if (action.type === actions.GET_COMMUNITY_SUCCESS) {
 		console.log('community fetched');
 		return Object.assign({}, state, {
 			community: action.community,
@@ -91,7 +91,7 @@ export const artseenReducer = (state=initialState, action) => {
 			modals,
 			prevAction: action.type
 		})
-	} else if (action.type === actions.HANDLE_NEW_COMMENT_SUCCESS) {
+	} else if (action.type === actions.POST_NEW_COMMENT_SUCCESS) {
 		let discussionToView = Object.assign({}, state.discussionToView);
 		discussionToView.comments.push(action.comment);
 		return Object.assign({}, state, {

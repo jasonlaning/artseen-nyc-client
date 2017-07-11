@@ -10,7 +10,7 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {toggleModal, logOutUser, updateDiscussionToView, fetchUser} from '../../actions';
+import {toggleModal, logOutUser, updateDiscussionToView, getUserSession} from '../../actions';
 
 import SearchModal from './search-modal';
 import FollowUserModal from './follow-user-modal';
@@ -27,7 +27,7 @@ export const Dashboard = (props) => {
 	// below is for page refresh
 	if (!loaded) {
 		if (feedView === ('discussion')) {
-		props.dispatch(fetchUser())
+		props.dispatch(getUserSession())
 			.then(() => {
 				if (props.match.params.feedView === 'discussion') {
 					console.log('fetching discussion');
@@ -35,7 +35,7 @@ export const Dashboard = (props) => {
 				}
 			})
 		} else {
-			props.dispatch(fetchUser());
+			props.dispatch(getUserSession());
 		}
 	}
 

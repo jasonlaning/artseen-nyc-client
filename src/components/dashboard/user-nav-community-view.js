@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {fetchDiscussions} from '../../actions';
+import {getDiscussions} from '../../actions';
 
 const UserNavCommunityView = (props) => {
 
 	const onClickDiscussions = e => {
 		e.preventDefault();
-		props.dispatch(fetchDiscussions());
+		props.dispatch(getDiscussions());
 		props.history.push('/dashboard/discussions');
 	}
 
