@@ -1,5 +1,5 @@
-import {mockUser, mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
-import $ from 'jquery';
+import {/*mockUser, */mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
+//import $ from 'jquery';
 const {API_BASE_URL} = require('../config');
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
