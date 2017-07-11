@@ -1,5 +1,5 @@
 import {/*mockUser, */mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
-//import $ from 'jquery';
+import $ from 'jquery';
 const {API_BASE_URL} = require('../config');
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
@@ -22,17 +22,16 @@ export const fetchUser = (username, password) => dispatch => {
 		'content-type': 'application/json',
 	    authorization: 'Basic ' + btoa(username + ':' + password)
 	}
- 	fetch(`${API_BASE_URL}/users/login`, {headers})
- 	.then(res => {
- 		console.log("response: ", res);
- 		console.log("response.user: ", res.user)
+
+ 	$.ajax({url: `${API_BASE_URL}/users/login`, headers})
+ 	.done(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
         return res.json();
     })
-    .then(user => {
-        dispatch(fetchUserSuccess(user, mockCommunity, mockDiscussions));
+    .then(res => {
+        dispatch(fetchUserSuccess(res.user, mockCommunity, mockDiscussions));
     })
     .catch(err => dispatch(fetchUserError(err)));   
 
