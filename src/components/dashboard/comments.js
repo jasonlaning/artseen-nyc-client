@@ -13,8 +13,8 @@ export const Comments = (props) => {
 		<section>
 			<ul className="comments">
 			<ReactCSSTransitionGroup 
-			transitionEnterTimeout="500"
-			transitionLeaveTimeout="500"
+			transitionEnterTimeout={500}
+			transitionLeaveTimeout={500}
 			transitionName="dashboard-fade">
 				{comments}
 			</ReactCSSTransitionGroup>

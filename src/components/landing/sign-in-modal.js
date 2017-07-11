@@ -18,10 +18,6 @@ export const SignInModal = (props) => {
 		props.dispatch(signInUser(e.target.username.value, e.target.password.value))
 	} 
 
-	/*if (props.loggedIn) {
-		props.history.push('/dashboard');
-	}*/
-
 	return ( 
 		<div>
 			<div className="modal-overlay" onClick={e => onCloseModal(e, 'showSignInModal')} >
@@ -37,6 +33,9 @@ export const SignInModal = (props) => {
 					<input type="password" name="password" id="password" />
 				</div>
 				<button type="submit">Log In</button>
+				<div>
+					<p className="modal-message">{props.message}</p>
+				</div>
 			</form>
 		</div>
 	)
@@ -45,6 +44,7 @@ export const SignInModal = (props) => {
 const mapStateToProps = (state, props) => ({
 	user: state.user,
 	loggedIn: state.loggedIn,
+	message: state.message
 });
 
 export default connect(mapStateToProps)(withRouter(SignInModal));

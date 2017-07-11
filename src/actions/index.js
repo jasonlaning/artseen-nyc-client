@@ -64,26 +64,18 @@ export const getUserSession = () => dispatch => {
 	}
 
 	axios(settings)
- 	.then(res => {
- 		console.log(res);
-
- 		return dispatch(signInUserSuccess(res.data.user, mockCommunity, mockDiscussions))
- 	/*	
+ 	.then(res => { 
 	        if (res.statusText !== 'OK') {
 			return Promise.reject(res.statusText);
-	       } else if (res.data.message === 'Please sign in') {
-	       	return Promise.reject(res.data.message);
 	       }
 	       return res.data.user;
 	})
 	.then(user => {
-		console.log('user: ', user);
 		return dispatch(signInUserSuccess(user, mockCommunity, mockDiscussions));
 	})
 	.catch(err => {
 		console.log('error: ', err);
-	//	window.location = '/';
-		return dispatch(signInUserError(err))*/
+		window.location.replace('/');
 	});   
 }
 

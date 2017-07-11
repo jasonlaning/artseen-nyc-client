@@ -7,40 +7,40 @@ import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
 
-export const SingleDiscussion = (props) => {
+export class SingleDiscussion extends React.Component {
 
-	const loaded = (props.discussion.id === props.match.params.discussionId);
-
-	if (!loaded && (props.discussions.length > 0)) {
-	props.dispatch(updateDiscussionToView(props.match.params.discussionId));
+	componentWillMount() {
+		this.props.dispatch(updateDiscussionToView(this.props.match.params.discussionId));
 	}
 
-	const windowScroll = () => {
-		console.log('prevAction: ', props.prevAct);
-		if (props.prevAction !== 'HANDLE_NEW_COMMENT_SUCCESS' 
-			&& props.prevAction !== 'FETCH_USER_TO_FOLLOW_SUCCESS'
-			&& props.prevAction !== 'TOGGLE_MODAL') {
-			scroll.animateScroll.scrollTo(200, {duration: 1000});
-		} 
-	}
+	render() {
 
-	console.log('discussionId', props.match.params.discussionId);
-	console.log('discussion.id', props.discussion.id);
+		const windowScroll = () => {
+			console.log('prevAction: ', this.props.prevAct);
+			if (this.props.prevAction !== 'HANDLE_NEW_COMMENT_SUCCESS' 
+				&& this.props.prevAction !== 'FETCH_USER_TO_FOLLOW_SUCCESS'
+				&& this.props.prevAction !== 'TOGGLE_MODAL') {
+				scroll.animateScroll.scrollTo(200, {duration: 1000});
+			} 
+		}
 
-	if (!loaded) {
-		return <section className="loading"></section>
-	} else {
+		const loaded = (this.props.discussion.id === this.props.match.params.discussionId);
 
-		return (
-			<section>
-				{windowScroll()}
-				<div className="wrapper">
-					<ExhibitionHeading discussion={props.discussion} />
-					<Comments comments={props.discussion.comments}/>
-					<CommentForm />
-				</div>
-			</section>
-		);
+		if (!loaded) {
+			return <section className="loading"></section>
+		} else {
+
+			return (
+				<section>
+					{windowScroll()}
+					<div className="wrapper">
+						<ExhibitionHeading discussion={this.props.discussion} />
+						<Comments comments={this.props.discussion.comments}/>
+						<CommentForm />
+					</div>
+				</section>
+			);
+		}
 	}
 }
 

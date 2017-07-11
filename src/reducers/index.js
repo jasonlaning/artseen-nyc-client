@@ -21,7 +21,8 @@ const initialState = {
 		showFollowUserModal: false,
 		showSearchModal: false
 	},
-	prevAction: ''
+	prevAction: '',
+	message: ' '
 };
 
 export const artseenReducer = (state=initialState, action) => {

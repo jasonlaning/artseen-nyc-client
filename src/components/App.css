@@ -147,3 +147,11 @@ form input {
   opacity: 0.01;
   transition: opacity 100ms ease-in;
 }
+
+p.modal-message {
+    margin: 10px 0 -22px 0;
+    font-size: 14px;
+    color: #e21515;
+    font-weight: bold;
+    text-align: center;
+}

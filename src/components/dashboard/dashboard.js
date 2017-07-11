@@ -10,7 +10,7 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {toggleModal, logOutUser, updateDiscussionToView, getUserSession} from '../../actions';
+import {toggleModal, logOutUser, getUserSession} from '../../actions';
 
 import SearchModal from './search-modal';
 import FollowUserModal from './follow-user-modal';
@@ -22,21 +22,8 @@ export const Dashboard = (props) => {
 	const feedView = props.match.params.feedView;
 	const loaded = props.loggedIn;
 
-	// insert something to attempt to fetch user with cookie for each mount
-	// but not the following, which should be replaced!!
-	// below is for page refresh
 	if (!loaded) {
-		if (feedView === ('discussion')) {
-		props.dispatch(getUserSession())
-			.then(() => {
-				if (props.match.params.feedView === 'discussion') {
-					console.log('fetching discussion');
-					props.dispatch(updateDiscussionToView(props.match.params.discussionId));
-				}
-			})
-		} else {
-			props.dispatch(getUserSession());
-		}
+		props.dispatch(getUserSession());
 	}
 
 	const onClickLogOut = (e) => {
