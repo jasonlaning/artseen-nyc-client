@@ -45,17 +45,16 @@ export const artseenReducer = (state=initialState, action) => {
 	} else if (action.type === actions.GET_USER_TO_FOLLOW_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
 		modals.showFollowUserModal = true;
-		console.log(action.userToFollow)
+		// check if user is already followed
+		let userToFollow = Object.assign({}, action.userToFollow);
+		if (state.user.favoriteUsers.indexOf(action.userToFollow.username) > -1) {
+			userToFollow.followed = true
+		} else {
+			userToFollow.followed = false
+		}
 		return Object.assign({}, state, {
-			userToFollow: action.userToFollow,
+			userToFollow,
 			modals,
-			prevAction: action.type
-		})
-	} else if (action.type === actions.LOG_OUT_USER_SUCCESS) {
-		console.log('user logged out');
-		return Object.assign({}, state, {
-			user: {},
-			loggedIn: false,
 			prevAction: action.type
 		})
 	} else if (action.type === actions.GET_DISCUSSIONS_SUCCESS) {
@@ -71,20 +70,8 @@ export const artseenReducer = (state=initialState, action) => {
 			prevAction: action.type
 		})
 	} else if (action.type === actions.UPDATE_DISCUSSION_TO_VIEW) {
-		let discussionIndex;
-		console.log('action id', action.id);
-		console.log(state.discussions);
-		console.log(state.discussions[0]);
-		console.log(state.discussions[0].id);
-		console.log(action.id === state.discussions[0].id)
-
-		for (let i=0; i < state.discussions.length; i++ ) {
-			if (state.discussions[i].id === action.id) {
-				discussionIndex = i;
-			}
-		}
-		const discussionToView = Object.assign({}, state.discussions[discussionIndex]);
-		console.log('discussion to view: ', discussionToView.title);
+		const discussionToView = Object.assign({}, action.discussion);
+		console.log('discussion to view: ', discussionToView);
 		return Object.assign({}, state, {
 			discussionToView,
 			prevAction: action.type
@@ -97,8 +84,7 @@ export const artseenReducer = (state=initialState, action) => {
 			prevAction: action.type
 		})
 	} else if (action.type === actions.POST_NEW_COMMENT_SUCCESS) {
-		let discussionToView = Object.assign({}, state.discussionToView);
-		discussionToView.comments.push(action.comment);
+		let discussionToView = Object.assign({}, action.discussion);
 		return Object.assign({}, state, {
 			discussionToView,
 			prevAction: action.type

@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import scroll from 'react-scroll';
-import {updateDiscussionToView} from '../../actions';
+import {getSingleDiscussion} from '../../actions';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
@@ -10,15 +10,15 @@ import CommentForm from './comment-form';
 export class SingleDiscussion extends React.Component {
 
 	componentWillMount() {
-		this.props.dispatch(updateDiscussionToView(this.props.match.params.discussionId));
+		this.props.dispatch(getSingleDiscussion(this.props.match.params.discussionId));
 	}
 
 	render() {
 
 		const windowScroll = () => {
 			console.log('prevAction: ', this.props.prevAct);
-			if (this.props.prevAction !== 'HANDLE_NEW_COMMENT_SUCCESS' 
-				&& this.props.prevAction !== 'FETCH_USER_TO_FOLLOW_SUCCESS'
+			if (this.props.prevAction !== 'POST_NEW_COMMENT_SUCCESS' 
+				&& this.props.prevAction !== 'GET_USER_TO_FOLLOW_SUCCESS'
 				&& this.props.prevAction !== 'TOGGLE_MODAL') {
 				scroll.animateScroll.scrollTo(200, {duration: 1000});
 			} 

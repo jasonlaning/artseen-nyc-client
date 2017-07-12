@@ -10,10 +10,9 @@ const CommentForm = (props) => (
 				e.preventDefault();
 				console.log('comment: ', e.target.comment.value);
 				let comment = {
-					username: props.username,
-					date: 'today',
-					text: e.target.comment.value,
-					discussionId: props.discussionId
+					discussionId: props.discId,
+					discussionName: props.discName,
+					text: e.target.comment.value
 				}
 				props.dispatch(postNewComment(comment))
 				e.target.comment.value = '';
@@ -23,13 +22,17 @@ const CommentForm = (props) => (
 				<textarea placeholder="text goes here..." name="comment" id="comment" />
 			</div>
 			<button type="submit">Submit</button>
+			<div>
+				<p className="modal-message">{props.message}</p>
+			</div>
 		</form>
 	</section>
 );
 
 const mapStateToProps = (state, props) => ({
-	username: state.user.username,
-	discussionId: state.discussionToView.id
+	discId: state.discussionToView.id,
+	discName: state.discussionToView.name,
+	message: state.message
 })
 
 export default connect(mapStateToProps)(CommentForm);

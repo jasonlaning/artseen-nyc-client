@@ -1,4 +1,5 @@
 import React from 'react';
+import date from '../date';
 import {connect} from 'react-redux';
 import {getUserToFollow} from '../../actions';
 
@@ -6,7 +7,7 @@ import './comment-item.css';
 
 export const CommentItem = (props) => (
 	<li className="comment-item">
-	    <h3>{props.date}</h3>
+	    <h3>{date(props.date)}</h3>
 	    <p><a href="" className="comment-username" onClick={e => {
 		    		e.preventDefault();
 		    		props.dispatch(getUserToFollow(props.username))
