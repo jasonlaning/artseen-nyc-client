@@ -26,6 +26,9 @@ export const SearchModal = (props) => {
 					<input autoFocus type="text" name="search-exhibitions" id="search-exhibitions"
 						placeholder="artist, exhibition, title, media, etc..." />
 					<button type="submit">Search</button>
+					<div>
+			        	<p className="modal-message">{props.message}</p>
+			        </div>
 				</div>
 			</form>
 		</div>
@@ -34,7 +37,8 @@ export const SearchModal = (props) => {
 
 const mapStateToProps = (state, props) => ({
 	user: state.user,
-	loggedIn: state.loggedIn,
+	message: state.message,
+	loggedIn: state.loggedIn
 });
 
 export default connect(mapStateToProps)(SearchModal);

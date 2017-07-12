@@ -22,11 +22,15 @@ const initialState = {
 		showSearchModal: false
 	},
 	prevAction: '',
-	message: ' '
+	message: ''
 };
 
 export const artseenReducer = (state=initialState, action) => {
-	if (action.type === actions.SIGN_IN_USER_SUCCESS) {
+	if (action.type === actions.UPDATE_MODAL_MESSAGE) {
+		return Object.assign({}, state, {
+			message: action.message
+		})
+	} else if (action.type === actions.GET_USER_SESSION_SUCCESS) {
 		console.log('user signed in');
 		let modals = Object.assign({}, state.modals);
 		modals.showSignInModal = false;

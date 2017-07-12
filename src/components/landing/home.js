@@ -26,11 +26,7 @@ export class Home extends React.Component {
 		if (this.props.showSignInModal) {
 			signInModal = <SignInModal />;
 		}
-/*
-		if (this.props.loggedIn) {
-			return <Redirect to='/dashboard' />
-		}
-*/
+
 		return (
 			<div>
 				{console.log('rendered Home')}
@@ -49,7 +45,7 @@ export class Home extends React.Component {
 				<main>
 					<Banner />
 					<About />
-					<SignUp />
+					<SignUp message={this.props.message} />
 				</main>
 				<Footer />
 				<ReactCSSTransitionGroup 
@@ -66,6 +62,7 @@ export class Home extends React.Component {
 const mapStateToProps = (state, props) => ({
 	showSignInModal: state.modals.showSignInModal,
 	loggedIn: state.loggedIn,
+	message: state.message,
 	state: state
 })
 

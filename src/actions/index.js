@@ -1,28 +1,44 @@
 import {/*mockUser, */mockDiscussions, mockCommunity, mockUserToFollow} from '../mock-data';
 import axios from 'axios';
-import $ from 'jquery';
 
 const {API_BASE_URL} = require('../config');
 
-export const SIGN_IN_USER_SUCCESS = 'SIGN_IN_USER_SUCCESS';
-export const signInUserSuccess = (user, community, discussions) => ({
-	type: SIGN_IN_USER_SUCCESS,
-	user,
-	community,
-	discussions
+const api = axios.create({
+	baseURL: API_BASE_URL,
+	timeout: 1000
 })
 
-export const SIGN_IN_USER_ERROR = 'SIGN_IN_USER_ERROR';
-export const signInUserError = (error) => ({
-	type: SIGN_IN_USER_ERROR,
-	error
+export const UPDATE_MODAL_MESSAGE = 'UPDATE_MODAL_MESSAGE';
+export const updateModalMessage = (message) => ({
+	type: UPDATE_MODAL_MESSAGE,
+	message
 })
+
+export const signUpNewUser = (username, password) => dispatch => {
+
+	dispatch(updateModalMessage('Signing up...'));
+
+ 	api.post('users/sign-up', {
+	 		username,
+	 		password
+	 	})
+	 	.then((res) => {
+	 		if (res.status === 201) {
+	 			dispatch(signInUser(username, password));
+	 		} else {
+				return Promise.reject(res);
+			}
+	 	}) 
+	 	.catch((err) => {
+			return dispatch(updateModalMessage(err.response.data.message))
+		})
+}
 
 export const signInUser = (username, password) => dispatch => {
 
 	const settings = {
 		url: `${API_BASE_URL}/users/login`,
-		method: "GET",
+		method: 'GET',
 		headers: {
 			'content-type': 'application/json',
 			authorization: 'Basic ' + btoa(username + ':' + password)
@@ -30,26 +46,30 @@ export const signInUser = (username, password) => dispatch => {
 	 	withCredentials: true
 	};
 
- 	axios(settings).then(()=> window.location ='/dashboard');
- 	
-/*
- 	.then(res => {
- 		console.log(res);
-	        if (res.statusText !== 'OK') {
-			return Promise.reject(res.statusText);
-	       }
-	      return window.location = '/dashboard';
-	      // return res.data.user;
+	dispatch(updateModalMessage('Signing in...'));
+
+ 	axios(settings)
+ 	.then((res) => {
+ 		console.log(res)
+ 		if (res.data.user) {
+ 			window.location ='/dashboard'
+ 		} else {
+			return Promise.reject();
+		}
+ 	}) 
+ 	.catch(() => {
+ 		const err = "Invalid Username or Password";
+		return dispatch(updateModalMessage(err))
 	})
-	.then(user => {
-		console.log('user: ', user);
-		return dispatch(signInUserSuccess(user, mockCommunity, mockDiscussions));
-	})
-	.catch(err => {
-		console.log('error: ', err);
-		return dispatch(signInUserError(err))
-	});*/   
 }
+
+export const GET_USER_SESSION_SUCCESS = 'GET_USER_SESSION_SUCCESS';
+export const getUserSessionSuccess = (user, community, discussions) => ({
+	type: GET_USER_SESSION_SUCCESS,
+	user,
+	community,
+	discussions
+})
 
 export const getUserSession = () => dispatch => {
 
@@ -59,8 +79,7 @@ export const getUserSession = () => dispatch => {
 		headers: {
 			'content-type': 'application/json'
 	 	},
-	 	withCredentials: true,
-	 	cache: false
+	 	withCredentials: true
 	}
 
 	axios(settings)
@@ -71,7 +90,7 @@ export const getUserSession = () => dispatch => {
 	       return res.data.user;
 	})
 	.then(user => {
-		return dispatch(signInUserSuccess(user, mockCommunity, mockDiscussions));
+		return dispatch(getUserSessionSuccess(user, mockCommunity, mockDiscussions));
 	})
 	.catch(err => {
 		console.log('error: ', err);
@@ -92,14 +111,11 @@ export const logOutUser = user => dispatch => {
 		headers: {
 			'content-type': 'application/json'
 	 	},
-	 	xhrFields: {
-	 		withCredentials: true
-	 	},
-		crossDomain: true
+	 	withCredentials: true
 	}
 
-	$.ajax(settings)
- 	.done(res => {
+	axios(settings)
+ 	.then(res => {
  		console.log(res);
 		window.location.replace('/');
 		//dispatch(logOutUserSuccess(user));

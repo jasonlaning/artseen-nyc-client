@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {toggleModal, signInUser} from '../../actions';
+import {toggleModal, signInUser, updateModalMessage} from '../../actions';
 
 import './sign-in-modal.css';
 
@@ -11,11 +11,14 @@ export const SignInModal = (props) => {
 	const onCloseModal = (e, modal) => {
 		e.preventDefault();
 		props.dispatch(toggleModal(modal));
+		props.dispatch(updateModalMessage(''));
 	}
 
 	const onSignIn = e => {
 		e.preventDefault();
-		props.dispatch(signInUser(e.target.username.value, e.target.password.value))
+		props.dispatch(signInUser(e.target.username.value, e.target.password.value));
+		e.target.username.value = '';
+		e.target.password.value = '';
 	} 
 
 	return ( 
@@ -26,11 +29,11 @@ export const SignInModal = (props) => {
 			<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showSignInModal')} > </a>
 				<div>
 					<label htmlFor="username">Username</label>
-					<input autoFocus type="text" name="username" id="username" />
+					<input autoFocus type="text" name="username" id="username" required />
 				</div>
 				<div>
 					<label htmlFor="password">Password</label>
-					<input type="password" name="password" id="password" />
+					<input type="password" name="password" id="password" required />
 				</div>
 				<button type="submit">Log In</button>
 				<div>
