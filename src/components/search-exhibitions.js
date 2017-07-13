@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const searchExhibitions = (searchTerms, exhibitions) => {
 
 	let searchResults = [];
@@ -5,16 +7,18 @@ const searchExhibitions = (searchTerms, exhibitions) => {
 	console.log('search terms: ', searchTerms);
 
 	exhibitions.forEach(exhibition => {
-		
+
+		if (moment(exhibition.DateStart[0]).isValid() && moment(exhibition.DateEnd[0]).isValid()) {	
 			let strToSearch = `${exhibition.Name} ${exhibition.Venue.Name}`;
 			exhibition.Media.forEach(medium => {
 				strToSearch += ` ${medium.toLowerCase()} `;
 			})
-			let arrToSearch = strToSearch.replace(/[|&;$%@":“”<>()+,]/g, "").toLowerCase().match(/\S+/g);	
+			exhibition.searchTerms = strToSearch.replace(/[|&;$%@":“”<>()+,]/g, "")
+				.replace(undefined, '').toLowerCase().match(/\S+/g);
 			let matchFound = false;
 			let i = 0;
 			while (!matchFound) {
-				if (arrToSearch.indexOf(searchTerms[i]) !== -1) {
+				if (exhibition.searchTerms.indexOf(searchTerms[i]) !== -1) {
 					searchResults.push(exhibition);
 					matchFound = true;
 				} else if (i === (searchTerms.length - 1)) {
@@ -23,6 +27,7 @@ const searchExhibitions = (searchTerms, exhibitions) => {
 					i++;
 				}
 			}
+		}
 	})
 	return searchResults;
 }

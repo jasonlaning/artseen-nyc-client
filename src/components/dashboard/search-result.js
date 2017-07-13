@@ -1,10 +1,18 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {getDiscussionFromSearch} from '../../actions';
 
-const SearchResult = (props) => (
+const SearchResult = (props) => {
 
-	<ul>
-		<li>{props.Name}</li>
-	</ul>
-);
+	const onExhibitionClick = (e) => {
+		e.preventDefault();
+		console.log(props);
+		props.dispatch(getDiscussionFromSearch(props));
+	}
 
-export default SearchResult;
+	return (
+		<a href={`/single-discussion/${props.$.id}`} onClick={e => onExhibitionClick(e)}><li>{props.Name[0]}</li></a>
+	);
+}
+
+export default connect()(SearchResult);

@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import SearchResult from './search-result';
-import {toggleModal, getExhibitionsForSearch, getSearchResultsSuccess} from '../../actions';
-import searchExhibitions from '../search-exhibitions';
+import {toggleModal, getExhibitionsForSearch} from '../../actions';
 import './search-modal.css';
 
 export const SearchModal = (props) => {
@@ -14,20 +13,21 @@ export const SearchModal = (props) => {
 
 	const onSearchSubmit = (e) => {
 		e.preventDefault();
-		console.log(e.target['search-exhibitions'].value);
-		if (props.exhibitions.length < 1) {
-			props.dispatch(getExhibitionsForSearch(e.target['search-exhibitions'].value));
-		} else {
-			const searchResults = searchExhibitions(e.target['search-exhibitions'].value, props.exhibitions);
-			props.dispatch(getSearchResultsSuccess(searchResults, props.exhibitions));
-			console.log(searchResults);
-		}	
+		props.dispatch(getExhibitionsForSearch(e.target['search-exhibitions'].value));
 	}
 
 	const showSearchResults = () => {
 		if (props.searchResults.length > 0) {
-			return props.searchResults.map((item, index) =>
+			const results = props.searchResults.map((item, index) =>
 				<SearchResult key={index} {...item} />
+			)
+			return (
+				<div className="search-results">
+			       	<p>Search results ({props.searchResults.length}): </p>
+			       		<ul>
+			       			{results}
+			       		</ul>
+		       	</div>
 			)
 		}
 	}
@@ -44,11 +44,11 @@ export const SearchModal = (props) => {
 						autoFocus placeholder="artist, exhibition, title, media, etc..." required />{/*
 					*/}<button type="submit">Search</button>
 					<div>
-			        	<p className="modal-message">{props.message}</p>
-			        </div>
-			        {showSearchResults()}
+			        		<p className="modal-message">{props.message}</p>
+			        	</div>
 				</div>
 			</form>
+		       {showSearchResults()}
 		</div>
 	);
 }

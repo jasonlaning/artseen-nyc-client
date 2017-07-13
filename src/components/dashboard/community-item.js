@@ -11,15 +11,12 @@ const CommunityItem = (props) => {
 
 	const onTitleClick = e => {
 		e.preventDefault();
-		//props.dispatch(updateDiscussionToView(e.currentTarget.name, 'community'));
 		props.history.push(`/dashboard/discussion/${e.currentTarget.name}`);
 	}
 
 	const onClickUserToFollow = e => {
 		e.preventDefault();
 		props.dispatch(getUserToFollow(props.username));
-		//dispatch get the user data
-		//reducer should change state to open modal
 	}
 
 	return (

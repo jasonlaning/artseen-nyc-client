@@ -89,7 +89,6 @@ export const artseenReducer = (state=initialState, action) => {
 		})
 	} else if (action.type === actions.GET_SEARCH_RESULTS_SUCCESS) {
 		return Object.assign({}, state, {
-			exhibitions: action.exhibitions,
 			searchResults: action.searchResults
 		})
 	} else if (action.type === actions.POST_NEW_COMMENT_SUCCESS) {

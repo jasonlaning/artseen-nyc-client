@@ -7,7 +7,6 @@ const {API_BASE_URL} = require('../config');
 
 const api = axios.create({
 	baseURL: API_BASE_URL,
-	timeout: 1000,
 	withCredentials: true
 })
 
@@ -23,11 +22,37 @@ export const toggleModal = (modal) => ({
 	modal
 })
 
+export const getDiscussionFromSearch = (ex) => dispatch => {
+
+	const id = ex.$.id.replace(/\//g, '-');
+
+	api.post('/discussions', {
+			id: id,
+			href: ex.$.href,
+			name: ex.Name[0],
+			venue: {
+				name: ex.Venue[0].Name[0],
+				address: ex.Venue[0].Address[0],
+				area: ex.Venue[0].Area[0]._
+			},
+			description: ex.Description[0],
+			image: ex.Image[2].$.src,
+			dateStart: ex.DateStart[0],
+			dateEnd: ex.DateEnd[0],
+			searchTerms: ex.searchTerms
+		})
+		.then(res => {
+			window.location=`/dashboard/discussion/${res.data.discussion.id}`;
+		})
+		.catch(err => {
+			console.log(err);
+		})
+}
+
 export const GET_SEARCH_RESULTS_SUCCESS = 'GET_SEARCH_RESULTS_SUCCESS';
-export const getSearchResultsSuccess = (searchResults, exhibitions) => ({
+export const getSearchResultsSuccess = (searchResults) => ({
 	type: GET_SEARCH_RESULTS_SUCCESS,
-	searchResults,
-	exhibitions
+	searchResults
 })
 
 export const getExhibitionsForSearch = (searchTerms) => dispatch => {
@@ -53,7 +78,7 @@ export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 	const exhibitions = mockExhibitions.Events.Event;
 	const searchResults = searchExhibitions(searchTerms, exhibitions);
 	console.log('searchResults: ', searchResults)
-	dispatch(getSearchResultsSuccess(searchResults, exhibitions));
+	dispatch(getSearchResultsSuccess(searchResults));
 }
 
 export const GET_DISCUSSIONS_SUCCESS = 'GET_DISCUSSIONS_SUCCESS';
@@ -104,7 +129,7 @@ export const addUserToFavorites = (username) => dispatch => {
 				return Promise.reject(res);
 			}
 			dispatch(updateModalMessage('Success! Updating Community Activity...'));
-			setTimeout(() => window.location ='/dashboard', 1500);
+			setTimeout(() => window.location ='/dashboard', 1000);
 		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
