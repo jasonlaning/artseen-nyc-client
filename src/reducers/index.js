@@ -10,6 +10,7 @@ const initialState = {
 	},
 	loggedIn: false,
 	exhibitions: [],
+	searchResults: [],
 	community: [],
 	discussions: [],
 	discussionToView: {
@@ -77,11 +78,19 @@ export const artseenReducer = (state=initialState, action) => {
 			prevAction: action.type
 		})
 	} else if (action.type === actions.TOGGLE_MODAL) {
+		let message = '';
 		let modals = Object.assign({}, state.modals);
 		modals[action.modal] = !(state.modals[action.modal]);
 		return Object.assign({}, state, { 
 			modals,
-			prevAction: action.type
+			message,
+			prevAction: action.type,
+			searchResults: []
+		})
+	} else if (action.type === actions.GET_SEARCH_RESULTS_SUCCESS) {
+		return Object.assign({}, state, {
+			exhibitions: action.exhibitions,
+			searchResults: action.searchResults
 		})
 	} else if (action.type === actions.POST_NEW_COMMENT_SUCCESS) {
 		let discussionToView = Object.assign({}, action.discussion);

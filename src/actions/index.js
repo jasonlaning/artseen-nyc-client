@@ -1,5 +1,7 @@
-import {mockDiscussions, mockCommunity} from '../mock-data';
+import {mockDiscussions, mockCommunity, mockExhibitions} from '../mock-data';
+//import {parseString} from 'xml2js';
 import axios from 'axios';
+import searchExhibitions from '../components/search-exhibitions';
 
 const {API_BASE_URL} = require('../config');
 
@@ -20,6 +22,39 @@ export const toggleModal = (modal) => ({
 	type: TOGGLE_MODAL,
 	modal
 })
+
+export const GET_SEARCH_RESULTS_SUCCESS = 'GET_SEARCH_RESULTS_SUCCESS';
+export const getSearchResultsSuccess = (searchResults, exhibitions) => ({
+	type: GET_SEARCH_RESULTS_SUCCESS,
+	searchResults,
+	exhibitions
+})
+
+export const getExhibitionsForSearch = (searchTerms) => dispatch => {
+
+	/*
+	axios({
+		method: 'get',
+		url: 'https://crossorigin.me/http://www.nyartbeat.com/list/event_free.en.xml'
+	})
+		.then(res => {
+			parseString(res.data, (err, result) => {
+				if (err) {
+					console.log('error: ', err);
+				} else {
+					console.log(result.Events.Event);
+					dispatch(getExhibitionsForSearchSuccess(result.Events.Event));
+				}
+			})
+		})
+		*/
+	// get exhibitions above .then =>
+	// uncomment import parseString
+	const exhibitions = mockExhibitions.Events.Event;
+	const searchResults = searchExhibitions(searchTerms, exhibitions);
+	console.log('searchResults: ', searchResults)
+	dispatch(getSearchResultsSuccess(searchResults, exhibitions));
+}
 
 export const GET_DISCUSSIONS_SUCCESS = 'GET_DISCUSSIONS_SUCCESS';
 export const getDiscussionsSuccess = discussions => ({
@@ -79,7 +114,7 @@ export const addUserToFavorites = (username) => dispatch => {
 export const deleteUserFromFavorites = (username) => dispatch => {
 	console.log(username);
 	api.delete('users/me/favorites', {
-			username
+			data: {username}
 		})
 		.then(res => {
 			if (res.statusText !== 'OK') {

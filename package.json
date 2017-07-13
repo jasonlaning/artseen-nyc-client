@@ -15,7 +15,8 @@
     "react-scroll": "^1.5.4",
     "react-transition-group": "^1.2.0",
     "redux": "^3.7.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "enzyme": "^2.9.1",

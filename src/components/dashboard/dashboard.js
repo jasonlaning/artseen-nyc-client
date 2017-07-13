@@ -34,7 +34,7 @@ export const Dashboard = (props) => {
 
 	const onClickSearch = (e, modal) => {
 		e.preventDefault();
-		props.dispatch(toggleModal(modal));
+		props.dispatch(toggleModal(modal))
 	}
 
 	const userFeedView = (feedView) => {
