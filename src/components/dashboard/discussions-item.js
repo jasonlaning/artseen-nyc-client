@@ -11,7 +11,9 @@ const DiscussionsItem = (props) => {
 		props.dispatch(getSingleDiscussion(props.id));
 	}
 
-	const imgSrc = props.image.slice(5);
+	const imgSrc = `//${props.image.slice(11)}`;
+
+	console.log(imgSrc);
 
 	const dateStart = moment(props.dateStart).format('MMM DD, YYYY');
 	const dateEnd = moment(props.dateEnd).format('MMM DD, YYYY');
