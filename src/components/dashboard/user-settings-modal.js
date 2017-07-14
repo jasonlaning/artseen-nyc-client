@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {toggleModal, updateUserSettings, uploadImage} from '../../actions';
+import {toggleModal, updateUserSettings} from '../../actions';
 
 import './user-settings-modal.css';
 
