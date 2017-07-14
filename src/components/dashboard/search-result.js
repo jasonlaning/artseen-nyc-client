@@ -4,14 +4,17 @@ import {getDiscussionFromSearch} from '../../actions';
 
 const SearchResult = (props) => {
 
+	const id = props.$.id.replace(/\//g, '-');
+	const discussion = Object.assign({}, props);
+	discussion.id = id;
+
 	const onExhibitionClick = (e) => {
 		e.preventDefault();
-		console.log(props);
-		props.dispatch(getDiscussionFromSearch(props));
+		props.dispatch(getDiscussionFromSearch(discussion));
 	}
 
 	return (
-		<a href={`/single-discussion/${props.$.id}`} onClick={e => onExhibitionClick(e)}><li>{props.Name[0]}</li></a>
+		<a href={`/dashboard/discussion/${discussion.id}`} onClick={(e) => onExhibitionClick(e)}><li>{discussion.Name[0]}</li></a>
 	);
 }
 

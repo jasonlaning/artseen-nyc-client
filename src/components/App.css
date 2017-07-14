@@ -115,8 +115,10 @@ form input {
   right: 10px;
 }
 
-.page-not-found {
-  padding-left: 25px;
+.error-404 {
+  text-align: center;
+  height: 400px;
+  padding-top: 150px;
 }
 
 .loading {

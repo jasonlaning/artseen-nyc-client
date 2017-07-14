@@ -1,14 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {getSingleDiscussion} from '../../actions';
 
+import './discussions-item.css';
+
 const DiscussionsItem = (props) => {
-	const onTitleClick = (e) => {
-		e.preventDefault();
-		props.dispatch(getSingleDiscussion(e.currentTarget.name));
-		props.history.push(`/dashboard/discussion/${e.currentTarget.name}`);
+	const onTitleClick = () => {
+		props.dispatch(getSingleDiscussion(props.id));
 	}
 
 	const dateStart = moment(props.dateStart).format('MMM DD, YYYY');
@@ -16,13 +16,16 @@ const DiscussionsItem = (props) => {
 
 	return (
 		<li>
-			<h2><a href="discussion" name={props.id} onClick={(e) => onTitleClick(e)} >{props.name}</a></h2>
+			<img src={props.image} alt="exhibition" className="exhibition-photo"/>
+			<div className="disc-item-container">
+				<h2><Link to={`/dashboard/discussion/${props.id}`} onClick={() => onTitleClick()}>{props.name}</Link></h2>
 		              <p>{props.venue.name} / {props.venue.address}</p>
 		              <p>{dateStart} - {dateEnd}</p>
 		              <p><b>Description:</b> {props.description}</p>
 		              <p>{props.comments.length} Comments</p>
+		      	</div>
 		</li>
 	);
 }
 
-export default connect()(withRouter(DiscussionsItem));
+export default connect()(DiscussionsItem);

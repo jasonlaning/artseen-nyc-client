@@ -17,8 +17,8 @@ const initialState = {
 	discussionToView: {
 		id: '',
 	},
+	discussionIdFromSearch: '',
 	singleDiscussionLoaded: false,
-	discussionFromSearch: false,
 	userToFollow: {},
 	modals: {
 		showSignInModal: false,
@@ -73,6 +73,10 @@ export const artseenReducer = (state=initialState, action) => {
 			modals,
 			prevAction: action.type
 		})
+	} else if (action.type === actions.UPDATE_USER_FAVORITES_SUCCESS) {
+		return Object.assign({}, state, {
+			user: action.user
+		})
 	} else if (action.type === actions.GET_DISCUSSIONS_SUCCESS) {
 		console.log('discussions fetched');
 		return Object.assign({}, state, {
@@ -94,13 +98,8 @@ export const artseenReducer = (state=initialState, action) => {
 			prevAction: action.type
 		})
 	} else if (action.type === actions.GET_DISCUSSION_FROM_SEARCH_SUCCESS) {
-		const discussionToView = Object.assign({}, action.discussion);
-		const modals = Object.assign({}, state.modals);
-		modals.showSearchModal = false; 
 		return Object.assign({}, state, {
-			discussionToView,
-			modals,
-			discussionFromSearch: true
+			discussionIdFromSearch: action.discussion.id
 		})
 	} else if (action.type === actions.TOGGLE_MODAL) {
 		let message = '';
@@ -109,6 +108,7 @@ export const artseenReducer = (state=initialState, action) => {
 		return Object.assign({}, state, { 
 			modals,
 			message,
+			discussionIdFromSearch: '',
 			prevAction: action.type,
 			searchResults: []
 		})
@@ -129,10 +129,6 @@ export const artseenReducer = (state=initialState, action) => {
 	} else if (action.type === actions.RESET_PROFILE_PIC_MODAL) {
 		return Object.assign({}, state, {
 			imageUploaded: ''
-		})
-	} else if (action.type === actions.RESET_SEARCH_FORM) {
-		return Object.assign({}, state, {
-			discussionFromSearch: false
 		})
 	} else if (action.type === actions.RESET_SINGLE_DISCUSSION) {
 		return Object.assign({}, state, {

@@ -12,51 +12,48 @@ import {toggleModal} from '../../actions';
 
 import './home.css';
 
-export class Home extends React.Component {
+export const Home = (props) => {
 
-	onSignInClick = (e, modal) => {
+	const onSignInClick = (e, modal) => {
 		e.preventDefault();
-		e.stopPropagation();
-		this.props.dispatch(toggleModal(modal));
+		props.dispatch(toggleModal(modal));
 	}
 
-	render() {
-
-		let signInModal;
-		if (this.props.showSignInModal) {
-			signInModal = <SignInModal />;
+	const showModal = (modal) => {
+		if (props[modal]) {
+			return <SignInModal />
 		}
-
-		return (
-			<div>
-				{console.log('rendered Home')}
-				{console.log('state: ', this.props.state)}
-				<NavBar>
-					<div className="nav-item">
-						<a href="" onClick={(e) => this.onSignInClick(e, 'showSignInModal')}>Log in</a>
-					</div>
-					<div className="nav-item">
-						<a href="#sign-up">Sign up</a>
-					</div>
-					<div className="nav-item">
-						<a href="#about">About</a>
-					</div>
-				</NavBar>
-				<main>
-					<Banner />
-					<About />
-					<SignUp message={this.props.message} />
-				</main>
-				<Footer />
-				<ReactCSSTransitionGroup 
-					transitionEnterTimeout={500}
-					transitionLeaveTimeout={500}
-					transitionName="modal-fade">
-					{signInModal}
-				</ReactCSSTransitionGroup>
-			</div>
-		);
 	}
+
+	return (
+		<div>
+			{console.log('rendered Home')}
+			{console.log('state: ', props.state)}
+			<NavBar>
+				<div className="nav-item">
+					<a href="" onClick={(e) => onSignInClick(e, 'showSignInModal')}>Log in</a>
+				</div>
+				<div className="nav-item">
+					<a href="#sign-up">Sign up</a>
+				</div>
+				<div className="nav-item">
+					<a href="#about">About</a>
+				</div>
+			</NavBar>
+			<main>
+				<Banner />
+				<About />
+				<SignUp message={props.message} />
+			</main>
+			<Footer />
+			<ReactCSSTransitionGroup 
+				transitionEnterTimeout={500}
+				transitionLeaveTimeout={500}
+				transitionName="modal-fade">
+				{showModal('showSignInModal')}
+			</ReactCSSTransitionGroup>
+		</div>
+	)
 }
 
 const mapStateToProps = (state, props) => ({

@@ -1,7 +1,6 @@
 form.profile-pic-form {
 	width: 294px;
 	height: 294px;
-
 	text-align: center;
 }
 
@@ -26,4 +25,8 @@ form.profile-pic-form {
     width: 230px;
     height: 230px;
     margin: 0 auto;
+}
+
+.dropzone-container:hover {
+	cursor: pointer;
 }

@@ -12,33 +12,34 @@ const FollowUserModal = (props) => {
 		props.dispatch(toggleModal(modal));
 	}
 
-	const onFollowFormSubmit = e => {
+	const onFollowClick = e => {
 		e.preventDefault();
-		if (e.target.action.value === 'follow') {
-			props.dispatch(addUserToFavorites(props.userToFollow.username));
-		} else {
-			props.dispatch(deleteUserFromFavorites(props.userToFollow.username));
-		}
+		props.dispatch(addUserToFavorites(props.userToFollow.username));
+	}
+
+	const onUnfollowClick = e => {
+		e.preventDefault();
+		props.dispatch(deleteUserFromFavorites(props.userToFollow.username));
 	}
 
 	return (
 		<div>
 			<div className="modal-overlay" onClick={e => onCloseModal(e, 'showFollowUserModal')}>
 		</div> 
-			<form className="follow-user-form modal-form" onSubmit={e => onFollowFormSubmit(e)} >
+			<form className="follow-user-form modal-form" >
 				<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showFollowUserModal')} > </a>
 				<div>
+					<img className="profile-pic" src={props.userToFollow.profilePicURL} alt="" />
 					<h2>{props.userToFollow.username}</h2>
-					<p><img src={props.userToFollow.profilePicURL} alt="" /></p>
 					<p>{props.userToFollow.location}</p>
 					<p>{props.userToFollow.about}</p>
 				</div>
-				<button type="submit" name="action" value="follow">Follow</button>
-				<button type="submit" name="action" value="unfollow">Unfollow</button>
+				<button onClick={(e) => onFollowClick(e)} >Follow</button>
+				<button onClick={(e) => onUnfollowClick(e)} >Unfollow</button>
 				<div>
 					<p className="modal-message">{props.message}</p>
 				</div>
-				</form>
+			</form>
 		</div>
 	);
 }

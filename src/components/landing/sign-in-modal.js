@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {toggleModal, signInUser, updateModalMessage} from '../../actions';
+import {toggleModal, signInUser} from '../../actions';
 
 import './sign-in-modal.css';
 
@@ -11,7 +11,6 @@ export const SignInModal = (props) => {
 	const onCloseModal = (e, modal) => {
 		e.preventDefault();
 		props.dispatch(toggleModal(modal));
-		props.dispatch(updateModalMessage(''));
 	}
 
 	const onSignIn = e => {

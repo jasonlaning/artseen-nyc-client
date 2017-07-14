@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import scroll from 'react-scroll';
 import {getSingleDiscussion, resetSingleDiscussion} from '../../actions';
@@ -9,10 +9,10 @@ import CommentForm from './comment-form';
 
 export class SingleDiscussion extends React.Component {
 
-	componentWillMount() {
-		if (!this.props.loaded) {
+	constructor(props) {
+		super(props);
 			this.props.dispatch(getSingleDiscussion(this.props.match.params.discussionId));
-		}
+			scroll.animateScroll.scrollTo(200, {duration: 1000})
 	}
 
 	componentWillUnmount() {
@@ -21,13 +21,9 @@ export class SingleDiscussion extends React.Component {
 
 	render() {
 
-		const windowScroll = () => {
-			console.log('prevAction: ', this.props.prevAct);
-			if (this.props.prevAction !== 'POST_NEW_COMMENT_SUCCESS' 
-				&& this.props.prevAction !== 'GET_USER_TO_FOLLOW_SUCCESS'
-				&& this.props.prevAction !== 'TOGGLE_MODAL') {
-				scroll.animateScroll.scrollTo(200, {duration: 1000});
-			} 
+		if (this.props.message) {
+			console.log(this.props.message);
+			return <Redirect to="/dashboard/404" />
 		}
 
 		if (!this.props.loaded) {
@@ -36,7 +32,6 @@ export class SingleDiscussion extends React.Component {
 
 			return (
 				<section>
-					{windowScroll()}
 					<div className="wrapper">
 						<ExhibitionHeading discussion={this.props.discussion} />
 						<Comments comments={this.props.discussion.comments}/>
@@ -51,8 +46,8 @@ export class SingleDiscussion extends React.Component {
 const mapStateToProps = (state, props) => ({
 	discussion: state.discussionToView,
 	discussions: state.discussions,
-	prevAction: state.prevAction,
-	loaded: state.singleDiscussionLoaded
+	loaded: state.singleDiscussionLoaded,
+	message: state.message
 })
 
 export default connect(mapStateToProps)(withRouter(SingleDiscussion));

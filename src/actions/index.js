@@ -1,4 +1,4 @@
-import {mockDiscussions, mockCommunity, mockExhibitions} from '../mock-data';
+import {mockDiscussions, mockExhibitions} from '../mock-data';
 //import {parseString} from 'xml2js';
 import axios from 'axios';
 import searchExhibitions from '../components/search-exhibitions';
@@ -22,11 +22,6 @@ export const toggleModal = (modal) => ({
 	modal
 })
 
-export const RESET_SEARCH_FORM = 'RESET_SEARCH_FORM';
-export const resetSearchForm = () => ({
-	type: RESET_SEARCH_FORM
-})
-
 export const RESET_SINGLE_DISCUSSION = 'RESET_SINGLE_DISCUSSION';
 export const resetSingleDiscussion = () => ({
 	type: RESET_SINGLE_DISCUSSION
@@ -38,24 +33,22 @@ export const getDiscussionFromSearchSuccess = (discussion) => ({
 	discussion
 })
 
-export const getDiscussionFromSearch = (ex) => dispatch => {
-
-	const id = ex.$.id.replace(/\//g, '-');
+export const getDiscussionFromSearch = (discussion) => dispatch => {
 
 	api.post('/discussions', {
-			id: id,
-			href: ex.$.href,
-			name: ex.Name[0],
+			id: discussion.id,
+			href: discussion.$.href,
+			name: discussion.Name[0],
 			venue: {
-				name: ex.Venue[0].Name[0],
-				address: ex.Venue[0].Address[0],
-				area: ex.Venue[0].Area[0]._
+				name: discussion.Venue[0].Name[0],
+				address: discussion.Venue[0].Address[0],
+				area: discussion.Venue[0].Area[0]._
 			},
-			description: ex.Description[0],
-			image: ex.Image[2].$.src,
-			dateStart: ex.DateStart[0],
-			dateEnd: ex.DateEnd[0],
-			searchTerms: ex.searchTerms
+			description: discussion.Description[0],
+			image: discussion.Image[2].$.src,
+			dateStart: discussion.DateStart[0],
+			dateEnd: discussion.DateEnd[0],
+			searchTerms: discussion.searchTerms
 		})
 		.then(res => {
 			dispatch(getDiscussionFromSearchSuccess(res.data.discussion));
@@ -115,8 +108,15 @@ export const getCommunitySuccess = community => ({
 })
 
 export const getCommunity = () => dispatch => {
-	
-	dispatch(getCommunitySuccess(mockCommunity));
+
+	api.get('users/me/community')
+		.then(res => {
+			if (res.statusText !== 'OK') {
+				return Promise.reject(res)
+			}
+			dispatch(getCommunitySuccess(res.data.comments));
+		})
+		.catch(err => console.log(err))
 }
 
 export const GET_USER_TO_FOLLOW_SUCCESS = 'GET_USER_TO_FOLLOW_SUCCESS';
@@ -136,6 +136,12 @@ export const getUserToFollow = (username) => dispatch => {
 		.catch(err => console.log('error: ', err.response.data.message))
 }
 
+export const UPDATE_USER_FAVORITES_SUCCESS = 'UPDATE_USER_FAVORITES_SUCCESS';
+export const updateUserFavoritesSuccess = (user) => ({
+	type: UPDATE_USER_FAVORITES_SUCCESS,
+	user
+})
+
 export const addUserToFavorites = (username) => dispatch => {
 	api.post('users/me/favorites', {
 			username
@@ -144,8 +150,13 @@ export const addUserToFavorites = (username) => dispatch => {
 			if (res.status !== 201) {
 				return Promise.reject(res);
 			}
-			dispatch(updateModalMessage('Success! Updating Community Activity...'));
-			setTimeout(() => window.location ='/dashboard', 1000);
+			dispatch(updateUserFavoritesSuccess(res.data.user));
+		})
+		.then(() => {
+			dispatch(getCommunity());
+		})
+		.then(()=> {
+			dispatch(toggleModal('showFollowUserModal'))
 		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
@@ -161,8 +172,13 @@ export const deleteUserFromFavorites = (username) => dispatch => {
 			if (res.statusText !== 'OK') {
 				return Promise.reject(res);
 			}
-			dispatch(updateModalMessage('Success! Updating Community Activity...'));
-			setTimeout(() => window.location ='/dashboard', 1500);
+			dispatch(updateUserFavoritesSuccess(res.data.user));
+		})
+		.then(() => {
+			dispatch(getCommunity());
+		})
+		.then(()=> {
+			dispatch(toggleModal('showFollowUserModal'))
 		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
@@ -187,7 +203,7 @@ export const getSingleDiscussion = (id) => dispatch => {
 			dispatch(updateDiscussionToView(discussion))
 		})
 		.catch(err => {
-			console.log('error: ', err.response.data.message);
+			dispatch(updateModalMessage("Discussion not found."))
 		});   
 }
 
@@ -271,8 +287,7 @@ export const signInUser = (username, password) => dispatch => {
 			}
 	 	}) 
 	 	.catch(() => {
-	 		const err = "Invalid Username or Password";
-			return dispatch(updateModalMessage(err))
+			dispatch(updateModalMessage('Invalid Username or Passowrd'));
 		})
 }
 

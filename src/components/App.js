@@ -5,7 +5,7 @@ import ScrollToTop from './scroll-to-top';
 import './App.css';
 import Home from './landing/home';
 import Dashboard from './dashboard/dashboard';
-import PageNotFound from './page-not-found';
+import Error404 from './error-404';
 
 const App = (props) => {
 
@@ -18,7 +18,7 @@ const App = (props) => {
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/dashboard/:feedView" component={Dashboard} />
 				<Route exact path="/dashboard/:feedView/:discussionId" component ={Dashboard} />
-				<Route component={PageNotFound} />
+				<Route component={Error404} />
 			</Switch>
 		</div>
 		</ScrollToTop>

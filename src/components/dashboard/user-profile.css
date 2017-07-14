@@ -1,7 +1,10 @@
-img.profile-pic {
+.profile-pic {
 	height: 150px;
 	width: 150px;
 	border-radius: 50%;
+}
+
+.user-profile img {
 	float: left;
 	margin-right: 35px;
 }
