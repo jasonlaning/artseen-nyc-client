@@ -16,7 +16,7 @@ const DiscussionsItem = (props) => {
 
 	return (
 		<li>
-			<img src={props.image} alt="exhibition" className="exhibition-photo"/>
+			<img src={`https://crossorigin.me${props.image}}` alt="exhibition" className="exhibition-photo"/>
 			<div className="disc-item-container">
 				<h2><Link to={`/dashboard/discussion/${props.id}`} onClick={() => onTitleClick()}>{props.name}</Link></h2>
 		              <p>{props.venue.name} / {props.venue.address}</p>
