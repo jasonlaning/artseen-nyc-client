@@ -1,11 +1,14 @@
 import React from 'react';
+import moment from 'moment';
 
 const ExhibitionHeading = (props) => (
 	<section>
-        <h1>{props.discussion.id} {props.discussion.name}</h1>
-        <p>Luhring Augustine Bushwick / 25 Knickerbocker Ave</p>
-        <p>July 22 - July 29, 2017</p>
-        <p><b>Description:</b> Luhring Augustine is pleased to announce Caída libre (Free fall), an exhibition by Miguel Calderón, featuring a film and sculptural installation centered on the theme of falconry. This presentation in the gallery’s Bushwick location is organized in collaboration with kurimanzutto, Mexico City.</p>
+        <h1>{props.discussion.name}</h1>
+        <p>{props.discussion.venue.name} / {props.discussion.venue.address}</p>
+        <p>{moment(props.discussion.dateStart).format('MMM DD')} - 
+        	{moment(props.discussion.dateEnd).format('MMM DD, YYYY')}</p>
+        <p><span style={{fontWeight: 'bold'}}>Description: </span>
+        	{props.discussion.description}</p>
         <p>Comments:</p>
     </section>
 );

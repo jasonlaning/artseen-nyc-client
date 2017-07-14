@@ -14,6 +14,8 @@ import {toggleModal, logOutUser, getUserSession} from '../../actions';
 
 import SearchModal from './search-modal';
 import FollowUserModal from './follow-user-modal';
+import UserSettingsModal from './user-settings-modal';
+import ProfilePicModal from './profile-pic-modal';
 
 import './dashboard.css';
 
@@ -46,14 +48,16 @@ export const Dashboard = (props) => {
 		return <CommunityActivity />
 	}
 
-	let searchModal;
-	if (props.modals.showSearchModal) {
-		searchModal = <SearchModal />;
-	}
-
-	let followUserModal;
-	if (props.modals.showFollowUserModal) {
-		followUserModal = <FollowUserModal />;
+	const showModals = () => {
+		if (props.modals.showSearchModal) {
+			return <SearchModal />
+		} else if (props.modals.showFollowUserModal) {
+			return <FollowUserModal />
+		} else if (props.modals.showUserSettingsModal) {
+			return <UserSettingsModal />
+		} else if (props.modals.showProfilePicModal) {
+			return <ProfilePicModal />
+		}
 	}
 
 	const fadeIn = () => {
@@ -82,8 +86,7 @@ export const Dashboard = (props) => {
 					transitionEnterTimeout={500}
 					transitionLeaveTimeout={500}
 					transitionName="modal-fade">
-					{searchModal}
-					{followUserModal}
+					{showModals()}
 				</ReactCSSTransitionGroup>
 				<NavBar>
 					<div className="nav-item"><a href="" onClick={(e) => onClickLogOut(e)}>Log out</a></div>

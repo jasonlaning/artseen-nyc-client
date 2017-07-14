@@ -9,6 +9,7 @@ const initialState = {
 		favoriteUsers: ''
 	},
 	loggedIn: false,
+	imageUploaded: '',
 	exhibitions: [],
 	searchResults: [],
 	community: [],
@@ -16,11 +17,15 @@ const initialState = {
 	discussionToView: {
 		id: '',
 	},
+	singleDiscussionLoaded: false,
+	discussionFromSearch: false,
 	userToFollow: {},
 	modals: {
 		showSignInModal: false,
 		showFollowUserModal: false,
-		showSearchModal: false
+		showSearchModal: false,
+		showUserSettingsModal: false,
+		showProfilePicModal: false
 	},
 	prevAction: '',
 	message: ''
@@ -43,6 +48,16 @@ export const artseenReducer = (state=initialState, action) => {
 			modals,
 			prevAction: action.type
 		})
+	} else if (action.type === actions.UPDATE_USER_SETTINGS_SUCCESS) {
+		let modals = Object.assign({}, state.modals);
+		modals[action.modal] = false;
+		return Object.assign({}, state, {
+			user: action.user,
+			modals,
+			imageUploaded: '',
+			prevAction: action.type
+		})
+
 	} else if (action.type === actions.GET_USER_TO_FOLLOW_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
 		modals.showFollowUserModal = true;
@@ -75,7 +90,17 @@ export const artseenReducer = (state=initialState, action) => {
 		console.log('discussion to view: ', discussionToView);
 		return Object.assign({}, state, {
 			discussionToView,
+			singleDiscussionLoaded: true,
 			prevAction: action.type
+		})
+	} else if (action.type === actions.GET_DISCUSSION_FROM_SEARCH_SUCCESS) {
+		const discussionToView = Object.assign({}, action.discussion);
+		const modals = Object.assign({}, state.modals);
+		modals.showSearchModal = false; 
+		return Object.assign({}, state, {
+			discussionToView,
+			modals,
+			discussionFromSearch: true
 		})
 	} else if (action.type === actions.TOGGLE_MODAL) {
 		let message = '';
@@ -96,6 +121,22 @@ export const artseenReducer = (state=initialState, action) => {
 		return Object.assign({}, state, {
 			discussionToView,
 			prevAction: action.type
+		})
+	} else if (action.type === actions.UPLOAD_IMAGE_SUCCESS) {
+		return Object.assign({}, state, {
+			imageUploaded: action.url
+		})
+	} else if (action.type === actions.RESET_PROFILE_PIC_MODAL) {
+		return Object.assign({}, state, {
+			imageUploaded: ''
+		})
+	} else if (action.type === actions.RESET_SEARCH_FORM) {
+		return Object.assign({}, state, {
+			discussionFromSearch: false
+		})
+	} else if (action.type === actions.RESET_SINGLE_DISCUSSION) {
+		return Object.assign({}, state, {
+			singleDiscussionLoaded: false
 		})
 	}
 	return state;

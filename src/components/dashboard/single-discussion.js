@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import scroll from 'react-scroll';
-import {getSingleDiscussion} from '../../actions';
+import {getSingleDiscussion, resetSingleDiscussion} from '../../actions';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
@@ -10,7 +10,13 @@ import CommentForm from './comment-form';
 export class SingleDiscussion extends React.Component {
 
 	componentWillMount() {
-		this.props.dispatch(getSingleDiscussion(this.props.match.params.discussionId));
+		if (!this.props.loaded) {
+			this.props.dispatch(getSingleDiscussion(this.props.match.params.discussionId));
+		}
+	}
+
+	componentWillUnmount() {
+		this.props.dispatch(resetSingleDiscussion());
 	}
 
 	render() {
@@ -24,9 +30,7 @@ export class SingleDiscussion extends React.Component {
 			} 
 		}
 
-		const loaded = (this.props.discussion.id === this.props.match.params.discussionId);
-
-		if (!loaded) {
+		if (!this.props.loaded) {
 			return <section className="loading"></section>
 		} else {
 
@@ -47,7 +51,8 @@ export class SingleDiscussion extends React.Component {
 const mapStateToProps = (state, props) => ({
 	discussion: state.discussionToView,
 	discussions: state.discussions,
-	prevAction: state.prevAction
+	prevAction: state.prevAction,
+	loaded: state.singleDiscussionLoaded
 })
 
 export default connect(mapStateToProps)(withRouter(SingleDiscussion));

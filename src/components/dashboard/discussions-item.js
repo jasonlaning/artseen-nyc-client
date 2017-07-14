@@ -2,12 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {updateDiscussionToView} from '../../actions';
+import {getSingleDiscussion} from '../../actions';
 
 const DiscussionsItem = (props) => {
 	const onTitleClick = (e) => {
 		e.preventDefault();
-		props.dispatch(updateDiscussionToView(e.currentTarget.name, 'discussions'));
+		props.dispatch(getSingleDiscussion(e.currentTarget.name));
 		props.history.push(`/dashboard/discussion/${e.currentTarget.name}`);
 	}
 

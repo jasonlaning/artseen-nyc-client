@@ -23,8 +23,8 @@ const CommunityItem = (props) => {
 		<li>
 			<h2>{date(props.date)}</h2>
 			<p><a href="" onClick={(e) => onClickUserToFollow(e)} 
-					className="community-username">{props.username}</a> commented on 
-				<a href="" name={props.id} onClick={e => onTitleClick(e)} 
+					className="community-username">{props.username}</a> commented on <a href="" 
+					name={props.id} onClick={e => onTitleClick(e)} 
 					className="community-title"> {props.discussion.name}</a></p>
 			<p className="snippet">{props.text}...</p>
 		</li>

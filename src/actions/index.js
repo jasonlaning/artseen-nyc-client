@@ -22,6 +22,22 @@ export const toggleModal = (modal) => ({
 	modal
 })
 
+export const RESET_SEARCH_FORM = 'RESET_SEARCH_FORM';
+export const resetSearchForm = () => ({
+	type: RESET_SEARCH_FORM
+})
+
+export const RESET_SINGLE_DISCUSSION = 'RESET_SINGLE_DISCUSSION';
+export const resetSingleDiscussion = () => ({
+	type: RESET_SINGLE_DISCUSSION
+})
+
+export const GET_DISCUSSION_FROM_SEARCH_SUCCESS = 'GET_DISCUSSION_FROM_SEARCH_SUCCESS';
+export const getDiscussionFromSearchSuccess = (discussion) => ({
+	type: GET_DISCUSSION_FROM_SEARCH_SUCCESS,
+	discussion
+})
+
 export const getDiscussionFromSearch = (ex) => dispatch => {
 
 	const id = ex.$.id.replace(/\//g, '-');
@@ -42,7 +58,7 @@ export const getDiscussionFromSearch = (ex) => dispatch => {
 			searchTerms: ex.searchTerms
 		})
 		.then(res => {
-			window.location=`/dashboard/discussion/${res.data.discussion.id}`;
+			dispatch(getDiscussionFromSearchSuccess(res.data.discussion));
 		})
 		.catch(err => {
 			console.log(err);
@@ -269,6 +285,56 @@ export const signUpNewUser = (username, password) => dispatch => {
 	 	.then((res) => {
 	 		if (res.status === 201) {
 	 			dispatch(signInUser(username, password));
+	 		} else {
+				return Promise.reject(res);
+			}
+	 	}) 
+	 	.catch((err) => {
+			return dispatch(updateModalMessage(err.response.data.message))
+		})
+}
+
+export const RESET_PROFILE_PIC_MODAL = 'RESET_PROFILE_PIC_MODAL';
+export const resetProfilePicModal = () => ({
+	type: RESET_PROFILE_PIC_MODAL
+})
+
+export const UPLOAD_IMAGE_SUCCESS = 'UPLOAD_IMAGE_SUCCESS';
+export const uploadImageSuccess = (url) => ({
+	type: UPLOAD_IMAGE_SUCCESS,
+	url
+})
+
+export const uploadImage = (image) => dispatch => {
+	dispatch(updateModalMessage('Uploading new image...'));
+	const file = image[0];
+	let data = new FormData();
+	data.append('file', file);
+	data.append('upload_preset', 'dw4rjy87');
+	axios.post('https://api.cloudinary.com/v1_1/w0932jor82/upload', data)
+		.then(res => {
+			dispatch(uploadImageSuccess(res.data.secure_url));
+			dispatch(updateModalMessage(''));
+		})
+		.catch(err => console.log(err));
+}
+
+export const UPDATE_USER_SETTINGS_SUCCESS = 'UPDATE_USER_SETTINGS_SUCCESS';
+export const updateUserSettingsSuccess = (user, modal) => ({
+	type: UPDATE_USER_SETTINGS_SUCCESS,
+	user,
+	modal
+})
+
+export const updateUserSettings = (location, about, profilePicURL, modal) => dispatch => {
+	api.put('users/me', {
+	 		location,
+	 		about,
+	 		profilePicURL
+	 	})
+	 	.then((res) => {
+	 		if (res.status === 200) {
+	 			dispatch(updateUserSettingsSuccess(res.data.user, modal));
 	 		} else {
 				return Promise.reject(res);
 			}
