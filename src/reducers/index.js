@@ -98,8 +98,12 @@ export const artseenReducer = (state=initialState, action) => {
 			prevAction: action.type
 		})
 	} else if (action.type === actions.GET_DISCUSSION_FROM_SEARCH_SUCCESS) {
+		let modals = Object.assign({}, state.modals);
+		modals['showSearchModal'] = false;
 		return Object.assign({}, state, {
-			discussionIdFromSearch: action.discussion.id
+			discussionIdFromSearch: action.discussion.id,
+			modals,
+			singleDiscussionLoaded: false
 		})
 	} else if (action.type === actions.TOGGLE_MODAL) {
 		let message = '';

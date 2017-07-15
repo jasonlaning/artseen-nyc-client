@@ -22,6 +22,16 @@ const FollowUserModal = (props) => {
 		props.dispatch(deleteUserFromFavorites(props.userToFollow.username));
 	}
 
+	let followDisabled = true;
+	let unfollowDisabled = true;
+	if ((props.user.favoriteUsers.indexOf(props.userToFollow.username) === -1) && 
+		(props.user.username !== props.userToFollow.username)) {
+		followDisabled = false;
+	} else if ((props.user.favoriteUsers.indexOf(props.userToFollow.username) !== -1) &&
+		(props.user.username !== props.userToFollow.username)) {
+		unfollowDisabled = false;
+	}
+
 	return (
 		<div>
 			<div className="modal-overlay" onClick={e => onCloseModal(e, 'showFollowUserModal')}>
@@ -34,8 +44,8 @@ const FollowUserModal = (props) => {
 					<p>{props.userToFollow.location}</p>
 					<p>{props.userToFollow.about}</p>
 				</div>
-				<button onClick={(e) => onFollowClick(e)} >Follow</button>
-				<button onClick={(e) => onUnfollowClick(e)} >Unfollow</button>
+				<button onClick={(e) => onFollowClick(e)} disabled={followDisabled} >Follow</button>
+				<button onClick={(e) => onUnfollowClick(e)} disabled={unfollowDisabled} >Unfollow</button>
 				<div>
 					<p className="modal-message">{props.message}</p>
 				</div>

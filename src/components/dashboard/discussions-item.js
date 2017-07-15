@@ -11,7 +11,7 @@ const DiscussionsItem = (props) => {
 		props.dispatch(getSingleDiscussion(props.id));
 	}
 
-	const dateStart = moment(props.dateStart).format('MMM DD, YYYY');
+	const dateStart = moment(props.dateStart).format('MMM DD');
 	const dateEnd = moment(props.dateEnd).format('MMM DD, YYYY');
 
 	return (

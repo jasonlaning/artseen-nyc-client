@@ -8,7 +8,8 @@ const ExhibitionHeading = (props) => (
         <p>{moment(props.discussion.dateStart).format('MMM DD')} - 
         	{moment(props.discussion.dateEnd).format('MMM DD, YYYY')}</p>
         <p><span style={{fontWeight: 'bold'}}>Description: </span>
-        	{props.discussion.description}</p>
+        	{`${props.discussion.description.slice(0, 500)}...`}
+        	(read more at <a href={props.discussion.href} target="_blank" >NY Art Beat</a>)</p>
         <p>Comments:</p>
     </section>
 );

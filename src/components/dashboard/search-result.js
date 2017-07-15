@@ -14,7 +14,8 @@ const SearchResult = (props) => {
 	}
 
 	return (
-		<a href={`/dashboard/discussion/${discussion.id}`} onClick={(e) => onExhibitionClick(e)}><li>{discussion.Name[0]}</li></a>
+		<a href={`/dashboard/discussion/${discussion.id}`} 
+			onClick={(e) => onExhibitionClick(e)}><li>{discussion.Name[0]}</li></a>
 	);
 }
 

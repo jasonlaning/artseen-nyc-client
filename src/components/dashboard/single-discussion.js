@@ -6,6 +6,7 @@ import {getSingleDiscussion, resetSingleDiscussion} from '../../actions';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export class SingleDiscussion extends React.Component {
 
@@ -19,6 +20,12 @@ export class SingleDiscussion extends React.Component {
 		this.props.dispatch(resetSingleDiscussion());
 	}
 
+	componentDidUpdate() {
+		if (this.props.prevAction === 'UPDATE_DISCUSSION_TO_VIEW') {
+			scroll.animateScroll.scrollTo(200, {duration: 1000})
+		}
+	}
+
 	render() {
 
 		if (this.props.message) {
@@ -26,20 +33,30 @@ export class SingleDiscussion extends React.Component {
 			return <Redirect to="/dashboard/404" />
 		}
 
-		if (!this.props.loaded) {
-			return <section className="loading"></section>
-		} else {
+		const waitForLoaded = () => {
+			if (!this.props.loaded) {
+				return (
+					<section className="loading"></section>
+				)
+				} else {
 
-			return (
-				<section>
-					<div className="wrapper">
-						<ExhibitionHeading discussion={this.props.discussion} />
-						<Comments comments={this.props.discussion.comments}/>
-						<CommentForm />
-					</div>
-				</section>
-			);
+					return (
+						<section>
+							<div className="wrapper">
+								<ExhibitionHeading discussion={this.props.discussion} />
+								<Comments comments={this.props.discussion.comments}/>
+								<CommentForm />
+							</div>
+						</section>
+					);
+				}
 		}
+
+		return (
+			<div>
+			{waitForLoaded()}
+			</div>
+		)
 	}
 }
 
@@ -47,6 +64,7 @@ const mapStateToProps = (state, props) => ({
 	discussion: state.discussionToView,
 	discussions: state.discussions,
 	loaded: state.singleDiscussionLoaded,
+	prevAction: state.prevAction,
 	message: state.message
 })
 

@@ -129,11 +129,12 @@ export const getUserToFollow = (username) => dispatch => {
 	api.get(`users/${username}`)
 		.then(res => {
 			if (res.statusText !== 'OK') {
+				console.log(res.statusText);
 				return Promise.reject(res)
 			}
 			dispatch(getUserToFollowSuccess(res.data.user));
 		})
-		.catch(err => console.log('error: ', err.response.data.message))
+		.catch(err => console.log('error: ', err))
 }
 
 export const UPDATE_USER_FAVORITES_SUCCESS = 'UPDATE_USER_FAVORITES_SUCCESS';
@@ -149,6 +150,7 @@ export const addUserToFavorites = (username) => dispatch => {
 		.then(res => {
 			if (res.status !== 201) {
 				return Promise.reject(res);
+				console.log(res.status);
 			}
 			dispatch(updateUserFavoritesSuccess(res.data.user));
 		})
