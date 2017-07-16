@@ -1,19 +1,50 @@
-h2.inactive, h2.active {
+.front {
+	z-index: 1000000;
+	background-color: white;
+}
+
+.user-nav h2 {
+	text-transform: uppercase;
+	background-color: white;
+}
+
+.user-nav h2.inactive, .user-nav h2.active {
 	display: inline-block;
 	width: 50%;
 	text-align: center;
 }
 
-h2.active {
-	border-bottom: 2px solid #444;
+.user-nav h2.active {
+	border-bottom: 2px solid gray;
 }
 
-h2.inactive {
+.user-nav h2.inactive {
 	color: #bbb;
-	border-bottom: 2px solid #bbb;
+	border-bottom: 2px solid white;
 }
 
-h2.inactive:hover {
+.user-nav h2.inactive:hover {
 	color: #999;
 	border-bottom: 2px solid #999;
+} 
+
+@media screen and (max-width: 400px) {
+
+	.user-nav {
+		width: 100%;
+		padding: 0;
+	}
+
+	.user-nav h2 {
+		font-size: 16px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		transition: padding 300ms ease;
+	}
+
+	.sticky-outer-wrapper.active h2 {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
 }

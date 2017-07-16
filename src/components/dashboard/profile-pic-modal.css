@@ -21,7 +21,7 @@ form.profile-pic-form {
 
 .dropzone-container {
 	border: 3px dotted gray;
-    border-radius: 5px;
+    border-radius: 50%;
     width: 230px;
     height: 230px;
     margin: 0 auto;

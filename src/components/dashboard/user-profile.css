@@ -9,10 +9,6 @@
 	margin-right: 35px;
 }
 
-.user-profile {
-	min-height: 210px;
-}
-
 .location {
 	margin-top: 0;
 	font-size: 14px;
@@ -20,4 +16,34 @@
 
 .user-profile h2 {
 	padding-top: 15px;
+}
+
+@media screen and (max-width: 400px) {
+
+	img.profile-pic {
+		height: 100px;
+		width: 100px;
+		margin-right: 20px;
+	}
+
+	.user-profile {
+		padding: 15px;
+		min-height: 130px;
+	}
+
+	.user-profile h2 {
+		padding-top: 5px;
+		font-size: 22px;
+	}
+
+	.location {
+		margin-top: -5px;
+		color: #969696;
+	}
+
+	.about {
+		margin-top: 10px;
+		font-size: 14px;
+	}
+
 }

@@ -10,6 +10,12 @@ const api = axios.create({
 	withCredentials: true
 })
 
+export const UPDATE_STICKY = 'UPDATE_STICKY';
+export const updateSticky = (status) => ({
+	type: UPDATE_STICKY,
+	status
+})
+
 export const UPDATE_MODAL_MESSAGE = 'UPDATE_MODAL_MESSAGE';
 export const updateModalMessage = (message) => ({
 	type: UPDATE_MODAL_MESSAGE,
@@ -150,7 +156,6 @@ export const addUserToFavorites = (username) => dispatch => {
 		.then(res => {
 			if (res.status !== 201) {
 				return Promise.reject(res);
-				console.log(res.status);
 			}
 			dispatch(updateUserFavoritesSuccess(res.data.user));
 		})

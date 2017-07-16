@@ -30,7 +30,7 @@ export const ProfilePicModal = (props) => {
 					accept="image/*"
 					onDrop={pic => onImageDrop(pic)}>
 					<p className="drop-instructions">Drag and Drop<br/>
-						New Profile Image<br /><br/>(or click to select a file)</p>
+						New Profile Image<br /><br/>or click here<br/>to select a file</p>
 				</Dropzone>
 			)
 		} else {

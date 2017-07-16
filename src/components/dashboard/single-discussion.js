@@ -1,28 +1,35 @@
 import React from 'react';
 import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import scroll from 'react-scroll';
+//import Scroll from 'react-scroll';
 import {getSingleDiscussion, resetSingleDiscussion} from '../../actions';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+//const Element = Scroll.Element;
+//const scroller = Scroll.scroller;
 
 export class SingleDiscussion extends React.Component {
 
 	constructor(props) {
 		super(props);
-			this.props.dispatch(getSingleDiscussion(this.props.match.params.discussionId));
-			scroll.animateScroll.scrollTo(200, {duration: 1000})
+			if (!this.props.loaded) {
+				this.props.dispatch(getSingleDiscussion(this.props.match.params.discussionId));
+				//window.scrollTo(0, 130);
+			}
+			//Scroll.animateScroll.scrollTo(130, {duration: 0})
 	}
 
 	componentWillUnmount() {
 		this.props.dispatch(resetSingleDiscussion());
 	}
 
-	componentDidUpdate() {
-		if (this.props.prevAction === 'UPDATE_DISCUSSION_TO_VIEW') {
-			scroll.animateScroll.scrollTo(200, {duration: 1000})
+	componentDidUpdate(prevProps) {
+		if (this.props.prevAction === 'GET_DISCUSSION_FROM_SEARCH_SUCCESS') {
+			//window.scrollTo(0, 130);
+		} else {
+			//Scroll.animateScroll.scrollTo(130, {duration: 1000})
 		}
 	}
 
@@ -33,30 +40,24 @@ export class SingleDiscussion extends React.Component {
 			return <Redirect to="/dashboard/404" />
 		}
 
-		const waitForLoaded = () => {
-			if (!this.props.loaded) {
+		const discussionLoaded = () => {
+			if (this.props.loaded) {
 				return (
-					<section className="loading"></section>
+					<div className="wrapper discussion-loaded">
+						<ExhibitionHeading discussion={this.props.discussion} />
+						<Comments comments={this.props.discussion.comments}/>
+						<CommentForm />
+					</div>
 				)
-				} else {
-
-					return (
-						<section>
-							<div className="wrapper">
-								<ExhibitionHeading discussion={this.props.discussion} />
-								<Comments comments={this.props.discussion.comments}/>
-								<CommentForm />
-							</div>
-						</section>
-					);
-				}
+			}
 		}
 
 		return (
-			<div>
-			{waitForLoaded()}
-			</div>
-		)
+			<section className='wrapper'>
+			{console.log(window.scrollY)}
+				{discussionLoaded()}
+			</section>
+			)
 	}
 }
 

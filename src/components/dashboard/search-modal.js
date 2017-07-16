@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import SearchResult from './search-result';
-import {toggleModal, getExhibitionsForSearch, getSingleDiscussion} from '../../actions';
+import {toggleModal, getExhibitionsForSearch} from '../../actions';
 import './search-modal.css';
 
 export class SearchModal extends React.Component {
@@ -11,9 +11,6 @@ export class SearchModal extends React.Component {
 		if (this.props.discussionIdFromSearch) {
 			console.log(this.props.match.params.discussionId, this.props.discussionIdFromSearch);
 			this.props.history.push(`/dashboard/discussion/${this.props.discussionIdFromSearch}`);
-			if(this.props.match.params.feedView === 'discussion') {
-				this.props.dispatch(getSingleDiscussion(this.props.discussionIdFromSearch));
-			}
 		}
 	}
 

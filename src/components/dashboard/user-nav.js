@@ -1,9 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Sticky from 'react-stickynode';
+import { updateSticky } from '../../actions'
 
 import './user-nav.css';
 
-const UserNav = (props) => {
+export const UserNav = (props) => {
 
 	const navView = (view) => {
 		if (view === 'discussions' || view === 'discussion') {
@@ -23,11 +26,21 @@ const UserNav = (props) => {
 		}
 	}
 
+	const handleStickyChange = (status) => {
+		props.dispatch(updateSticky(status.status));
+	}
+
 	return (
-		<section>
-		   {navView(props.userFeedView)}   
+		<section className="user-nav">
+			<Sticky top={50} innerZ={1}  onStateChange={handleStickyChange} enabled={true}>
+				{navView(props.userFeedView)}
+			</Sticky>
 		</section>
 	);
 }
 
-export default (UserNav);
+const mapStateToProps = (state, props) => ({
+	stickyStatus: state.stickyStatus
+});
+
+export default connect(mapStateToProps)(UserNav);

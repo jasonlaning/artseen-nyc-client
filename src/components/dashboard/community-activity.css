@@ -1,19 +1,15 @@
-.user-profile-link, .discussion-link {
-	font-weight: 600;
-}
-
-.community-activity h2 {
-	text-align: center;
-	color: #666;
-}
-
-.snippet {
-	margin-top: 0;
-	margin-bottom: 26px;
-	color: gray;
-	font-style: italic;
-}
-
 .community-activity a:hover {
 	border-bottom: 2px solid black;
+}
+
+.community-activity {
+	padding: 0;
+}
+
+@media screen and (max-width: 400px) {
+
+	.community-activity {
+		font-size: 16px;
+	}
+
 }

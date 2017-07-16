@@ -16,6 +16,7 @@ const initialState = {
 	discussions: [],
 	discussionToView: {
 		id: '',
+		comments: []
 	},
 	discussionIdFromSearch: '',
 	singleDiscussionLoaded: false,
@@ -28,7 +29,8 @@ const initialState = {
 		showProfilePicModal: false
 	},
 	prevAction: '',
-	message: ''
+	message: '',
+	stickyStatus: false
 };
 
 export const artseenReducer = (state=initialState, action) => {
@@ -57,7 +59,6 @@ export const artseenReducer = (state=initialState, action) => {
 			imageUploaded: '',
 			prevAction: action.type
 		})
-
 	} else if (action.type === actions.GET_USER_TO_FOLLOW_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
 		modals.showFollowUserModal = true;
@@ -99,11 +100,14 @@ export const artseenReducer = (state=initialState, action) => {
 		})
 	} else if (action.type === actions.GET_DISCUSSION_FROM_SEARCH_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
+		let discussion = Object.assign({}, action.discussion);
 		modals['showSearchModal'] = false;
 		return Object.assign({}, state, {
 			discussionIdFromSearch: action.discussion.id,
+			discussionToView: discussion,
 			modals,
-			singleDiscussionLoaded: false
+			singleDiscussionLoaded: true,
+			prevAction: action.type
 		})
 	} else if (action.type === actions.TOGGLE_MODAL) {
 		let message = '';
@@ -137,6 +141,14 @@ export const artseenReducer = (state=initialState, action) => {
 	} else if (action.type === actions.RESET_SINGLE_DISCUSSION) {
 		return Object.assign({}, state, {
 			singleDiscussionLoaded: false
+		})
+	} else if (action.type === actions.UPDATE_STICKY) {
+		let stickyStatus = false;
+		if (action.status > 0) {
+			stickyStatus = true;
+		}
+		return Object.assign({}, state, {
+			stickyStatus
 		})
 	}
 	return state;

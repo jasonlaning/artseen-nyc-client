@@ -95,7 +95,7 @@ export const Dashboard = (props) => {
 
 	return (
 
-			<div>
+			<div className="dashboard">
 				{console.log('current state: ', props.state)}
 				<ReactCSSTransitionGroup 
 					transitionEnterTimeout={300}
