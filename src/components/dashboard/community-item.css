@@ -11,8 +11,11 @@
 	margin: 0 auto;
 }
 
-.snippet {
-	margin: 0 15px 22px 15px;
+.community-activity .snippet {
+	margin: 5px 15px 25px 15px;
+    line-height: 1.3;
+    color: #676767;
+    font-size: 15px;
 }
 
 .community-date {
@@ -26,8 +29,8 @@
 }
 
 .community-from {
-	background-color: #f3f3f3;
-	border-bottom: 1px solid gray;
+	background-color: #fafafa;
+	border-bottom: 2px solid #cecece;
 	padding: 5px 15px;
 	font-size: 14px;
 	text-align: center;
@@ -38,17 +41,17 @@
 	color: #5d5d5d;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
 
 	.community-activity img {
-		height: 50px;
-		width: 50px;
+		height: 40px;
+		width: 40px;
 		float: left;
 		border-radius: 50%;
 	}
 
 	.community-header {
-		height: 65px;
+		height: 55px;
 	}
 
 	.community-date {

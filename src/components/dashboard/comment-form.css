@@ -1,5 +1,13 @@
 .comment-form {
 	width: initial;
+	border: none;
+	padding: 0;
+}
+
+.comment-form textarea {
+	font-family: inherit;
+	padding: 10px;
+	font-size: 15px;
 }
 
 .comment-form label {

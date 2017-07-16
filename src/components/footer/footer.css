@@ -5,5 +5,8 @@ footer {
 	text-align: center;
 	font-size: 14px;
 	margin-top: 150px;
-	display: none;
+}
+
+p.footer-text {
+	text-align: center;
 }

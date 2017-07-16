@@ -93,6 +93,14 @@ export const Dashboard = (props) => {
 		}
 	}
 
+	const footer = () => {
+		if (feedView === 'discussion') {
+			return null
+		} else {
+			return <Footer />
+		}
+	}
+
 	return (
 
 			<div className="dashboard">
@@ -113,7 +121,7 @@ export const Dashboard = (props) => {
 					transitionName="dashboard-fade">
 					{fadeIn()}
 				</ReactCSSTransitionGroup>
-				<Footer />
+				{footer()}
 			</div>
 	);		
 }

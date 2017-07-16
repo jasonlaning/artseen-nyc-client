@@ -17,9 +17,10 @@ const DiscussionsItem = (props) => {
 			<img src={props.image} alt="exhibition" title="exhibition" className="ex-photo"/>
 			<div className="disc-item-container">
 				<h2><Link to={`/dashboard/discussion/${props.id}`} >{props.name}</Link></h2>
-		              <p>{props.venue.name} / {props.venue.address}</p>
-		              <p>{dateStart} - {dateEnd}</p>
-		              <p><b>Description:</b> {props.description}</p>
+		              <p className="disc-item-venue">{props.venue.name} / {props.venue.address}</p>
+		              <span> ({dateStart} - {dateEnd})</span>
+		              <p><span style={{fontWeight: 'bold'}}>Description:</span></p>
+		              <p className="disc-item-descr">{props.description.slice(0, 250)}...</p>
 		              <p>{props.comments.length} Comments</p>
 		      	</div>
 		</li>

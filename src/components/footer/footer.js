@@ -4,7 +4,7 @@ import './footer.css';
 
 const Footer = (props) => (
 	<footer>
-		<p>Exhibition listings powered by NY Art Beat</p>
+		<p className="footer-text">Exhibition listings powered by NY Art Beat</p>
 	</footer>
 );
 

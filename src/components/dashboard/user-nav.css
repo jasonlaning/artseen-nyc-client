@@ -1,10 +1,11 @@
-.front {
-	z-index: 1000000;
-	background-color: white;
+.user-nav {
+	width: 100%;
+	padding: 0;
 }
 
 .user-nav h2 {
-	text-transform: uppercase;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	background-color: white;
 }
 
@@ -20,20 +21,16 @@
 
 .user-nav h2.inactive {
 	color: #bbb;
-	border-bottom: 2px solid white;
+	border-bottom: 2px solid #d6d6d6;
+	font-weight: normal;
 }
 
 .user-nav h2.inactive:hover {
 	color: #999;
-	border-bottom: 2px solid #999;
+	background-color: #fafafa;
 } 
 
-@media screen and (max-width: 400px) {
-
-	.user-nav {
-		width: 100%;
-		padding: 0;
-	}
+@media screen and (max-width: 600px) {
 
 	.user-nav h2 {
 		font-size: 16px;

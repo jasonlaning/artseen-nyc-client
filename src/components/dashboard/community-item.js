@@ -1,5 +1,5 @@
 import React from 'react';
-import date from '../date';
+import moment from 'moment';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
@@ -23,11 +23,11 @@ const CommunityItem = (props) => {
 				<img src={props.profilePicURL} alt="user-profile" />
 				<p className="community-username">{props.username}
 				</p></a>
-				<p className="community-date">{date(props.date)}</p>
+				<p className="community-date">{moment(props.date).fromNow()}</p>
 			</div>
 			<Link to={`/dashboard/discussion/${props.id}`} >
-			<p className="snippet">	&ldquo;{props.text.slice(0, 80)}...&rdquo;</p>
-			<p className="community-from">from <span className="community-title">{props.discussion.name}</span>
+			<p className="snippet">&ldquo;{props.text.slice(0, 200)}...&rdquo;</p>
+			<p className="community-from">on <span className="community-title">{props.discussion.name}</span>
 			</p></Link>
 			
 		</li>

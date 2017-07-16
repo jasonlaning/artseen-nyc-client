@@ -18,7 +18,7 @@ const CommentForm = (props) => (
 				e.target.comment.value = '';
 			}}>
 			<div>
-				<label htmlFor="comment">New Comment:</label>
+				<h4><label htmlFor="comment">Post Comment:</label></h4>
 				<textarea placeholder="text goes here..." name="comment" id="comment" />
 			</div>
 			<button type="submit">Submit</button>

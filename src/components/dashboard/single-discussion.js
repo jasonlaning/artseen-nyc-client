@@ -3,9 +3,11 @@ import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 //import Scroll from 'react-scroll';
 import {getSingleDiscussion, resetSingleDiscussion} from '../../actions';
+import Footer from '../footer/footer';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
+import './single-discussion.css';
 
 //const Element = Scroll.Element;
 //const scroller = Scroll.scroller;
@@ -47,13 +49,14 @@ export class SingleDiscussion extends React.Component {
 						<ExhibitionHeading discussion={this.props.discussion} />
 						<Comments comments={this.props.discussion.comments}/>
 						<CommentForm />
+						<Footer />
 					</div>
 				)
 			}
 		}
 
 		return (
-			<section className='wrapper'>
+			<section className='single-discussion'>
 			{console.log(window.scrollY)}
 				{discussionLoaded()}
 			</section>

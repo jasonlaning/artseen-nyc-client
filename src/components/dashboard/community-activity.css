@@ -6,7 +6,7 @@
 	padding: 0;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
 
 	.community-activity {
 		font-size: 16px;

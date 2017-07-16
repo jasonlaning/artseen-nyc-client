@@ -1,3 +1,10 @@
+.user-profile {
+	height: 210px;
+	overflow: hidden;
+	background-color: #fafafa;
+	border-bottom: 1px solid #d6d6d6;
+}
+
 .profile-pic {
 	height: 150px;
 	width: 150px;
@@ -18,7 +25,7 @@
 	padding-top: 15px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
 
 	img.profile-pic {
 		height: 100px;
@@ -28,7 +35,7 @@
 
 	.user-profile {
 		padding: 15px;
-		min-height: 130px;
+		height: 130px;
 	}
 
 	.user-profile h2 {
