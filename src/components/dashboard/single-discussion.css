@@ -1,0 +1,17 @@
+section.single-discussion {
+	padding: 25px 0 0 0;
+}
+
+@media screen and (max-width: 600px) {
+
+	section.single-discussion.wrapper {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.single-discussion h1 {
+		font-size: 22px;
+		line-height: 1;
+	}
+
+}
