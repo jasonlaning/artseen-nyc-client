@@ -1,5 +1,6 @@
 .search-form {
-	width: 550px;
+	max-width: 550px;
+	width: auto;
 	height: 140px;
 	overflow-y: hidden;
 }
@@ -8,8 +9,13 @@
 	padding: 10px 15px;
 	font-size: 20px;
 	height: auto;
-	width: 80%;
+	width: 75%;
 	line-height: 20px;
+}
+
+.search-form label {
+	font-weight: bold;
+	font-size: 18px;
 }
 
 .search-form input[placeholder] {
@@ -20,12 +26,14 @@
 	padding: 10px 15px;
 	font-size: 20px;
 	height: auto;
-	width: 20%;
+	width: 24%;
+    margin-left: 1%;
 	line-height: 20px;
 }
 
 .search-results {
-	width: 550px;
+	max-width: 550px;
+	width: auto;
 	max-height: 400px;
 	position: fixed;
 	top: 155px;
@@ -45,4 +53,16 @@
 	border-bottom: 1px solid gray;
 	padding: 20px 0;
 	font-size: 16px;
+}
+
+.result-list li:hover {
+	background-color: #f1f1f1;
+}
+
+@media screen and (max-width: 600px) {
+
+	.search-form input, .search-form button {
+		font-size: 16px
+	}
+
 }

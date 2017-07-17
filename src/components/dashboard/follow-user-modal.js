@@ -38,11 +38,11 @@ const FollowUserModal = (props) => {
 		</div> 
 			<form className="follow-user-form modal-form" >
 				<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showFollowUserModal')} > </a>
-				<div>
+				<div className="follow-wrapper">
 					<img className="profile-pic" src={props.userToFollow.profilePicURL} alt="" />
 					<h2>{props.userToFollow.username}</h2>
-					<p>{props.userToFollow.location}</p>
-					<p>{props.userToFollow.about}</p>
+					<p className="location">{props.userToFollow.location}</p>
+					<p className="about">{props.userToFollow.about}</p>
 				</div>
 				<button onClick={(e) => onFollowClick(e)} disabled={followDisabled} >Follow</button>
 				<button onClick={(e) => onUnfollowClick(e)} disabled={unfollowDisabled} >Unfollow</button>

@@ -27,7 +27,7 @@ const CommunityItem = (props) => {
 			</div>
 			<Link to={`/dashboard/discussion/${props.id}`} >
 			<p className="snippet">&ldquo;{props.text.slice(0, 200)}...&rdquo;</p>
-			<p className="community-from">on <span className="community-title">{props.discussion.name}</span>
+			<p className="community-from">from <span className="community-title">{props.discussion.name}</span>
 			</p></Link>
 			
 		</li>

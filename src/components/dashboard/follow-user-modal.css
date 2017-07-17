@@ -1,5 +1,6 @@
 .follow-user-form {
-	width: 550px;
+	max-width: 550px;
+	width: auto;
 }
 
 .follow-user-form img {
@@ -7,7 +8,24 @@
 	margin: 0 25px 25px 0;
 }
 
+.follow-wrapper {
+	height: 150px;
+	overflow: hidden;
+}
+
+.follow-wrapper h2 {
+	text-align: left;
+}
+
 .follow-user-form button {
-	width: 20%;
-	margin: 10px;
+	width: 40%;
+	margin-top: 20px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+@media screen and (max-width: 600px) {
+	.follow-wrapper {
+		height: 100px;
+	}
 }

@@ -34,12 +34,14 @@ export class SearchModal extends React.Component {
 				)
 				return (
 					<div className="search-results">
-				       	<p>Search results ({this.props.searchResults.length}): </p>
-				       		<ul>
+				       	<h3>Search results ({this.props.searchResults.length}): </h3>
+				       		<ul className="result-list">
 				       			{results}
 				       		</ul>
 			       	</div>
 				)
+			} else if (this.props.searchSubmitted) {
+				return <div className="search-results">No results.</div>
 			}
 		}
 
@@ -72,7 +74,8 @@ const mapStateToProps = (state, props) => ({
 	exhibitions: state.exhibitions,
 	searchResults: state.searchResults,
 	discussionIdFromSearch: state.discussionIdFromSearch,
-	discussionToView: state.discussionToView
+	discussionToView: state.discussionToView,
+	searchSubmitted: state.searchSubmitted
 });
 
 export default connect(mapStateToProps)(withRouter(SearchModal));

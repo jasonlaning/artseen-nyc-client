@@ -19,6 +19,7 @@ const initialState = {
 		comments: []
 	},
 	discussionIdFromSearch: '',
+	searchSubmitted: false,
 	singleDiscussionLoaded: false,
 	userToFollow: {},
 	modals: {
@@ -118,11 +119,13 @@ export const artseenReducer = (state=initialState, action) => {
 			message,
 			discussionIdFromSearch: '',
 			prevAction: action.type,
-			searchResults: []
+			searchResults: [],
+			searchSubmitted: false
 		})
 	} else if (action.type === actions.GET_SEARCH_RESULTS_SUCCESS) {
 		return Object.assign({}, state, {
-			searchResults: action.searchResults
+			searchResults: action.searchResults,
+			searchSubmitted: true
 		})
 	} else if (action.type === actions.POST_NEW_COMMENT_SUCCESS) {
 		let discussionToView = Object.assign({}, action.discussion);

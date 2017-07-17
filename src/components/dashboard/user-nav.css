@@ -16,18 +16,19 @@
 }
 
 .user-nav h2.active {
-	border-bottom: 2px solid gray;
+	border-bottom: 2px solid #0e0e0e;
 }
 
 .user-nav h2.inactive {
 	color: #bbb;
-	border-bottom: 2px solid #d6d6d6;
+	border-bottom: 2px solid #c6c6c6;
 	font-weight: normal;
 }
 
 .user-nav h2.inactive:hover {
-	color: #999;
-	background-color: #fafafa;
+	color: #777;
+	background-color: #f1f1f1;
+	border-bottom: 2px solid #777;
 } 
 
 @media screen and (max-width: 600px) {
