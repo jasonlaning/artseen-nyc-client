@@ -22,6 +22,15 @@ export const NavBar = (props) => {
 		buttonCloseClass = 'burger-button-visible';
 	} 
 
+	const getOverlay = () => {
+		if (props.modals.burgerModal) {
+			return (
+				<div className="modal-overlay burger-overlay" onClick={e => toggleBurger(e, 'burgerModal')} >
+				</div>
+			)
+		}
+	} 
+		
 	return (
 		<nav>
 			<div className="nav-bar-wrapper">
@@ -32,6 +41,7 @@ export const NavBar = (props) => {
 						onClick={(e) => toggleBurger(e, 'burgerModal')} />
 					<img className={`burger-button ${buttonCloseClass}`} src='/burger-close.png' alt="close modal" 
 						onClick={(e) => toggleBurger(e, 'burgerModal')} />
+				{getOverlay()}
 				<div className={`nav-items-container ${menuClass}`}>
 					{props.children}
 				</div>

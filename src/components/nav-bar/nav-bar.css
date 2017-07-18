@@ -29,15 +29,22 @@ nav {
   float: right;
 }
 
-.nav-items-container a:hover {
+.nav-items-container .nav-item:hover {
+  background-color: #666;
   border-bottom: 2px solid #fff;
 }
 
 .nav-item {
+  display: block;
   float: right;
   padding: 0 26px;
   font-size: 16px;
   text-transform: uppercase;
+}
+
+.burger-overlay {
+  z-index: 0;
+  opacity: 0;
 }
 
 .burger-button {
@@ -81,6 +88,10 @@ nav {
     opacity: 0;
   }
 
+  .burger-button:hover {
+    cursor: pointer;
+  }
+
   .nav-items-open {
     right: 0;
     opacity: 1;
@@ -92,8 +103,9 @@ nav {
     border-top: 2px solid rgba(255, 255, 255, 0.2);
   }
 
-  .nav-item:hover {
+  .nav-items-container .nav-item:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    border-bottom: none;
   }
 
   .glass-container {

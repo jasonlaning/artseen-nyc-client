@@ -29,7 +29,7 @@ const initialState = {
 		userSettingsModal: false,
 		profilePicModal: false,
 		signUpModal: false,
-		burgerMenu: false
+		burgerModal: false
 	},
 	prevAction: '',
 	message: '',

@@ -14,7 +14,7 @@
 
 .search-form input {
 	padding: 10px 15px;
-	font-size: 20px;
+	font-size: 18px;
 	height: auto;
 	width: 75%;
 	line-height: 20px;
@@ -31,7 +31,7 @@
 
 .search-form button {
 	padding: 10px 0;
-	font-size: 20px;
+	font-size: 18px;
 	height: auto;
 	width: 24%;
     margin-left: 1%;
@@ -69,4 +69,16 @@
 		font-size: 16px
 	}
 
+}
+
+@media screen and (max-width: 400px) {
+	.modal-title {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.modal-title {
+		font-size: 18px;
+	}
 }

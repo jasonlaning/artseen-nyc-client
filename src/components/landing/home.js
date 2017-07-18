@@ -17,7 +17,9 @@ export const Home = (props) => {
 	const onModalLinkClick = (e, modal) => {
 		e.preventDefault();
 		props.dispatch(toggleModal(modal));
-		props.dispatch(toggleModal('burgerModal'))
+		if (props.modals.burgerModal) {
+			props.dispatch(toggleModal('burgerModal'))
+		}
 	}
 
 	const showModals = () => {
@@ -38,15 +40,9 @@ export const Home = (props) => {
 			{console.log('rendered Home')}
 			{console.log('state: ', props.state)}
 			<NavBar>
-				<div className="nav-item">
-					<a href="/sign-in" onClick={(e) => onModalLinkClick(e, 'signInModal')}>Log in</a>
-				</div>
-				<div className="nav-item">
-					<a href="/sign-up" onClick={(e) => onModalLinkClick(e, 'signUpModal')}>Sign up</a>
-				</div>
-				<div className="nav-item">
-					<a href="/demo" onClick={(e) => onDemoClick(e)}>Demo</a>
-				</div>
+				<a className="nav-item" href="/sign-in" onClick={(e) => onModalLinkClick(e, 'signInModal')}>Log in</a>
+				<a className="nav-item" href="/sign-up" onClick={(e) => onModalLinkClick(e, 'signUpModal')}>Sign up</a>
+				<a className="nav-item" href="/demo" onClick={(e) => onDemoClick(e)}>Demo</a>
 			</NavBar>
 			<main>
 				<Banner />

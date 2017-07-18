@@ -15,7 +15,7 @@ export const CommunityActivity = (props) => {
 		} else {
 			return (
 				<li className="comment-item">
-					<p className="snippet">You are currently following 0 users.<br/>
+					<p className="snippet no-users">You are currently following 0 users.<br/>
 					View discussions, then follow other users to view activity.</p>
 				</li>
 			)

@@ -47,11 +47,12 @@ export const SignUpModal = (props) => {
 							<a href="" className="modal-x" onClick={e => onCloseModal(e, 'signUpModal')} > </a>
 							<div>
 								<label htmlFor="signUpUsername">Username</label>
-								<input autoFocus type="text" name="signUpUsername" id="signUpUsername" required />
+								<input autoFocus type="text" name="signUpUsername" id="signUpUsername" 
+									maxLength="20" required />
 							</div>
 							<div>
 								<label htmlFor="location">Location (optional)</label>
-								<input type="text" name="location" id="location" />
+								<input type="text" name="location" id="location" maxLength="32" />
 							</div>
 							<div>
 								<label htmlFor="signUpPassword">Password</label>

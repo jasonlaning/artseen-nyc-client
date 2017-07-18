@@ -3,24 +3,23 @@
 	width: auto;
 }
 
-.follow-user-form img {
-	float: left;
-	margin: 0 25px 25px 0;
+.follow-wrapper img {
+	margin: 0;
 }
 
 .follow-wrapper {
-	height: 150px;
-	overflow: hidden;
+	text-align: center;
 }
 
 .follow-wrapper h2 {
-	text-align: left;
+	font-size: 22px;
 }
 
 .follow-wrapper .about {
 	font-size: 16px;
 	line-height: 1.2;
-	padding-top: 15px;
+	padding: 10px 0;
+	text-align: left;
 }
 
 .follow-user-form button {
@@ -31,7 +30,5 @@
 }
 
 @media screen and (max-width: 600px) {
-	.follow-wrapper {
-		height: 100px;
-	}
+
 }

@@ -16,7 +16,7 @@ export const CommunityItem = (props) => {
 
 	return (
 		
-		<li>
+		<li className="community-item">
 			<div className="community-header">
 				<a href="/dashboard" 
 					onClick={(e) => onClickUserToFollow(e)} >

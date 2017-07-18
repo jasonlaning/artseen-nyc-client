@@ -44,7 +44,12 @@ export const Dashboard = (props) => {
 
 	const onClickSearch = (e, modal) => {
 		e.preventDefault();
-		props.dispatch(toggleModal('burgerModal'));
+		console.log(props.modals.burgerModal);
+		if (props.modals.burgerModal) {
+			console.log('here');
+			props.dispatch(toggleModal('burgerModal'));
+		}
+		console.log('here2');
 		props.dispatch(toggleModal(modal));
 	}
 
@@ -103,10 +108,11 @@ export const Dashboard = (props) => {
 		}
 	}
 
+	console.log('current state: ', props.state);
+
 	return (
 
 			<div className="dashboard">
-				{console.log('current state: ', props.state)}
 				<ReactCSSTransitionGroup 
 					transitionEnterTimeout={300}
 					transitionLeaveTimeout={300}
@@ -114,10 +120,10 @@ export const Dashboard = (props) => {
 					{showModals()}
 				</ReactCSSTransitionGroup>
 				<NavBar>
-					<div className="nav-item"><a href="/" onClick={(e) => onClickLogOut(e)}>Log out</a></div>
-					<div className="nav-item"><div className="glass-container"><a href="/dashboard" onClick={(e) => 
-						onClickSearch(e, 'searchModal')}>Search <img src="/search.png"
-							alt="search" className="search-glass" /></a></div></div>
+					<a className="nav-item" href="/" onClick={(e) => onClickLogOut(e)}>Log out</a>
+					<a className="nav-item" href="/dashboard" onClick={(e) => 
+						onClickSearch(e, 'searchModal')} ><div className="glass-container">Search <img src="/search.png"
+							alt="search" className="search-glass" /></div></a>
 				</NavBar>
 				<ReactCSSTransitionGroup 
 					transitionEnterTimeout={300}
