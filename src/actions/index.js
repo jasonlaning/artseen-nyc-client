@@ -1,5 +1,4 @@
-import {mockExhibitions} from '../mock-data';
-//import {parseString} from 'xml2js';
+import {parseString} from 'xml2js';
 import axios from 'axios';
 import searchExhibitions from '../components/search-exhibitions';
 
@@ -78,7 +77,7 @@ export const getSearchResultsSuccess = (searchResults) => ({
 
 export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 
-	/*
+	dispatch(updateModalMessage('Searching...'));
 	axios({
 		method: 'get',
 		url: 'https://crossorigin.me/http://www.nyartbeat.com/list/event_free.en.xml'
@@ -86,20 +85,26 @@ export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 		.then(res => {
 			parseString(res.data, (err, result) => {
 				if (err) {
-					console.log('error: ', err);
+					dispatch(updateModalMessage('Server Error'));
+					console.log(err);
 				} else {
-					console.log(result.Events.Event);
-					dispatch(getExhibitionsForSearchSuccess(result.Events.Event));
+					const exhibitions = result.Events.Event;
+					const searchResults = searchExhibitions(searchTerms, exhibitions);
+					dispatch(getSearchResultsSuccess(searchResults));
+					dispatch(updateModalMessage(''));
 				}
 			})
 		})
-		*/
-	// get exhibitions above .then =>
-	// uncomment import parseString
+		.catch(err => {
+			console.log(err);
+		})
+
+	/*
 	const exhibitions = mockExhibitions.Events.Event;
 	const searchResults = searchExhibitions(searchTerms, exhibitions);
 	console.log('searchResults: ', searchResults)
 	dispatch(getSearchResultsSuccess(searchResults));
+	*/
 }
 
 export const GET_MORE_DISCUSSIONS_SUCCESS = 'GET_MORE_DISCUSSIONS_SUCCESS';
@@ -270,6 +275,7 @@ export const postNewComment = (username, comment) => dispatch => {
 		const demoMsg = 'Commenting is disabled for demos';
 		return dispatch(updateCommentFormMessage(demoMsg));
 	} else {
+		dispatch(updateCommentFormMessage('Saving comment...'));
 		api.post('discussions/comment', {
 		 		discussionId: comment.discussionId,
 		 		discussionName: comment.discussionName,
@@ -283,7 +289,12 @@ export const postNewComment = (username, comment) => dispatch => {
 				}
 		 	}) 
 		 	.catch((err) => {
-				dispatch(updateCommentFormMessage(err.response.data.message))
+		 		if(err.response.data.message) {
+		 			dispatch(updateCommentFormMessage(err.response.data.message))
+		 		} else {
+		 			dispatch(updateCommentFormMessage('Error'));
+		 			console.log(err);
+		 		}
 			})
 	}
 }
