@@ -283,6 +283,7 @@ export const postNewComment = (username, comment) => dispatch => {
 		 	})
 		 	.then((res) => {
 		 		if (res.status === 201) {
+		 			dispatch(updateCommentFormMessage(''));
 		 			dispatch(postNewCommentSuccess(res.data.discussion));
 		 		} else {
 					return Promise.reject(res);
@@ -384,7 +385,8 @@ export const createNewDemoUser = () => dispatch => {
 		username: `Demo123abc${((Math.random() * 999999999999) + 111111111111).toString()}`,
 		password: 'demo',
 		location: 'New York, New York',
-		about: 'This is a demo profile. Sign up for an account to enable commenting.'
+		about: 'This is a demo profile. Sign up for an account to enable commenting.',
+		favoriteUsers: ['jesseDidThis', 'maggie_mags', 'everything_ryan']
 	}
 	
  	api.post('users/sign-up', {
@@ -427,7 +429,9 @@ export const uploadImage = (image) => dispatch => {
 			dispatch(uploadImageSuccess(res.data.secure_url));
 			dispatch(updateModalMessage(''));
 		})
-		.catch(err => console.log(err));
+		.catch(err => 
+			console.log(err)
+			dispatch(updateModalMessage('Error'));
 }
 
 export const UPDATE_USER_SETTINGS_SUCCESS = 'UPDATE_USER_SETTINGS_SUCCESS';
