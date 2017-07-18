@@ -1,9 +1,9 @@
 #about ol {
 	list-style-type: decimal;
-	margin-left: 15%;
+	margin: 0 auto;
 	font-size: 22px;
 	font-weight: bold;
-	width: 60%;
+	width: 70%;
 }
 
 #about ol h4 {
@@ -46,7 +46,7 @@ h4.about-sign-up a:hover {
 	}
 
 	#about ol {
-		width: auto;
+		width: 80%;
 		font-size: 18px;
 	}
 
