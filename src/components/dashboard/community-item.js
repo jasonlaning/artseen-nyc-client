@@ -7,7 +7,7 @@ import {getUserToFollow} from '../../actions';
 
 import './community-item.css';
 
-const CommunityItem = (props) => {
+export const CommunityItem = (props) => {
 
 	const onClickUserToFollow = e => {
 		e.preventDefault();

@@ -4,7 +4,7 @@ import DiscussionsItem from './discussions-item';
 
 import './discussions.css';
 
-const Discussions = (props) => {
+export const Discussions = (props) => {
 
 	const discussions = props.discussions.map((item, index) =>
 		<DiscussionsItem key={index} id={item.id} {...item} />

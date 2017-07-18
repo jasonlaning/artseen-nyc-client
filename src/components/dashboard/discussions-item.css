@@ -39,6 +39,16 @@
 	margin-top: 0px;
 }
 
+@media screen and (max-width: 875px) {
+	.ex-photo {
+		max-width: 35%;
+	}
+
+	.disc-item-container {
+		max-width: 65%;
+	}
+}
+
 @media screen and (max-width: 600px) {
 
 	section.discussions {
@@ -55,7 +65,7 @@
 	}
 
 	.ex-photo {
-		width: 30%;
+		width: 35%;
 		padding-right: 15px;
 	}
 

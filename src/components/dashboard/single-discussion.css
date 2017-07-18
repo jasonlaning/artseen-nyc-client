@@ -1,5 +1,6 @@
 section.single-discussion {
 	padding: 25px 0 0 0;
+	min-height: 400px;
 }
 
 @media screen and (max-width: 600px) {

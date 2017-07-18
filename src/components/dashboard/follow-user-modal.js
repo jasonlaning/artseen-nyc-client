@@ -5,7 +5,7 @@ import {toggleModal, addUserToFavorites, deleteUserFromFavorites} from '../../ac
 
 import './follow-user-modal.css';
 
-const FollowUserModal = (props) => {
+export const FollowUserModal = (props) => {
 
 	const onCloseModal = (e, modal) => {
 		e.preventDefault();
@@ -32,24 +32,43 @@ const FollowUserModal = (props) => {
 		unfollowDisabled = false;
 	}
 
+	const modalTitle = 'User Detail';
+	let messageEnter = 'message-enter';
+	let message = '';
+
+	const toggleMessage = () => {
+		if (props.message) {
+			message = props.message
+			return 'modal-title-remove'
+		} else {
+			messageEnter = ''
+			return null
+		}
+	}
+
 	return (
 		<div>
-			<div className="modal-overlay" onClick={e => onCloseModal(e, 'showFollowUserModal')}>
+			<div className="modal-overlay" onClick={e => onCloseModal(e, 'followUserModal')}>
 		</div> 
-			<form className="follow-user-form modal-form" >
-				<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showFollowUserModal')} > </a>
-				<div className="follow-wrapper">
-					<img className="profile-pic" src={props.userToFollow.profilePicURL} alt="" />
-					<h2>{props.userToFollow.username}</h2>
-					<p className="location">{props.userToFollow.location}</p>
-					<p className="about">{props.userToFollow.about}</p>
-				</div>
-				<button onClick={(e) => onFollowClick(e)} disabled={followDisabled} >Follow</button>
-				<button onClick={(e) => onUnfollowClick(e)} disabled={unfollowDisabled} >Unfollow</button>
-				<div>
-					<p className="modal-message">{props.message}</p>
-				</div>
-			</form>
+			<div className="modal-container">
+				<form className="follow-user-form modal-form" >
+					<h3 className="modal-title">
+						<span className={toggleMessage()}>{modalTitle}</span>
+						<span className={`modal-message ${messageEnter}`}>{message}</span>
+					</h3>
+					<a href="" className="modal-x" onClick={e => onCloseModal(e, 'followUserModal')} > </a>
+					<div className="form-container">
+						<div className="follow-wrapper">
+							<img className="profile-pic" src={props.userToFollow.profilePicURL} alt="" />
+							<h2>{props.userToFollow.username}</h2>
+							<p className="location">{props.userToFollow.location}</p>
+							<p className="about">{props.userToFollow.about}</p>
+						</div>
+						<button onClick={(e) => onFollowClick(e)} disabled={followDisabled} >Follow</button>
+						<button onClick={(e) => onUnfollowClick(e)} disabled={unfollowDisabled} >Unfollow</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 }

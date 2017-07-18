@@ -1,8 +1,15 @@
+.search-modal.modal-container {
+	max-width: 500px;
+}
+
+.search-form .form-container {
+	padding: 13px 25px 0 25px;
+}
+
 .search-form {
-	max-width: 550px;
-	width: auto;
 	height: 140px;
 	overflow-y: hidden;
+	border-bottom: 0;
 }
 
 .search-form input {
@@ -23,7 +30,7 @@
 } 
 
 .search-form button {
-	padding: 10px 15px;
+	padding: 10px 0;
 	font-size: 20px;
 	height: auto;
 	width: 24%;
@@ -31,22 +38,19 @@
 	line-height: 20px;
 }
 
+.search-results-container {
+	top: 170px;
+	max-width: 500px;
+}
+
 .search-results {
-	max-width: 550px;
-	width: auto;
-	max-height: 400px;
-	position: fixed;
-	top: 155px;
-	left: 0;
-	right: 0;
-	margin: 0 auto;
-	overflow-y: auto;
-	border-radius: 0px 0px 5px 5px;
-	z-index: 5;
 	background-color: white;
 	border: 1px solid #bbb;
 	border-top: none;
-	padding: 30px;
+	overflow-y: auto;
+	max-height: 400px;
+	padding: 0 30px 30px 30px;
+
 }
 
 .search-results li {

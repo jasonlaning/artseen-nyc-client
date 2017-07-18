@@ -163,7 +163,7 @@ export const addUserToFavorites = (username) => dispatch => {
 			dispatch(getCommunity());
 		})
 		.then(()=> {
-			dispatch(toggleModal('showFollowUserModal'))
+			dispatch(toggleModal('followUserModal'))
 		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
@@ -185,7 +185,7 @@ export const deleteUserFromFavorites = (username) => dispatch => {
 			dispatch(getCommunity());
 		})
 		.then(()=> {
-			dispatch(toggleModal('showFollowUserModal'))
+			dispatch(toggleModal('followUserModal'))
 		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
@@ -220,22 +220,31 @@ export const postNewCommentSuccess = (discussion) => ({
 	discussion
 })
 
-export const postNewComment = (comment) => dispatch => {
-	api.post('discussions/comment', {
-	 		discussionId: comment.discussionId,
-	 		discussionName: comment.discussionName,
-	 		text: comment.text
-	 	})
-	 	.then((res) => {
-	 		if (res.status === 201) {
-	 			dispatch(postNewCommentSuccess(res.data.discussion));
-	 		} else {
-				return Promise.reject(res);
-			}
-	 	}) 
-	 	.catch((err) => {
-			dispatch(updateModalMessage(err.response.data.message))
-		})
+export const postNewComment = (username, comment) => dispatch => {
+
+	// check for Demo user to disable demo comments
+	let demoUser = username.slice(0, 10);
+	console.log(demoUser);
+	if (demoUser === 'Demo123abc') {
+		const demoMsg = 'Commenting is disabled for demos';
+		return dispatch(updateModalMessage(demoMsg));
+	} else {
+		api.post('discussions/comment', {
+		 		discussionId: comment.discussionId,
+		 		discussionName: comment.discussionName,
+		 		text: comment.text
+		 	})
+		 	.then((res) => {
+		 		if (res.status === 201) {
+		 			dispatch(postNewCommentSuccess(res.data.discussion));
+		 		} else {
+					return Promise.reject(res);
+				}
+		 	}) 
+		 	.catch((err) => {
+				dispatch(updateModalMessage(err.response.data.message))
+			})
+	}
 }
 
 export const GET_USER_SESSION_SUCCESS = 'GET_USER_SESSION_SUCCESS';
@@ -294,19 +303,47 @@ export const signInUser = (username, password) => dispatch => {
 			}
 	 	}) 
 	 	.catch(() => {
-			dispatch(updateModalMessage('Invalid Username or Passowrd'));
+			dispatch(updateModalMessage('Invalid Username or Password'));
 		})
 }
 
-export const signUpNewUser = (username, password) => dispatch => {
+export const signUpNewUser = (username, password, location) => dispatch => {
 	dispatch(updateModalMessage('Signing up...'));
  	api.post('users/sign-up', {
 	 		username,
-	 		password
+	 		password,
+	 		location
 	 	})
 	 	.then((res) => {
 	 		if (res.status === 201) {
 	 			dispatch(signInUser(username, password));
+	 		} else {
+				return Promise.reject(res);
+			}
+	 	}) 
+	 	.catch((err) => {
+			return dispatch(updateModalMessage(err.response.data.message))
+		})
+}
+
+export const createNewDemoUser = () => dispatch => {
+
+	const demoData = {
+		username: `Demo123abc${((Math.random() * 999999999999) + 111111111111).toString()}`,
+		password: 'demo',
+		location: 'New York, New York',
+		about: 'This is a demo profile. Sign up for an account to enable commenting.'
+	}
+	
+ 	api.post('users/sign-up', {
+	 		username: demoData.username,
+	 		password: demoData.password,
+	 		location: demoData.location,
+	 		about: demoData.about
+	 	})
+	 	.then((res) => {
+	 		if (res.status === 201) {
+	 			dispatch(signInUser(demoData.username, demoData.password));
 	 		} else {
 				return Promise.reject(res);
 			}

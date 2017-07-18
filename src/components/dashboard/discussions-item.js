@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 import './discussions-item.css';
 
-const DiscussionsItem = (props) => {
+export const DiscussionsItem = (props) => {
 
 	const dateStart = moment(props.dateStart).format('MMM DD');
 	const dateEnd = moment(props.dateEnd).format('MMM DD, YYYY');

@@ -8,39 +8,60 @@ import './sign-in-modal.css';
 
 export const SignInModal = (props) => {
 
-	const onCloseModal = (e, modal) => {
-		e.preventDefault();
-		props.dispatch(toggleModal(modal));
-	}
+		const onCloseModal = (e, modal) => {
+			e.preventDefault();
+			props.dispatch(toggleModal(modal));
+		}
 
-	const onSignIn = e => {
-		e.preventDefault();
-		props.dispatch(signInUser(e.target.username.value, e.target.password.value));
-		e.target.username.value = '';
-		e.target.password.value = '';
-	} 
+		const onSignIn = e => {
+			e.preventDefault();
+			props.dispatch(signInUser(e.target.signInUsername.value, 
+				e.target.signInPassword.value));
+			e.target.signInUsername.value = '';
+			e.target.signInPassword.value = '';
+			e.target.signInUsername.focus();
+		} 
 
-	return ( 
-		<div>
-			<div className="modal-overlay" onClick={e => onCloseModal(e, 'showSignInModal')} >
-			</div>      
-			<form className="sign-in-form modal-form" onSubmit={e => onSignIn(e)} >
-			<a href="" className="modal-x" onClick={e => onCloseModal(e, 'showSignInModal')} > </a>
-				<div>
-					<label htmlFor="username">Username</label>
-					<input autoFocus type="text" name="username" id="username" required />
+		const modalTitle = 'Log in';
+		let messageEnter = 'message-enter';
+		let message = '';
+
+		const toggleMessage = () => {
+			if (props.message) {
+				message = props.message
+				return 'modal-title-remove'
+			} else {
+				messageEnter = ''
+				return null
+			}
+		}
+
+		return ( 
+			<div>
+				<div className="modal-overlay" onClick={e => onCloseModal(e, 'signInModal')} >
+				</div>      
+				<div className="modal-container">
+					<form className="sign-in-form modal-form" onSubmit={e => onSignIn(e)} >
+						<h3 className="modal-title">
+							<span className={toggleMessage()}>{modalTitle}</span>
+							<span className={`modal-message ${messageEnter}`}>{message}</span>
+						</h3>
+						<div className="form-container">
+							<a href="" className="modal-x" onClick={e => onCloseModal(e, 'signInModal')} > </a>
+							<div>
+								<label htmlFor="signInUsername">Username</label>
+								<input autoFocus type="text" name="signInUsername" id="signInUsername" required />
+							</div>
+							<div>
+								<label htmlFor="signInPassword">Password</label>
+								<input type="password" name="signInPassword" id="signInPassword" required />
+							</div>
+							<button type="submit">Log In</button>
+						</div>
+					</form>
 				</div>
-				<div>
-					<label htmlFor="password">Password</label>
-					<input type="password" name="password" id="password" required />
-				</div>
-				<button type="submit">Log In</button>
-				<div>
-					<p className="modal-message">{props.message}</p>
-				</div>
-			</form>
-		</div>
-	)
+			</div>
+		)
 }
 
 const mapStateToProps = (state, props) => ({

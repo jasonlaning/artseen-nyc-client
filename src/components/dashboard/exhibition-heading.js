@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import './exhibition-heading.css';
 
-const ExhibitionHeading = (props) => (
+export const ExhibitionHeading = (props) => (
 	<div className="exhibition-heading">
         <h1>{props.discussion.name}</h1>
         <p className="single-disc-venue">{props.discussion.venue.name} / {props.discussion.venue.address}<br /><span 
@@ -13,7 +13,7 @@ const ExhibitionHeading = (props) => (
         <p className="single-disc-descr">{`${props.discussion.description.slice(0, 300)}...`}
         	<span style={{color: '#bdbdbd'}}><br />(full description at <a href={props.discussion.href} 
                 target="_blank" >NY Art Beat</a>)</span></p>
-        <p style={{fontWeight: 'bold', 'padding-bottom': '10px'}}>Discussion:</p>
+        <h4>Discussion:</h4>
     </div>
 );
 

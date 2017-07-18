@@ -7,7 +7,7 @@ import './user-settings-modal.css';
 
 export const UserSettingsModal = (props) => {
 
-	const modal = 'showUserSettingsModal'
+	const modal = 'userSettingsModal'
 
 	const onCloseModal = (e, modal) => {
 		e.preventDefault();
@@ -20,26 +20,46 @@ export const UserSettingsModal = (props) => {
 			e.target.about.value, props.user.profilePicURL, modal));
 	} 
 
+	const modalTitle = 'Edit Profile Settings';
+	let messageEnter = 'message-enter';
+	let message = '';
+
+	const toggleMessage = () => {
+		if (props.message) {
+			message = props.message
+			return 'modal-title-remove'
+		} else {
+			messageEnter = ''
+			return null
+		}
+	}
+
 	return ( 
 		<div>
 			<div className="modal-overlay" onClick={e => onCloseModal(e, modal)} >
-			</div>      
-			<form className="user-settings-form modal-form" onSubmit={e => onSubmit(e, modal)} >
-				<a href="" className="modal-x" onClick={e => onCloseModal(e, modal)} > </a>
-    			<h3>{props.user.username}</h3>
-				<div>
-					<label htmlFor="location">Location</label>
-					<input autoFocus type="text" name="location" id="location" defaultValue={props.user.location}/>
-				</div>
-				<div>
-					<label htmlFor="about">About</label>
-					<textarea type="text" name="about" id="about" defaultValue={props.user.about}></textarea>
-				</div>
-				<button type="submit">Save</button>
-				<div>
-					<p className="modal-message">{props.message}</p>
-				</div>
-			</form>
+			</div>  
+			<div className="modal-container">    
+				<form className="user-settings-form modal-form" onSubmit={e => onSubmit(e, modal)} >
+					<h3 className="modal-title">
+						<span className={toggleMessage()}>{modalTitle}</span>
+						<span className={`modal-message ${messageEnter}`}>{message}</span>
+					</h3>
+					<a href="" className="modal-x" onClick={e => onCloseModal(e, modal)} > </a>
+					<div className="form-container">
+						<div>
+							<label htmlFor="location">Location</label>
+							<input autoFocus type="text" name="location" id="location" 
+								maxLength="32" defaultValue={props.user.location}/>
+						</div>
+						<div>
+							<label htmlFor="about">About</label>
+							<input type="text" name="about" id="about" 
+								defaultValue={props.user.about} maxLength="65" />
+						</div>
+					<button type="submit">Save</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	)
 }

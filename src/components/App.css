@@ -62,6 +62,7 @@ form button {
   font-size: 100%;
   font: inherit;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
 form button:hover {
@@ -70,17 +71,23 @@ form button:hover {
   cursor: pointer;
 }
 
-form button:inactive {
+form button:disabled {
   cursor: default;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #ccc;
 }
 
 form {
   position: relative;
-  margin: 25px auto;
-  width: 300px;
+  margin: 0 auto;
   background-color: white;
   border: 1px solid #bbb;
-  padding: 30px 30px 5px 30px;
+  padding: 0;
+}
+
+.form-container {
+  padding: 25px;
 }
 
 form label {
@@ -97,6 +104,20 @@ form input {
   border-radius: 5px;
 }
 
+input, textarea, button {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+}
+ 
+input:focus, textarea:focus, button:focus {
+  box-shadow: 0 0 3px #5181ee;
+  border: 1px solid #5181ee;
+  border-radius: 5px;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -107,19 +128,29 @@ form input {
   z-index: 4;
 }
 
-.modal-form {
+.modal-open {
+  overflow-y: hidden;  
+}
+
+.empty-scroll {
+  overflow-y: hidden;
+}
+
+.modal-container {
   position: fixed;
+  max-width: 400px;
+  padding: 10px;
   max-height: 90%;
-  top: 25px;
+  top: 30px;
   left: 0;
   right: 0;
   margin: 0 auto;
-  overflow-y: auto;
   z-index: 5;
 }
 
-.modal-form h2 {
-  text-align: center;
+.modal-form {
+  overflow-y: auto;
+  z-index: 5;
 }
 
 .modal-x {
@@ -131,6 +162,31 @@ form input {
   opacity: .3;
   top: 10px;
   right: 10px;
+}
+
+.no-modal-title {
+  display: none;
+}
+
+.modal-title {
+  text-align: center;
+  padding: 7px 25px;
+  background-color: #f1f1f1;
+  color: #666;
+}
+
+.modal-title-remove {
+  display: none;
+}
+
+.modal-message {
+  opacity: 0;
+  font-style: italic;
+  transition: opacity 500ms ease-in;
+}
+
+.message-enter {
+  opacity: 1;
 }
 
 .error-404 {
@@ -161,11 +217,10 @@ form input {
   transition: opacity 100ms ease-in;
 }
 
-p.modal-message {
-	margin-top: 5px;
-	font-size: 14px;
-	color: #e21515;
-	font-style: italic;
-	text-align: center;
-	height: 20px;
+.wake-up {
+  position: fixed;
+  bottom: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
 }

@@ -19,18 +19,34 @@
 .location {
 	margin-top: 0;
 	font-size: 14px;
+	color: #999;
 }
 
 .user-profile h2 {
 	padding-top: 15px;
 }
 
+.user-profile .wrapper {
+	padding: 0 150px;
+}
+
+@media screen and (max-width: 800px) {
+	.user-profile .wrapper {
+		padding: 0 100px;
+	}
+}
+
 @media screen and (max-width: 600px) {
+
+	.user-profile .wrapper {
+		padding: 0;
+	}
 
 	img.profile-pic {
 		height: 100px;
 		width: 100px;
 		margin-right: 20px;
+		margin-left: 15%;
 	}
 
 	.user-profile {
@@ -45,12 +61,29 @@
 
 	.location {
 		margin-top: -5px;
-		color: #969696;
+		color: #999;
 	}
 
 	.about {
 		margin-top: 10px;
 		font-size: 14px;
+		line-height: 1.2;
+	}
+
+}
+
+@media screen and (max-width: 500px) {
+
+	img.profile-pic {
+		margin-left: 5%;
+	}
+
+}
+
+@media screen and (max-width: 400px) {
+
+	img.profile-pic {
+		margin-left: 0;
 	}
 
 }

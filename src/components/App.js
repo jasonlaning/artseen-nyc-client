@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from './scroll-to-top';
 
 import './App.css';
@@ -12,7 +12,6 @@ const App = (props) => {
 	return (  
 		<Router>
 		<ScrollToTop>
-		<div>
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/dashboard" component={Dashboard} />
@@ -20,7 +19,6 @@ const App = (props) => {
 				<Route exact path="/dashboard/:feedView/:discussionId" component ={Dashboard} />
 				<Route component={Error404} />
 			</Switch>
-		</div>
 		</ScrollToTop>
 		</Router>
 	);

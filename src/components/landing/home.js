@@ -5,25 +5,33 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import NavBar from '../nav-bar/nav-bar';
 import Banner from './banner';
 import About from './about';
-import SignUp from './sign-up';
 import Footer from '../footer/footer';
 import SignInModal from './sign-in-modal';
-import {toggleModal} from '../../actions';
+import SignUpModal from './sign-up-modal';
+import {toggleModal, createNewDemoUser} from '../../actions';
 
 import './home.css';
 
 export const Home = (props) => {
 
-	const onSignInClick = (e, modal) => {
+	const onModalLinkClick = (e, modal) => {
 		e.preventDefault();
 		props.dispatch(toggleModal(modal));
+		props.dispatch(toggleModal('burgerModal'))
 	}
 
-	const showModal = (modal) => {
-		if (props[modal]) {
+	const showModals = () => {
+		if (props.modals.signInModal) {
 			return <SignInModal />
+		} else if (props.modals.signUpModal) {
+			return <SignUpModal />
 		}
 	}
+
+	const onDemoClick = e => {
+		e.preventDefault();
+		props.dispatch(createNewDemoUser());
+	} 
 
 	return (
 		<div>
@@ -31,33 +39,32 @@ export const Home = (props) => {
 			{console.log('state: ', props.state)}
 			<NavBar>
 				<div className="nav-item">
-					<a href="" onClick={(e) => onSignInClick(e, 'showSignInModal')}>Log in</a>
+					<a href="/sign-in" onClick={(e) => onModalLinkClick(e, 'signInModal')}>Log in</a>
 				</div>
 				<div className="nav-item">
-					<a href="#sign-up">Sign up</a>
+					<a href="/sign-up" onClick={(e) => onModalLinkClick(e, 'signUpModal')}>Sign up</a>
 				</div>
 				<div className="nav-item">
-					<a href="#about">About</a>
+					<a href="/demo" onClick={(e) => onDemoClick(e)}>Demo</a>
 				</div>
 			</NavBar>
 			<main>
 				<Banner />
 				<About />
-				<SignUp message={props.message} />
 			</main>
 			<Footer />
 			<ReactCSSTransitionGroup 
 				transitionEnterTimeout={500}
 				transitionLeaveTimeout={500}
 				transitionName="modal-fade">
-				{showModal('showSignInModal')}
+				{showModals()}
 			</ReactCSSTransitionGroup>
 		</div>
 	)
 }
 
 const mapStateToProps = (state, props) => ({
-	showSignInModal: state.modals.showSignInModal,
+	modals: state.modals,
 	loggedIn: state.loggedIn,
 	message: state.message,
 	state: state

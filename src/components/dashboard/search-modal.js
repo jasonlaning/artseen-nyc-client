@@ -15,7 +15,7 @@ export class SearchModal extends React.Component {
 	}
 
 	render() {
-		const modal = 'showSearchModal'
+		const modal = 'searchModal'
 
 		const onCloseModal = (e, modal) => {
 			e.preventDefault();
@@ -27,14 +27,14 @@ export class SearchModal extends React.Component {
 			this.props.dispatch(getExhibitionsForSearch(e.target['search-exhibitions'].value));
 		}
 
-		const showSearchResults = () => {
+		const searchResults = () => {
 			if (this.props.searchResults.length > 0) {
 				const results = this.props.searchResults.map((item, index) =>
 					<SearchResult key={index} {...item} />
 				)
 				return (
 					<div className="search-results">
-				       	<h3>Search results ({this.props.searchResults.length}): </h3>
+				       	<h4>Search results ({this.props.searchResults.length}): </h4>
 				       		<ul className="result-list">
 				       			{results}
 				       		</ul>
@@ -45,23 +45,43 @@ export class SearchModal extends React.Component {
 			}
 		}
 
+		const modalTitle = 'Current NYC Art Exhibitions';
+		let messageEnter = 'message-enter';
+		let message = '';
+
+		const toggleMessage = () => {
+			if (this.props.message) {
+				message = this.props.message
+				return 'modal-title-remove'
+			} else {
+				messageEnter = ''
+				return null
+			}
+		}
+
 		return (
 			<div>
 				<div className="modal-overlay" onClick={e => onCloseModal(e, modal)} >
 				</div>      
-				<form className="search-form modal-form" onSubmit={e => onSearchSubmit(e)} >
-					<a href="" className="modal-x" onClick={e => onCloseModal(e, modal)} > </a>
-					<div>
-						<label htmlFor="search-exhibitions">Current Art Exhibitions in NYC</label>
-						<input type="text" name="search-exhibitions" id="search-exhibitions" autoComplete="off"
-							autoFocus placeholder="artist, exhibition, title, media, etc..." required />{/*
-						*/}<button type="submit">Search</button>
-						<div>
-				        		<p className="modal-message">{this.props.message}</p>
-				        	</div>
-					</div>
-				</form>
-			       {showSearchResults()}
+				<div className="modal-container search-modal">
+					<form className="search-form modal-form" onSubmit={e => onSearchSubmit(e)} >
+						<h3 className="modal-title">
+							<span className={toggleMessage()}>{modalTitle}</span>
+							<span className={`modal-message ${messageEnter}`}>{message}</span>
+						</h3>
+						<div className="form-container">
+							<a href="" className="modal-x" onClick={e => onCloseModal(e, modal)} > </a>
+							<div>
+								<input type="text" name="search-exhibitions" id="search-exhibitions" autoComplete="off"
+									autoFocus placeholder="artist, title, media, etc..." required />{/*
+								*/}<button type="submit">Search</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div className="modal-container search-results-container">
+			       {searchResults()}
+			    </div>
 			</div>
 		);
 	}

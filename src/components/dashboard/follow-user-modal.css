@@ -17,9 +17,15 @@
 	text-align: left;
 }
 
+.follow-wrapper .about {
+	font-size: 16px;
+	line-height: 1.2;
+	padding-top: 15px;
+}
+
 .follow-user-form button {
 	width: 40%;
-	margin-top: 20px;
+	margin-top: 25px;
 	margin-left: 5%;
 	margin-right: 5%;
 }

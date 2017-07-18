@@ -1,3 +1,7 @@
+ul.comments {
+	padding-bottom: 30px;
+}
+
 .comment-header img {
 	height: 100px;
 	width: 100px;
@@ -7,7 +11,7 @@
 }
 
 li.comment-item {
-	padding: 10px;
+	padding: 10px 0;
 }
 
 span>li:nth-child(odd) {
@@ -17,12 +21,13 @@ span>li:nth-child(odd) {
 .comment-header {
 	height: 130px;
 	margin: 0 auto;
+	padding: 0 30px;
 }
 
 .comment-item .snippet {
 	margin: 5px 0 25px 0;
+	padding: 0 30px;
     line-height: 1.3;
-    font-size: 15px;
     color: #676767;
 }
 
@@ -34,6 +39,10 @@ span>li:nth-child(odd) {
 
 .comment-username {
 	font-weight: bold;
+}
+
+.comment-item {
+	font-size: 20px;
 }
 
 @media screen and (max-width: 600px) {
@@ -51,6 +60,11 @@ span>li:nth-child(odd) {
 
 	.comment-header {
 		height: 55px;
+		padding: 0 15px;
+	}
+
+	.comment-item .snippet {
+		padding: 0 15px;
 	}
 
 	.comment-date {

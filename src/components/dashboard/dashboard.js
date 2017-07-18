@@ -44,7 +44,8 @@ export const Dashboard = (props) => {
 
 	const onClickSearch = (e, modal) => {
 		e.preventDefault();
-		props.dispatch(toggleModal(modal))
+		props.dispatch(toggleModal('burgerModal'));
+		props.dispatch(toggleModal(modal));
 	}
 
 	const userFeedView = (feedView) => {
@@ -59,13 +60,14 @@ export const Dashboard = (props) => {
 	}
 
 	const showModals = () => {
-		if (props.modals.showSearchModal) {
+		if (props.modals.searchModal) {
 			return <SearchModal />
-		} else if (props.modals.showFollowUserModal) {
+		} else if (props.modals.followUserModal) {
 			return <FollowUserModal />
-		} else if (props.modals.showUserSettingsModal) {
+		} else if (props.modals.userSettingsModal) {
 			return <UserSettingsModal />
-		} else if (props.modals.showProfilePicModal) {
+		} else if (props.modals.profilePicModal) {
+			console.log('here')
 			return <ProfilePicModal />
 		}
 	}
@@ -96,7 +98,7 @@ export const Dashboard = (props) => {
 	const footer = () => {
 		if (feedView === 'discussion') {
 			return null
-		} else {
+		} else if (loaded) {
 			return <Footer />
 		}
 	}
@@ -113,7 +115,9 @@ export const Dashboard = (props) => {
 				</ReactCSSTransitionGroup>
 				<NavBar>
 					<div className="nav-item"><a href="/" onClick={(e) => onClickLogOut(e)}>Log out</a></div>
-					<div className="nav-item"><a href="/dashboard" onClick={(e) => onClickSearch(e, 'showSearchModal')}>Search</a></div>
+					<div className="nav-item"><div className="glass-container"><a href="/dashboard" onClick={(e) => 
+						onClickSearch(e, 'searchModal')}>Search <img src="/search.png"
+							alt="search" className="search-glass" /></a></div></div>
 				</NavBar>
 				<ReactCSSTransitionGroup 
 					transitionEnterTimeout={300}

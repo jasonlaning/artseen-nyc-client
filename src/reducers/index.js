@@ -23,11 +23,13 @@ const initialState = {
 	singleDiscussionLoaded: false,
 	userToFollow: {},
 	modals: {
-		showSignInModal: false,
-		showFollowUserModal: false,
-		showSearchModal: false,
-		showUserSettingsModal: false,
-		showProfilePicModal: false
+		signInModal: false,
+		followUserModal: false,
+		searchModal: false,
+		userSettingsModal: false,
+		profilePicModal: false,
+		signUpModal: false,
+		burgerMenu: false
 	},
 	prevAction: '',
 	message: '',
@@ -42,7 +44,7 @@ export const artseenReducer = (state=initialState, action) => {
 	} else if (action.type === actions.GET_USER_SESSION_SUCCESS) {
 		console.log('user signed in');
 		let modals = Object.assign({}, state.modals);
-		modals.showSignInModal = false;
+		modals.signInModal = false;
 		return Object.assign({}, state, {
 			user: action.user,
 			community: action.community,
@@ -62,7 +64,7 @@ export const artseenReducer = (state=initialState, action) => {
 		})
 	} else if (action.type === actions.GET_USER_TO_FOLLOW_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
-		modals.showFollowUserModal = true;
+		modals.followUserModal = true;
 		// check if user is already followed
 		let userToFollow = Object.assign({}, action.userToFollow);
 		if (state.user.favoriteUsers.indexOf(action.userToFollow.username) > -1) {
@@ -102,7 +104,7 @@ export const artseenReducer = (state=initialState, action) => {
 	} else if (action.type === actions.GET_DISCUSSION_FROM_SEARCH_SUCCESS) {
 		let modals = Object.assign({}, state.modals);
 		let discussion = Object.assign({}, action.discussion);
-		modals['showSearchModal'] = false;
+		modals['searchModal'] = false;
 		return Object.assign({}, state, {
 			discussionIdFromSearch: action.discussion.id,
 			discussionToView: discussion,
@@ -113,6 +115,7 @@ export const artseenReducer = (state=initialState, action) => {
 	} else if (action.type === actions.TOGGLE_MODAL) {
 		let message = '';
 		let modals = Object.assign({}, state.modals);
+
 		modals[action.modal] = !(state.modals[action.modal]);
 		return Object.assign({}, state, { 
 			modals,

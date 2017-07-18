@@ -1,6 +1,6 @@
 .exhibition-heading {
 	font-size: 15px;
-	padding: 0 10px;
+	padding: 0 30px;
 }
 
 .single-disc-venue {
@@ -17,4 +17,14 @@
 .single-disc-descr {
 	margin-top: 0;
 	line-height: 1.3;
+}
+
+.exhibition-heading h4 {
+	padding: 15px 0;
+}
+
+@media screen and (max-width: 600px) {
+	.exhibition-heading {
+		padding: 0 15px;
+	}
 }

@@ -8,7 +8,7 @@ import './profile-pic-modal.css';
 
 export const ProfilePicModal = (props) => {
 
-	const modal = 'showProfilePicModal';
+	const modal = 'profilePicModal';
 
 	const onCloseModal = (e, modal) => {
 		e.preventDefault();
@@ -30,14 +30,15 @@ export const ProfilePicModal = (props) => {
 					accept="image/*"
 					onDrop={pic => onImageDrop(pic)}>
 					<p className="drop-instructions">Drag and Drop<br/>
-						New Profile Image<br /><br/>or click here<br/>to select a file</p>
+						New Profile Image<br /><br/>or click<br/>to select a file</p>
 				</Dropzone>
 			)
 		} else {
 			return (
 				<div>
-					<img src={props.imageUploaded} alt="preview" className="profile-pic" />
-					<button type="submit">Save?</button><button onClick={e => onCloseModal(e, modal)}>Cancel</button>
+					<img src={props.imageUploaded} alt="preview" />
+					<div className="profile-pic-button-container"><button type="submit">Save?</button><button onClick={e => 
+						onCloseModal(e, modal)}>Cancel</button></div>
 				</div>
 			)
 		}
@@ -49,17 +50,34 @@ export const ProfilePicModal = (props) => {
 			props.user.about, props.imageUploaded, modal));
 	} 
 
+	const modalTitle = 'Update Profile Pic';
+		let messageEnter = 'message-enter';
+		let message = '';
+
+		const toggleMessage = () => {
+			if (props.message) {
+				message = props.message
+				return 'modal-title-remove'
+			} else {
+				messageEnter = ''
+				return null
+			}
+		}
+
 	return ( 
 		<div>
 			<div className="modal-overlay" onClick={e => onCloseModal(e, modal)} >
-			</div>      
-			<form className="profile-pic-form modal-form" onSubmit={e => onSubmit(e, modal)} >
-				<a href="" className="modal-x" onClick={e => onCloseModal(e, modal)} > </a>
-				{dropzoneView()}
-				<div>
-					<p className="modal-message">{props.message}</p>
-				</div>
-			</form>
+			</div>  
+			<div className="modal-container">    
+				<form className="profile-pic-form modal-form" onSubmit={e => onSubmit(e, modal)} >
+					<h3 className="modal-title">
+						<span className={toggleMessage()}>{modalTitle}</span>
+						<span className={`modal-message ${messageEnter}`}>{message}</span>
+					</h3>					
+					<a href="" className="modal-x" onClick={e => onCloseModal(e, modal)} > </a>
+					{dropzoneView()}
+				</form>
+			</div>
 		</div>
 	)
 }

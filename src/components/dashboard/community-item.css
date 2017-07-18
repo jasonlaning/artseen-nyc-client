@@ -1,21 +1,35 @@
+.community-activity {
+	padding: 0;
+}
+
 .community-activity img {
 	height: 100px;
 	width: 100px;
 	float: left;
 	border-radius: 50%;
-	margin: 0 15px 15px 15px;
+	margin: 0 15px 0 0;
 }
 
 .community-header {
-	height: 130px;
-	margin: 0 auto;
+	display: inline-block;
+	width: 25%;
+	margin: 50px 2% 50px 10%;
+	height: 100px;
+	vertical-align: middle;
 }
 
 .community-activity .snippet {
-	margin: 5px 15px 25px 15px;
-    line-height: 1.3;
-    color: #676767;
-    font-size: 15px;
+	display: inline-block;
+	width: 53%;
+	margin-top: 0;
+	margin-right: 10%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	vertical-align: middle;
+}
+
+.community-activity a:hover {
+	color: #999;
 }
 
 .community-date {
@@ -35,27 +49,103 @@
 	font-size: 14px;
 	text-align: center;
 	color: gray;
+	margin-top: 0;
 }
 
 .community-title {
 	color: #5d5d5d;
 }
 
+@media screen and (max-width: 900px) {
+
+	.community-header {
+		width: 30%;
+		margin: 50px 2% 50px 5%;
+	}
+
+	.community-activity .snippet {
+		width: 58%;
+		margin-right: 5%;
+	}
+
+}
+
+@media screen and (max-width: 700px) {
+
+	.community-header {
+		width: 32%;
+		margin: 50px 6% 50px 5%;
+	}
+
+	.community-activity .snippet {
+		width: 52%;
+		margin-right: 5%;
+		font-size: 17px;
+	}
+
+}
+
 @media screen and (max-width: 600px) {
 
 	.community-activity img {
-		height: 40px;
-		width: 40px;
-		float: left;
-		border-radius: 50%;
+		height: 70px;
+		width: 70px;
 	}
 
 	.community-header {
-		height: 55px;
+		height: 70px;
+		margin: 30px 6% 30px 5%;
+		font-size: 15px;
+	}
+
+	.community-activity .snippet {
+		font-size: 16px;
+	}
+
+}
+
+@media screen and (max-width: 500px) {
+
+	.community-header {
+		width: 34%;
+		margin: 30px 6% 30px 3%;
+		font-size: 14px;
+	}
+
+	.community-activity .snippet {
+		width: 54%;
+		font-size: 14px;
+		margin-right: 3%;
+	}
+
+}
+
+@media screen and (max-width: 400px) {
+
+	.community-activity img {
+		height: 50px;
+		width: 50px;
+	}
+
+	.community-header {
+		width: 34%;
+		height: 50px;
+		margin: 30px 6% 30px 3%;
+		font-size: 12px;
 	}
 
 	.community-date {
-		font-size: 14px;
+		font-size: 10px;
+	}
+
+	.community-username {
+		margin-top: 10px;
+	}
+
+	.community-activity .snippet {
+		width: 54%;
+		margin-right: 3%;
+		font-size: 12px;
 	}
 
 }
