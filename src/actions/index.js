@@ -429,9 +429,10 @@ export const uploadImage = (image) => dispatch => {
 			dispatch(uploadImageSuccess(res.data.secure_url));
 			dispatch(updateModalMessage(''));
 		})
-		.catch(err => 
-			console.log(err)
+		.catch(err => {
+			console.log(err);
 			dispatch(updateModalMessage('Error'));
+		});
 }
 
 export const UPDATE_USER_SETTINGS_SUCCESS = 'UPDATE_USER_SETTINGS_SUCCESS';
