@@ -38,7 +38,7 @@ export const CommentForm = (props) => {
 					<span className={`modal-message ${messageEnter}`}>{message}</span>
 				</h3>
 				<div>
-					<textarea placeholder="write comment text here..." name="comment" id="comment" />
+					<textarea placeholder="write comment text here..." name="comment" id="comment" required />
 				</div>
 				<button type="submit">Submit</button>
 			</form>
@@ -50,7 +50,7 @@ const mapStateToProps = (state, props) => ({
 	user: state.user,
 	discId: state.discussionToView.id,
 	discName: state.discussionToView.name,
-	message: state.message
+	message: state.commentFormMessage
 })
 
 export default connect(mapStateToProps)(CommentForm);

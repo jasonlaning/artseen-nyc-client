@@ -1,4 +1,4 @@
-import {mockDiscussions, mockExhibitions} from '../mock-data';
+import {mockExhibitions} from '../mock-data';
 //import {parseString} from 'xml2js';
 import axios from 'axios';
 import searchExhibitions from '../components/search-exhibitions';
@@ -19,6 +19,12 @@ export const updateSticky = (status) => ({
 export const UPDATE_MODAL_MESSAGE = 'UPDATE_MODAL_MESSAGE';
 export const updateModalMessage = (message) => ({
 	type: UPDATE_MODAL_MESSAGE,
+	message
+})
+
+export const UPDATE_COMMENT_FORM_MESSAGE = 'UPDATE_COMMENT_FORM_MESSAGE';
+export const updateCommentFormMessage = (message) => ({
+	type: UPDATE_COMMENT_FORM_MESSAGE,
 	message
 })
 
@@ -96,15 +102,52 @@ export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 	dispatch(getSearchResultsSuccess(searchResults));
 }
 
-export const GET_DISCUSSIONS_SUCCESS = 'GET_DISCUSSIONS_SUCCESS';
-export const getDiscussionsSuccess = discussions => ({
-	type: GET_DISCUSSIONS_SUCCESS,
+export const GET_MORE_DISCUSSIONS_SUCCESS = 'GET_MORE_DISCUSSIONS_SUCCESS';
+export const getMoreDiscussionsSuccess = (discussions) => ({
+	type: GET_MORE_DISCUSSIONS_SUCCESS,
 	discussions
 })
 
-export const getDiscussions = () => dispatch => {
+export const UPDATE_LOAD_MORE_BUTTON = 'UPDATE_LOAD_MORE_BUTTON';
+export const updateLoadMoreButton = (button) => ({
+	type: UPDATE_LOAD_MORE_BUTTON,
+	button
+})
 
-	dispatch(getDiscussionsSuccess(mockDiscussions));
+export const GET_MORE_COMMUNITY_SUCCESS = 'GET_MORE_COMMUNITY_SUCCESS';
+export const getMoreCommunitySuccess = (comments) => ({
+	type: GET_MORE_COMMUNITY_SUCCESS,
+	comments
+})
+
+export const getMoreDiscussions = (skip) => dispatch => {
+
+	api.get(`discussions/${skip}`)
+		.then(res => {
+			if (res.statusText !== 'OK') {
+				return Promise.reject(res)
+			} else if (res.data.discussions.length > 0) {
+				dispatch(getMoreDiscussionsSuccess(res.data.discussions));
+			} else {
+				dispatch(updateLoadMoreButton('discussions'));
+			}
+		})
+		.catch(err => console.log(err));
+}
+
+export const getMoreCommunity = (skip) => dispatch => {
+
+	api.get(`users/me/community/${skip}`)
+		.then(res => {
+			if (res.statusText !== 'OK') {
+				return Promise.reject(res)
+			} else if (res.data.comments.length > 0) {
+				dispatch(getMoreCommunitySuccess(res.data.comments));
+			} else {
+				dispatch(updateLoadMoreButton('community'));
+			}
+		})
+		.catch(err => console.log(err));
 }
 
 export const GET_COMMUNITY_SUCCESS = 'GET_COMMUNITY_SUCCESS';
@@ -157,17 +200,16 @@ export const addUserToFavorites = (username) => dispatch => {
 			if (res.status !== 201) {
 				return Promise.reject(res);
 			}
-			dispatch(updateUserFavoritesSuccess(res.data.user));
+			dispatch(updateModalMessage(`${username} followed!`));
+			setTimeout(() => dispatch(updateUserFavoritesSuccess(res.data.user)), 1600);
 		})
 		.then(() => {
 			dispatch(getCommunity());
 		})
-		.then(()=> {
-			dispatch(toggleModal('followUserModal'))
-		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
 		})
+		setTimeout(() => dispatch(toggleModal('followUserModal')), 1500);
 }
 
 export const deleteUserFromFavorites = (username) => dispatch => {
@@ -179,17 +221,16 @@ export const deleteUserFromFavorites = (username) => dispatch => {
 			if (res.statusText !== 'OK') {
 				return Promise.reject(res);
 			}
-			dispatch(updateUserFavoritesSuccess(res.data.user));
+			dispatch(updateModalMessage(`${username} unfollowed!`))
+			setTimeout(() => dispatch(updateUserFavoritesSuccess(res.data.user)), 1600);
 		})
 		.then(() => {
 			dispatch(getCommunity());
 		})
-		.then(()=> {
-			dispatch(toggleModal('followUserModal'))
-		})
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
 		})
+		setTimeout(() => dispatch(toggleModal('followUserModal')), 1500);
 }
 
 export const UPDATE_DISCUSSION_TO_VIEW = 'UPDATE_DISCUSSION_TO_VIEW';
@@ -227,7 +268,7 @@ export const postNewComment = (username, comment) => dispatch => {
 	console.log(demoUser);
 	if (demoUser === 'Demo123abc') {
 		const demoMsg = 'Commenting is disabled for demos';
-		return dispatch(updateModalMessage(demoMsg));
+		return dispatch(updateCommentFormMessage(demoMsg));
 	} else {
 		api.post('discussions/comment', {
 		 		discussionId: comment.discussionId,
@@ -242,7 +283,7 @@ export const postNewComment = (username, comment) => dispatch => {
 				}
 		 	}) 
 		 	.catch((err) => {
-				dispatch(updateModalMessage(err.response.data.message))
+				dispatch(updateCommentFormMessage(err.response.data.message))
 			})
 	}
 }

@@ -71,11 +71,18 @@ form button:hover {
   cursor: pointer;
 }
 
-form button:disabled {
+button:disabled {
   cursor: default;
   background-color: white;
   border: 1px solid #ccc;
   color: #ccc;
+}
+
+button:hover:disabled {
+  background-color: inherit;
+  color: #ccc;
+  cursor: default;
+  border: 1px solid #ccc;
 }
 
 form {

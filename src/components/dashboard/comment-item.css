@@ -45,6 +45,33 @@ span>li:nth-child(odd) {
 	font-size: 20px;
 }
 
+.community-activity button {
+  border: 1px solid gray;
+  padding: 10px;
+  font-size: 100%;
+  font: inherit;
+  border-radius: 5px;
+  margin: 50px auto;
+  display: block;
+}
+
+.community-activity button:hover {
+  background-color: #f1f1f1;
+  color: #666;
+  cursor: pointer;
+}
+
+.community-activity button:disabled {
+  border: 1px solid #ccc;
+}
+
+.community-activity button:hover:disabled {
+  background-color: inherit;
+  color: #ccc;
+  cursor: default;
+  border: 1px solid #ccc;
+}
+
 @media screen and (max-width: 600px) {
 
 	.comment-item {

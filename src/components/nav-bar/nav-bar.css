@@ -13,6 +13,11 @@ nav {
   color: #fff;
 }
 
+.nav-bar-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .nav-site-title {
   display: inline-block;
 	font-size: 24px;

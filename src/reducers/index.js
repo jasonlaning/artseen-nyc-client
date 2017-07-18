@@ -33,13 +33,19 @@ const initialState = {
 	},
 	prevAction: '',
 	message: '',
-	stickyStatus: false
+	commentFormMessage: '',
+	stickyStatus: false,
+	buttonsDisabled: []
 };
 
 export const artseenReducer = (state=initialState, action) => {
 	if (action.type === actions.UPDATE_MODAL_MESSAGE) {
 		return Object.assign({}, state, {
 			message: action.message
+		})
+	} else 	if (action.type === actions.UPDATE_COMMENT_FORM_MESSAGE) {
+		return Object.assign({}, state, {
+			commentFormMessage: action.message
 		})
 	} else if (action.type === actions.GET_USER_SESSION_SUCCESS) {
 		console.log('user signed in');
@@ -81,10 +87,16 @@ export const artseenReducer = (state=initialState, action) => {
 		return Object.assign({}, state, {
 			user: action.user
 		})
-	} else if (action.type === actions.GET_DISCUSSIONS_SUCCESS) {
-		console.log('discussions fetched');
+	} else if (action.type === actions.GET_MORE_DISCUSSIONS_SUCCESS) {
+		let loadedDiscussions = state.discussions;
 		return Object.assign({}, state, {
-			discussions: action.discussions,
+			discussions: loadedDiscussions.concat(action.discussions),
+			prevAction: action.type
+		})
+	} else if (action.type === actions.GET_MORE_COMMUNITY_SUCCESS) {
+		let loadedCommunity = state.community;
+		return Object.assign({}, state, {
+			community: loadedCommunity.concat(action.comments),
 			prevAction: action.type
 		})
 	} else if (action.type === actions.GET_COMMUNITY_SUCCESS) {
@@ -125,6 +137,11 @@ export const artseenReducer = (state=initialState, action) => {
 			searchResults: [],
 			searchSubmitted: false
 		})
+	} else if (action.type === actions.UPDATE_LOAD_MORE_BUTTON) {
+			let buttons = state.buttonsDisabled;
+			return Object.assign({}, state, {
+				buttonsDisabled: buttons.concat(action.button)
+			})
 	} else if (action.type === actions.GET_SEARCH_RESULTS_SUCCESS) {
 		return Object.assign({}, state, {
 			searchResults: action.searchResults,

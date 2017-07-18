@@ -1,6 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CommunityItem from './community-item';
+import { getMoreCommunity } from '../../actions';
 
 export const CommunityActivity = (props) => {
 
@@ -21,19 +22,33 @@ export const CommunityActivity = (props) => {
 		}
 	}
 
-return (
-	<section className="community-activity">
-		<div className="wrapper">
-			<ul>
-			{community()}
-			</ul>
-		</div>
-	</section>
-);
+	let loadMoreDisabled = true;
+	let buttonText = 'No More Activity to Load';
+
+	if ((props.buttonsDisabled.indexOf('community') === -1) 
+			&& (props.community.length > 9)) {
+		loadMoreDisabled = false;
+		buttonText = 'Load More Activity';
+	} 
+
+	return (
+		<section className="community-activity">
+			<div className="wrapper">
+				<ul>
+				{community()}
+				</ul>
+			</div>
+			<button disabled={loadMoreDisabled} onClick={(e) => {
+					e.preventDefault();
+					props.dispatch(getMoreCommunity(props.community.length))
+				}}>{buttonText}</button>
+		</section>
+	);
 }
 
 const mapStateToProps = (state, props) => ({
-	community: state.community
+	community: state.community,
+	buttonsDisabled: state.buttonsDisabled
 })
 
 export default connect(mapStateToProps)(CommunityActivity);

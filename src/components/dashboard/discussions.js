@@ -1,6 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import DiscussionsItem from './discussions-item';
+import { getMoreDiscussions } from '../../actions';
 
 import './discussions.css';
 
@@ -10,6 +11,15 @@ export const Discussions = (props) => {
 		<DiscussionsItem key={index} id={item.id} {...item} />
 	)
 
+	let loadMoreDisabled = true;
+	let buttonText = 'No More Discussions to Load';
+
+	if ((props.buttonsDisabled.indexOf('discussions') === -1) 
+			&& (props.discussions.length > 9)) {
+		loadMoreDisabled = false;
+		buttonText = 'Load More Discussions';
+	} 
+
 	return(
 		<section className="discussions">
 			<div className="wrapper">
@@ -17,12 +27,17 @@ export const Discussions = (props) => {
 					{discussions}
 				</ul> 
 			</div> 
+			<button disabled={loadMoreDisabled} onClick={(e) => {
+				e.preventDefault();
+				props.dispatch(getMoreDiscussions(props.discussions.length))
+			}}>{buttonText}</button>
 		</section>
 	);
 }
 
 const mapStateToProps = (state, props) => ({
-	discussions: state.discussions
+	discussions: state.discussions,
+	buttonsDisabled: state.buttonsDisabled
 })
 
 export default connect(mapStateToProps)(Discussions);

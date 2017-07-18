@@ -10,3 +10,34 @@
 .discussions li {
 	padding-bottom: 40px;
 }
+
+.discussions .wrapper {
+	padding-bottom: 40px;
+}
+
+.discussions button {
+  border: 1px solid gray;
+  padding: 10px;
+  font-size: 100%;
+  font: inherit;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+}
+
+.discussions button:hover {
+  background-color: #f1f1f1;
+  color: #666;
+  cursor: pointer;
+}
+
+.discussions button:disabled {
+  border: 1px solid #ccc;
+}
+
+.discussions button:hover:disabled {
+  background-color: inherit;
+  color: #ccc;
+  cursor: default;
+  border: 1px solid #ccc;
+}

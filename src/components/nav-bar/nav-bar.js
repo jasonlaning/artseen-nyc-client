@@ -24,15 +24,17 @@ export const NavBar = (props) => {
 
 	return (
 		<nav>
-			<div className="nav-site-title">
-				<p><Link to="/" >ArtSEEN NYC</Link></p>
-			</div>
-				<img className={`burger-button ${buttonOpenClass}`} src='/burger-open.png' alt="close modal" 
-					onClick={(e) => toggleBurger(e, 'burgerModal')} />
-				<img className={`burger-button ${buttonCloseClass}`} src='/burger-close.png' alt="close modal" 
-					onClick={(e) => toggleBurger(e, 'burgerModal')} />
-			<div className={`nav-items-container ${menuClass}`}>
-				{props.children}
+			<div className="nav-bar-wrapper">
+				<div className="nav-site-title">
+					<p><Link to="/" >ArtSEEN NYC</Link></p>
+				</div>
+					<img className={`burger-button ${buttonOpenClass}`} src='/burger-open.png' alt="close modal" 
+						onClick={(e) => toggleBurger(e, 'burgerModal')} />
+					<img className={`burger-button ${buttonCloseClass}`} src='/burger-close.png' alt="close modal" 
+						onClick={(e) => toggleBurger(e, 'burgerModal')} />
+				<div className={`nav-items-container ${menuClass}`}>
+					{props.children}
+				</div>
 			</div>
 		</nav>
 	)
