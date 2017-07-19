@@ -6,7 +6,10 @@ const {API_BASE_URL} = require('../config');
 
 const api = axios.create({
 	baseURL: API_BASE_URL,
-	withCredentials: true
+	withCredentials: true,
+	headers: {
+ 		crossDomain: true
+ 			}
 })
 
 export const UPDATE_STICKY = 'UPDATE_STICKY';
@@ -347,7 +350,7 @@ export const signInUser = (username, password) => dispatch => {
  				username,
  				password
  				}
- 			})
+ 		})
 	 	.then((res) => {
 	 		console.log(res)
 	 		if (res.data.user) {
