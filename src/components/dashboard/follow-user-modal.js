@@ -32,7 +32,7 @@ export const FollowUserModal = (props) => {
 		unfollowDisabled = false;
 	}
 
-	const modalTitle = 'User Detail';
+	const modalTitle = 'Profile';
 	let messageEnter = 'message-enter';
 	let message = '';
 

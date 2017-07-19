@@ -26,7 +26,7 @@ export const CommunityItem = (props) => {
 				<p className="community-date">{moment(props.date).fromNow()}</p>
 			</div>
 			<Link to={`/dashboard/discussion/${props.id}`} >
-			<p className="snippet">&ldquo;{props.text.slice(0, 200)}...&rdquo;</p>
+			<p className="snippet">&ldquo;{props.text}&rdquo;</p>
 			<p className="community-from">from <span className="community-title">{props.discussion.name}</span>
 			</p></Link>
 			

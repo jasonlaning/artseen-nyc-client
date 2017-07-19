@@ -11,7 +11,7 @@ export const DiscussionsItem = (props) => {
 
 	const lastUpdate = () => {
 		if (props.comments.length > 0) {
-			return `Last commented: ${moment(props.comments[props.comments.length - 1].date).fromNow()}`
+			return `Last comment: ${moment(props.comments[props.comments.length - 1].date).fromNow()}`
 		}
 		return 'No comments'
 	}
