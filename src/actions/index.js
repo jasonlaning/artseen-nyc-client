@@ -451,6 +451,7 @@ export const updateUserSettings = (location, about, profilePicURL, modal) => dis
 	 	.then((res) => {
 	 		if (res.status === 200) {
 	 			dispatch(updateUserSettingsSuccess(res.data.user, modal));
+	 			dispatch(getUserSession());
 	 		} else {
 				return Promise.reject(res);
 			}
