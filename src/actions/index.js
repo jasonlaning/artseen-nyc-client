@@ -1,7 +1,6 @@
 import {parseString} from 'xml2js';
 import axios from 'axios';
 import searchExhibitions from '../components/search-exhibitions';
-import $ from 'jquery';
 
 const {API_BASE_URL} = require('../config');
 
@@ -311,26 +310,6 @@ export const getUserSessionSuccess = (user, community, discussions) => ({
 
 export const getUserSession = () => dispatch => {
 
-	const settings = {
-		url: `${API_BASE_URL}/users/me`,
-		method: "GET",
-		headers: {
-			'content-type': "application/json",
-		}
-	};
-
-	$.ajax(settings)
-		.done(res => {
-			if (res.user) {
-				console.log('logged in: ', res.user);
-			}
-			else {
-				dispatch(updateModalMessage('Server Error'))
-			}
-	});
-
-
-	/*
 	const getUser = () => {
 		return api.get('users/me');
 	}
@@ -358,36 +337,12 @@ export const getUserSession = () => dispatch => {
 		.catch(err => {
 			console.log('error: ', err.response.data.message);
 			//window.location.replace('/');
-		});   */
+		});   
 }
 
 export const signInUser = (username, password) => dispatch => {
-
 	dispatch(updateModalMessage('Signing in...'));
-
-	const settings = {
-		url: `${API_BASE_URL}/users/login`,
-		method: "GET",
-		headers: {
-			'content-type': "application/json",
-			authorization: "Basic " + btoa(username + ':' + password)
-		},
-		withCredentials: true
-	};
-
-	$.ajax(settings)
-		.done(res => {
-			if (res.user) {
-				console.log('logged in: ', res.user);
-				dispatch(getUserSession());
-			}
-			else {
-				dispatch(updateModalMessage('Server Error'));
-			}
-	});
-
-
- 	/*api.get('users/login', {
+ 	api.get('users/login', {
 	 		headers: {
 	 			authorization: 'Basic ' + btoa(username + ':' + password)
 	 		}
@@ -403,7 +358,7 @@ export const signInUser = (username, password) => dispatch => {
 	 	}) 
 	 	.catch(() => {
 			dispatch(updateModalMessage('Invalid Username or Password'));
-		})*/
+		})
 }
 
 export const signUpNewUser = (username, password, location) => dispatch => {
