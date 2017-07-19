@@ -350,7 +350,7 @@ export const signInUser = (username, password) => dispatch => {
 	 	.then((res) => {
 	 		console.log(res)
 	 		if (res.data.user) {
-	 			window.location ='/dashboard'
+	 			dispatch(getUserSession());
 	 		} else {
 				return Promise.reject();
 			}
