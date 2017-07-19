@@ -316,8 +316,7 @@ export const getUserSession = () => dispatch => {
 		method: "GET",
 		headers: {
 			'content-type': "application/json",
-		},
-		withCredentials: true
+		}
 	};
 
 	$.ajax(settings)
@@ -380,9 +379,10 @@ export const signInUser = (username, password) => dispatch => {
 		.done(res => {
 			if (res.user) {
 				console.log('logged in: ', res.user);
+				dispatch(getUserSession());
 			}
 			else {
-				dispatch(updateModalMessage('Server Error'))
+				dispatch(updateModalMessage('Server Error'));
 			}
 	});
 
