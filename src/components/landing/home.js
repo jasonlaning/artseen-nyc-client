@@ -9,15 +9,15 @@ import Footer from '../footer/footer';
 import SignInModal from './sign-in-modal';
 import SignUpModal from './sign-up-modal';
 import { toggleModal, createNewDemoUser } from '../../actions';
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 
 import './home.css';
 
 export const Home = (props) => {
 
-	if (props.loggedIn) {
+//	if (props.loggedIn) {
 		//return <Redirect to={'/dashboard'} />
-	}
+//	}
 
 	const onModalLinkClick = (e, modal) => {
 		e.preventDefault();

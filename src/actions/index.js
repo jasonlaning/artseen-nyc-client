@@ -350,7 +350,7 @@ export const signInUser = (username, password) => dispatch => {
 	 	.then((res) => {
 	 		console.log(res)
 	 		if (res.data.user) {
-	 			console.lo
+	 			console.log('made it here, logged in')
 	 			dispatch(getUserSession());
 	 		} else {
 				return Promise.reject();
