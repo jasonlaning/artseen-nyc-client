@@ -365,7 +365,8 @@ export const signUpNewUser = (username, password, location) => dispatch => {
  	api.post('users/sign-up', {
 	 		username,
 	 		password,
-	 		location
+	 		location,
+	 		favoriteUsers: []
 	 	})
 	 	.then((res) => {
 	 		if (res.status === 201) {
@@ -393,7 +394,8 @@ export const createNewDemoUser = () => dispatch => {
 	 		username: demoData.username,
 	 		password: demoData.password,
 	 		location: demoData.location,
-	 		about: demoData.about
+	 		about: demoData.about,
+	 		favoriteUsers: demoData.favoriteUsers
 	 	})
 	 	.then((res) => {
 	 		if (res.status === 201) {
