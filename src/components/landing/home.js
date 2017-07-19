@@ -21,7 +21,8 @@ export const Home = (props) => {
 
 	const onModalLinkClick = (e, modal) => {
 		e.preventDefault();
-		props.dispatch(toggleModal(modal));
+		//props.dispatch(toggleModal(modal));
+		window.location = 'https://artseen-nyc-api.herokuapp.com/sign-in.html';
 		if (props.modals.burgerModal) {
 			props.dispatch(toggleModal('burgerModal'))
 		}

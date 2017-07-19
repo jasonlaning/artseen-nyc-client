@@ -313,34 +313,16 @@ export const getUserSessionSuccess = (user, community, discussions) => ({
 
 export const getUserSession = () => dispatch => {
 
-	const username = window.sessionStorage.getItem('username');
-	const password = window.sessionStorage.getItem('password');
-
 	const getUser = () => {
-		return api.get('users/me', {
- 			auth: {
- 				username,
- 				password
- 				}
- 		})
+		return api.get('users/me');
 	}
 	
 	const getCommunity =  () => {
-		return api.get('users/me/community', {
- 			auth: {
- 				username,
- 				password
- 				}
- 		})
+		return api.get('users/me/community');
 	}
 
 	const getDiscussions = () => {
-		return api.get('discussions', {
- 			auth: {
- 				username,
- 				password
- 				}
- 		})
+		return api.get('discussions');
 	}
 
 	axios.all([getUser(), getCommunity(), getDiscussions()])
@@ -363,8 +345,6 @@ export const getUserSession = () => dispatch => {
 
 export const signInUser = (username, password) => dispatch => {
 	dispatch(updateModalMessage('Signing in...'));
-	window.sessionStorage.setItem('username', username);
-	window.sessionStorage.setItem('password', password);
  	api.get('users/login', {
  			auth: {
  				username,
@@ -374,7 +354,7 @@ export const signInUser = (username, password) => dispatch => {
 	 	.then((res) => {
 	 		console.log(res)
 	 		if (res.data.user) {
-	 			console.log('made it here, logged in')
+	 			console.log('made it here, logged in');
 	 			dispatch(getUserSession());
 	 		} else {
 				return Promise.reject();
