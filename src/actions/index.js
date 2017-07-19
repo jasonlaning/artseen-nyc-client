@@ -343,10 +343,11 @@ export const getUserSession = () => dispatch => {
 export const signInUser = (username, password) => dispatch => {
 	dispatch(updateModalMessage('Signing in...'));
  	api.get('users/login', {
-	 		headers: {
-	 			authorization: 'Basic ' + btoa(username + ':' + password)
-	 		}
-	 	})
+ 			auth: {
+ 				username,
+ 				password
+ 				}
+ 			})
 	 	.then((res) => {
 	 		console.log(res)
 	 		if (res.data.user) {
