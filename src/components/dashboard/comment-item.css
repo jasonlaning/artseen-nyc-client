@@ -26,7 +26,7 @@ span>li:nth-child(odd) {
 
 .comment-item .snippet {
 	margin: 0 0 50px 0;
-	padding: 0 5% 0 30%;
+	padding: 0 5% 0 25%;
 	line-height: 1.3;
 	color: #676767;
 }
@@ -53,8 +53,9 @@ span>li:nth-child(odd) {
 		font-size: 16px;
 	}
 
-	.comment-item {
+	.comment-item p.snippet{
 		font-size: 16px;
+		margin-top: 5px;
 	}
 
 	.comment-header img {
