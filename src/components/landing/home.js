@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import NavBar from '../nav-bar/nav-bar';
 import Banner from './banner';
 import About from './about';
 import Footer from '../footer/footer';
-import SignInModal from './sign-in-modal';
-import SignUpModal from './sign-up-modal';
-import { toggleModal, createNewDemoUser } from '../../actions';
-import { Redirect } from 'react-router-dom';
+//import SignInModal from './sign-in-modal';
+//import SignUpModal from './sign-up-modal';
+//import { toggleModal, createNewDemoUser } from '../../actions';
+//import { Redirect } from 'react-router-dom';
 
 import './home.css';
 
 export const Home = (props) => {
 
-	if (props.loggedIn) {
+	/*if (props.loggedIn) {
 		return <Redirect to={'/dashboard'} />
 	}
 
@@ -39,7 +39,7 @@ export const Home = (props) => {
 	const onDemoClick = e => {
 		e.preventDefault();
 		props.dispatch(createNewDemoUser());
-	} 
+	} */
 
 	return (
 		<div>
@@ -55,12 +55,12 @@ export const Home = (props) => {
 				<About />
 			</main>
 			<Footer />
-			<ReactCSSTransitionGroup 
+		{/*	<ReactCSSTransitionGroup 
 				transitionEnterTimeout={500}
 				transitionLeaveTimeout={500}
 				transitionName="modal-fade">
 				{showModals()}
-			</ReactCSSTransitionGroup>
+			</ReactCSSTransitionGroup> */}
 		</div>
 	)
 }
