@@ -48,7 +48,7 @@ export const Home = (props) => {
 			<NavBar>
 				<a className="nav-item" href="https://artseen-nyc-api.herokuapp.com/login">Log in</a>
 				<a className="nav-item" href="https://artseen-nyc-api.herokuapp.com/signup">Sign up</a>
-				<a className="nav-item" href="/demo" onClick={(e) => onDemoClick(e)}>Demo</a>
+				<a className="nav-item" href="https://artseen-nyc-api.herokuapp.com/demo" >Demo</a>
 			</NavBar>
 			<main>
 				<Banner />
