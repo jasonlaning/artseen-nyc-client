@@ -18,16 +18,13 @@
 	height: auto;
 	width: 75%;
 	line-height: 20px;
+	color: #444;
 }
 
 .search-form label {
 	font-weight: bold;
 	font-size: 18px;
 }
-
-.search-form input[placeholder] {
-	color: #c7c7c7;
-} 
 
 .search-form button {
 	padding: 10px 0;
