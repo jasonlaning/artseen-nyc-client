@@ -310,6 +310,16 @@ export const getUserSessionSuccess = (user, community, discussions) => ({
 
 export const getUserSession = () => dispatch => {
 
+	fetch(`${API_BASE_URL}/users/me`, {
+		  credentials: 'include'  
+		})
+		.then(res => {
+			console.log(res);
+		})
+
+
+	/*
+
 	const getUser = () => {
 		return api.get('users/me');
 	}
@@ -338,7 +348,7 @@ export const getUserSession = () => dispatch => {
 			console.log('error: ', err.response.data.message);
 			//window.location.replace('/');
 		});   
-}
+}*/
 
 export const signInUser = (username, password) => dispatch => {
 	dispatch(updateModalMessage('Signing in...'));
