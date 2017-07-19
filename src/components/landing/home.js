@@ -22,7 +22,7 @@ export const Home = (props) => {
 	const onModalLinkClick = (e, modal) => {
 		e.preventDefault();
 		//props.dispatch(toggleModal(modal));
-		window.location = 'https://artseen-nyc-api.herokuapp.com/sign-in.html';
+		window.location = 'https://artseen-nyc-api.herokuapp.com/login';
 		if (props.modals.burgerModal) {
 			props.dispatch(toggleModal('burgerModal'))
 		}
@@ -46,8 +46,8 @@ export const Home = (props) => {
 			{console.log('rendered Home')}
 			{console.log('state: ', props.state)}
 			<NavBar>
-				<a className="nav-item" href="/sign-in" onClick={(e) => onModalLinkClick(e, 'signInModal')}>Log in</a>
-				<a className="nav-item" href="/sign-up" onClick={(e) => onModalLinkClick(e, 'signUpModal')}>Sign up</a>
+				<a className="nav-item" href="https://artseen-nyc-api.herokuapp.com/login">Log in</a>
+				<a className="nav-item" href="https://artseen-nyc-api.herokuapp.com/signup">Sign up</a>
 				<a className="nav-item" href="/demo" onClick={(e) => onDemoClick(e)}>Demo</a>
 			</NavBar>
 			<main>
