@@ -347,8 +347,8 @@ export const getUserSession = () => dispatch => {
 		.catch(err => {
 			console.log('error: ', err.response.data.message);
 			//window.location.replace('/');
-		});   
-}*/
+		});   */
+}
 
 export const signInUser = (username, password) => dispatch => {
 	dispatch(updateModalMessage('Signing in...'));
