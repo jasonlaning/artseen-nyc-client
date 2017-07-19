@@ -313,16 +313,34 @@ export const getUserSessionSuccess = (user, community, discussions) => ({
 
 export const getUserSession = () => dispatch => {
 
+	const username = window.sessionStorage.getItem('username');
+	const password = window.sessionStorage.getItem('password');
+
 	const getUser = () => {
-		return api.get('users/me');
+		return api.get('users/me', {
+ 			auth: {
+ 				username,
+ 				password
+ 				}
+ 		})
 	}
 	
 	const getCommunity =  () => {
-		return api.get('users/me/community');
+		return api.get('users/me/community', {
+ 			auth: {
+ 				username,
+ 				password
+ 				}
+ 		})
 	}
 
 	const getDiscussions = () => {
-		return api.get('discussions');
+		return api.get('discussions', {
+ 			auth: {
+ 				username,
+ 				password
+ 				}
+ 		})
 	}
 
 	axios.all([getUser(), getCommunity(), getDiscussions()])
@@ -345,6 +363,8 @@ export const getUserSession = () => dispatch => {
 
 export const signInUser = (username, password) => dispatch => {
 	dispatch(updateModalMessage('Signing in...'));
+	window.sessionStorage.setItem('username', username);
+	window.sessionStorage.setItem('password', password);
  	api.get('users/login', {
  			auth: {
  				username,
