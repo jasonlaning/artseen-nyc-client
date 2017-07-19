@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import NavBar from '../nav-bar/nav-bar';
@@ -8,7 +8,7 @@ import About from './about';
 import Footer from '../footer/footer';
 import SignInModal from './sign-in-modal';
 import SignUpModal from './sign-up-modal';
-import {toggleModal, createNewDemoUser} from '../../actions';
+import { toggleModal, createNewDemoUser } from '../../actions';
 import { Redirect } from 'react-router-dom';
 
 import './home.css';
@@ -16,7 +16,7 @@ import './home.css';
 export const Home = (props) => {
 
 	if (props.loggedIn) {
-		return <Redirect to={'/dashboard'} />
+		//return <Redirect to={'/dashboard'} />
 	}
 
 	const onModalLinkClick = (e, modal) => {
