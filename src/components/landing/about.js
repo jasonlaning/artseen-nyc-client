@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleModal, createNewDemoUser } from '../../actions';
+//import { toggleModal, createNewDemoUser } from '../../actions';
 
 import './about.css';
 
 export const About = (props) => {
-
+/*
 	const onModalLinkClick = (e, modal) => {
 		e.preventDefault();
 		props.dispatch(toggleModal(modal));
@@ -15,7 +15,7 @@ export const About = (props) => {
 		e.preventDefault();
 		props.dispatch(createNewDemoUser());
 	} 
-
+*/
 	return (
 		<div id="about" >
 			<section>
@@ -51,8 +51,8 @@ export const About = (props) => {
 			  				<p>Update your profile photo, location, or “about” section to control what others see{ " " } 
 			  				when they view your profile.</p>
 			  				<h4 className="about-sign-up">
-			  				<a href="/sign-up" onClick={(e) => onModalLinkClick(e, 'signUpModal')}>Sign up</a>,{ " " }
-			  				or try a <a href="/demo" onClick={(e) => onDemoClick(e)}>Demo</a></h4>
+			  				<a href="https://artseen-nyc-api.herokuapp.com/signup">Sign up</a>,{ " " }
+			  				or try a <a href="https://artseen-nyc-api.herokuapp.com/demo">Demo</a></h4>
 			  			</li>
 			  		</ol>
 			    </div>		
