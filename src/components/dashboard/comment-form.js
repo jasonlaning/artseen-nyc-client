@@ -29,7 +29,6 @@ export class CommentForm extends React.Component {
 			<section>
 				<form className="comment-form" onSubmit={e => {
 						e.preventDefault();
-						console.log('comment: ', e.target.comment.value);
 						let comment = {
 							discussionId: this.props.discId,
 							discussionName: this.props.discName,

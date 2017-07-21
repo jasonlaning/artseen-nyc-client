@@ -108,8 +108,6 @@ export const Dashboard = (props) => {
 		}
 	}
 
-	console.log('current state: ', props.state);
-
 	return (
 
 			<div className="dashboard">
