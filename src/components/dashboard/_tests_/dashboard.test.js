@@ -79,4 +79,16 @@ describe('<Dashboard />', () => {
 		expect(dispatch).toHaveBeenCalledWith(mockLogOutUser);
 	});
 
+	it('Dispatches toggleModal if search link clicked', () => {
+		const loggedIn = true;
+		const dispatch = jest.fn();
+		const mockEvent = {
+			preventDefault: () => false
+		}
+		const wrapper = shallow(<Dashboard match={match} dispatch={dispatch} loggedIn={loggedIn}
+			modals={modals} />);
+		wrapper.find('a[href="/search"]').simulate('click', mockEvent);
+		expect(dispatch).toHaveBeenCalledWith(mockToggleModal);
+	});
+
 });

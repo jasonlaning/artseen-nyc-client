@@ -4,7 +4,7 @@ import {toggleModal} from '../../actions';
 
 import './user-profile.css';
 
-const UserProfile = (props) => {
+export const UserProfile = (props) => {
 
 	//check for demo account to display generic 'Demo' username
 	let username = props.user.username;

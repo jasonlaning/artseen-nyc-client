@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getDiscussionFromSearch} from '../../actions';
 
-const SearchResult = (props) => {
+export const SearchResult = (props) => {
 
 	const id = props.$.id.replace(/\//g, '-');
 	const discussion = Object.assign({}, props);

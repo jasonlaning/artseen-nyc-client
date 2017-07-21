@@ -9,7 +9,6 @@ export class SearchModal extends React.Component {
 
 	componentWillUnmount() {
 		if (this.props.discussionIdFromSearch) {
-			console.log(this.props.match.params.discussionId, this.props.discussionIdFromSearch);
 			this.props.history.push(`/dashboard/discussion/${this.props.discussionIdFromSearch}`);
 		}
 	}

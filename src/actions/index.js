@@ -339,7 +339,7 @@ export const getUserSession = () => dispatch => {
 		})
 		.catch(err => {
 			console.log('error: ', err.response.data.message);
-			//window.location.replace('/');
+			window.location.replace('https://artseen-nyc-api.herokuapp.com/login');
 		});   
 }
 

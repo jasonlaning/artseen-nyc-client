@@ -119,7 +119,7 @@ export const Dashboard = (props) => {
 				</ReactCSSTransitionGroup>
 				<NavBar>
 					<a className="nav-item" href="/" onClick={(e) => onClickLogOut(e)}>Log out</a>
-					<a className="nav-item" href="/dashboard" onClick={(e) => 
+					<a className="nav-item" href="/search" onClick={(e) => 
 						onClickSearch(e, 'searchModal')} ><div className="glass-container">Search <img src="/search.png"
 							alt="search" className="search-glass" /></div></a>
 				</NavBar>
