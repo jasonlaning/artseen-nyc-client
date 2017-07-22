@@ -16,11 +16,18 @@ export const DiscussionsItem = (props) => {
 		return 'No comments'
 	}
 
+	const s = () => {
+		if (props.comments.length > 1) {
+			return 's'
+		}
+	}
+
 	return (
 		<li>
 			<img src={props.image} alt="exhibition" title="exhibition" className="ex-photo"/>
 			<div className="disc-item-container">
-				<h2><Link to={`/dashboard/discussion/${props.id}`} >{props.name}</Link></h2>
+				<h2><Link to={`/dashboard/discussion/${props.id}`} >{props.name}</Link>
+					<br /><span className="total-comments"> ({props.comments.length} comment{s()})</span></h2>
 				<p className="disc-item-venue">{props.venue.name} / {props.venue.address}</p>
 				<span className="disc-item-date"> ({dateStart} - {dateEnd})</span>
 				<p><span style={{fontWeight: 'bold'}}>Description:</span></p>

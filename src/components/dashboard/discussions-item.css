@@ -39,6 +39,10 @@
 	margin-top: 0px;
 }
 
+.total-comments {
+	color: #cecece;
+}
+
 @media screen and (max-width: 875px) {
 	.ex-photo {
 		max-width: 35%;

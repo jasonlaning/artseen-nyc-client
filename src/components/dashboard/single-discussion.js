@@ -27,7 +27,8 @@ export class SingleDiscussion extends React.Component {
 			if (this.props.loaded) {
 				return (
 					<div className="wrapper discussion-loaded">
-						<ExhibitionHeading discussion={this.props.discussion} />
+						<ExhibitionHeading discussion={this.props.discussion} 
+							length={this.props.discussion.comments.length} />
 						<Comments comments={this.props.discussion.comments}/>
 						<CommentForm />
 						<Footer />
