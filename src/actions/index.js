@@ -321,7 +321,6 @@ export const postNewComment = (username, comment) => dispatch => {
 
 	// check for Demo user to disable demo comments
 	let demoUser = username.slice(0, 10);
-	console.log(demoUser);
 	if (demoUser === 'Demo123abc') {
 		const demoMsg = 'Commenting is disabled for demos';
 		return dispatch(updateCommentFormMessage(demoMsg));

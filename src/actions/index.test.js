@@ -397,7 +397,7 @@ describe('postNewComment', () => {
         const mock = new MockAdapter(axios);
         mock
             .onAny()
-            .reply(200, {
+            .reply(201, {
                     discussion
                     })
         const dispatch = jest.fn();
