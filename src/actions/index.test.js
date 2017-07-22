@@ -25,6 +25,7 @@ import {
 	getMoreCommunity,
 	GET_COMMUNITY_SUCCESS,
 	getCommunitySuccess,
+    getCommunity,
 	GET_USER_TO_FOLLOW_SUCCESS,
 	getUserToFollowSuccess,
 	getUserToFollow,
@@ -52,7 +53,10 @@ import {
 	logOutUser
 } from './index';
 
-import nock from 'nock';
+import axios from 'axios';
+
+import MockAdapter from 'axios-mock-adapter';
+
 import { API_BASE_URL } from '../config';
 
 describe('updateSticky', () => {
@@ -225,7 +229,6 @@ describe('updateUserSettingsSuccess', () => {
     });
 });
 
-/*
 describe('getDiscussionFromSearch', () => {
     it('Should dispatch getDiscussionFromSearchSuccess', () => {
         const discussion = {
@@ -245,36 +248,223 @@ describe('getDiscussionFromSearch', () => {
         	DateEnd: ['20170201'],
         	searchTerms: []
         };
-
-        nock(API_BASE_URL)
-        	.post('/discussions', {
-			id: discussion.id,
-			href: discussion.$.href,
-			name: discussion.Name[0],
-			venue: {
-				name: discussion.Venue[0].Name[0],
-				address: discussion.Venue[0].Address[0],
-				area: discussion.Venue[0].Area[0]._
-			},
-			description: discussion.Description[0],
-			image: discussion.Image[2].$.src,
-			dateStart: discussion.DateStart[0],
-			dateEnd: discussion.DateEnd[0],
-			searchTerms: discussion.searchTerms
-		})
-        	.reply(200, { 
-        		body: {
-        			data: {
-        				discussion: 'something'
-        			}
-        		}
-        	})
-
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+        	.reply(200, {
+        				discussion
+        			})
         const dispatch = jest.fn();
         getDiscussionFromSearch(discussion)(dispatch).then(() => {
-           // expect(axios).toHaveBeenCalledWith('/discussions');
-            expect(dispatch).toHaveBeenCalledWith(getDiscussionFromSearchSuccess('something'));
-        });
+            expect(dispatch).toHaveBeenCalledWith(getDiscussionFromSearchSuccess(discussion));
+        }).catch((err) => console.log(err));
     });
 });
-*/
+
+describe('getMoreDiscussions', () => {
+    it('Should dispatch getMoreDiscussionsSuccess', () => {
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    discussions: [{discussion: {id: '123abc'}}]
+                    })
+        const dispatch = jest.fn();
+        getMoreDiscussions(9)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(getMoreDiscussionsSuccess([{
+                discussion: {id: '123abc'}
+            }]));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('getMoreCommunity', () => {
+    it('Should dispatch getMoreCommunitySuccess', () => {
+        const comments = [{comment: 'something'}];
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    comments
+                    })
+        const dispatch = jest.fn();
+        getMoreCommunity(9)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(getMoreCommunitySuccess(comments));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('getCommunity', () => {
+    it('Should dispatch getCommunitySuccess', () => {
+        const comments = [{comment: 'something'}];
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    comments
+                    })
+        const dispatch = jest.fn();
+        getCommunity()(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(getCommunitySuccess(comments));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('getUserToFollow', () => {
+    it('Should dispatch getUserToFollowSuccess', () => {
+        const user = {
+            username: 'something'
+        };
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    user
+                    })
+        const dispatch = jest.fn();
+        getUserToFollow(user.username)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(getUserToFollowSuccess(user));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('addUserToFavorites', () => {
+    it('Should dispatch updateModalMessage', () => {
+        const user = {
+            username: 'something'
+        };
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(201, {
+                    user
+                    })
+        const dispatch = jest.fn();
+        addUserToFavorites(user.username)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(updateModalMessage(`${user.username} followed!`));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('deleteUserFromFavorites', () => {
+    it('Should dispatch updateModalMessage', () => {
+        const user = {
+            username: 'something'
+        };
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    user
+                    })
+        const dispatch = jest.fn();
+        deleteUserFromFavorites(user.username)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(updateModalMessage(`${user.username} unfollowed!`));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('getSingleDiscussion', () => {
+    it('Should dispatch updateDiscussionToView', () => {
+        const discussion = {
+            name: 'something'
+        };
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    discussion
+                    })
+        const dispatch = jest.fn();
+        getSingleDiscussion('123abc')(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(updateDiscussionToView(discussion));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('postNewComment', () => {
+    it('Should dispatch postNewCommentSuccess', () => {
+        const discussion = {
+            name: 'something'
+        };
+        const username = 'someUser';
+        const comment = {
+            text: 'some comment',
+            discussionId: '123abc',
+            discussionName: 'name'
+        };
+
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    discussion
+                    })
+        const dispatch = jest.fn();
+        postNewComment(username, comment)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(postNewCommentSuccess(discussion));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('getUserSession', () => {
+    it('Should dispatch getUserSessionSuccess', () => {
+        const user = {
+            username: 'someUsername'
+        };
+        const comments = [{text: 'some comment about art'}];
+        const discussions = [{
+            name: 'something'
+        }];
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    user, comments, discussions
+                    })
+        const dispatch = jest.fn();
+        getUserSession()(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(getUserSessionSuccess(user, comments, discussions));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('uploadImage', () => {
+    it('Should dispatch uploadImageSuccess', () => {
+        const secure_url = 'https://someimage.jpg'
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    secure_url
+                    })
+        const dispatch = jest.fn();
+        uploadImage(['image'])(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(uploadImageSuccess(secure_url));
+        }).catch((err) => console.log(err));
+    });
+});
+
+describe('updateUserSettings', () => {
+    it('Should dispatch updateUserSettingsSuccess', () => {
+        const location = 'new yawk';
+        const about = 'about the user';
+        const profilePicURL = 'http://someimage.jpg';
+        const modal = 'userSettingsModal';
+        const user = {
+            location,
+            about,
+            profilePicURL
+        }
+        const mock = new MockAdapter(axios);
+        mock
+            .onAny()
+            .reply(200, {
+                    user
+                    })
+        const dispatch = jest.fn();
+        updateUserSettings(location, about, profilePicURL, modal)(dispatch).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(updateUserSettingsSuccess(user, modal));
+        }).catch((err) => console.log(err));
+    });
+});

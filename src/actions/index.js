@@ -4,14 +4,6 @@ import searchExhibitions from '../components/search-exhibitions';
 
 const {API_BASE_URL} = require('../config');
 
-const api = axios.create({
-	baseURL: API_BASE_URL,
-	withCredentials: true,
-	headers: {
- 		crossDomain: true
- 			}
-})
-
 export const UPDATE_STICKY = 'UPDATE_STICKY';
 export const updateSticky = (status) => ({
 	type: UPDATE_STICKY,
@@ -49,7 +41,10 @@ export const getDiscussionFromSearchSuccess = (discussion) => ({
 
 export const getDiscussionFromSearch = (discussion) => dispatch => {
 
-	api.post('/discussions', {
+	return axios({
+		method: 'post',
+		url: `${API_BASE_URL}/discussions`,
+		data: {
 			id: discussion.id,
 			href: discussion.$.href,
 			name: discussion.Name[0],
@@ -63,6 +58,11 @@ export const getDiscussionFromSearch = (discussion) => dispatch => {
 			dateStart: discussion.DateStart[0],
 			dateEnd: discussion.DateEnd[0],
 			searchTerms: discussion.searchTerms
+		},
+		withCredentials: true,
+		headers: {
+	 		crossDomain: true
+	 			}
 		})
 		.then(res => {
 			dispatch(getDiscussionFromSearchSuccess(res.data.discussion));
@@ -81,7 +81,7 @@ export const getSearchResultsSuccess = (searchResults) => ({
 export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 
 	dispatch(updateModalMessage('Searching...'));
-	axios({
+	return axios({
 		method: 'get',
 		url: 'https://crossorigin.me/http://www.nyartbeat.com/list/event_free.en.xml'
 	})
@@ -101,13 +101,6 @@ export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 		.catch(err => {
 			console.log(err);
 		})
-
-	/*
-	const exhibitions = mockExhibitions.Events.Event;
-	const searchResults = searchExhibitions(searchTerms, exhibitions);
-	console.log('searchResults: ', searchResults)
-	dispatch(getSearchResultsSuccess(searchResults));
-	*/
 }
 
 export const GET_MORE_DISCUSSIONS_SUCCESS = 'GET_MORE_DISCUSSIONS_SUCCESS';
@@ -130,9 +123,16 @@ export const getMoreCommunitySuccess = (comments) => ({
 
 export const getMoreDiscussions = (skip) => dispatch => {
 
-	api.get(`discussions/${skip}`)
+	return axios({
+		method: 'get',
+		url: `${API_BASE_URL}/discussions/${skip}`,
+		withCredentials: true,
+		headers: {
+	 		crossDomain: true
+	 			}
+		})
 		.then(res => {
-			if (res.statusText !== 'OK') {
+			if (res.status !== 200) {
 				return Promise.reject(res)
 			} else if (res.data.discussions.length > 0) {
 				dispatch(getMoreDiscussionsSuccess(res.data.discussions));
@@ -145,9 +145,16 @@ export const getMoreDiscussions = (skip) => dispatch => {
 
 export const getMoreCommunity = (skip) => dispatch => {
 
-	api.get(`users/me/community/${skip}`)
+	return axios({
+		method: 'get',
+		url: `${API_BASE_URL}/users/me/community/${skip}`,
+		withCredentials: true,
+		headers: {
+	 		crossDomain: true
+	 			}
+		})
 		.then(res => {
-			if (res.statusText !== 'OK') {
+			if (res.status !== 200) {
 				return Promise.reject(res)
 			} else if (res.data.comments.length > 0) {
 				dispatch(getMoreCommunitySuccess(res.data.comments));
@@ -166,9 +173,16 @@ export const getCommunitySuccess = community => ({
 
 export const getCommunity = () => dispatch => {
 
-	api.get('users/me/community')
+	return axios({
+		method: 'get',
+		url: `${API_BASE_URL}/users/me/community`,
+		withCredentials: true,
+		headers: {
+	 		crossDomain: true
+	 			}
+		})
 		.then(res => {
-			if (res.statusText !== 'OK') {
+			if (res.status !== 200) {
 				return Promise.reject(res)
 			}
 			dispatch(getCommunitySuccess(res.data.comments));
@@ -183,9 +197,17 @@ export const getUserToFollowSuccess = userToFollow => ({
 })
 
 export const getUserToFollow = (username) => dispatch => {
-	api.get(`users/${username}`)
+
+	return axios({
+		method: 'get',
+		url: `${API_BASE_URL}/users/${username}`,
+		withCredentials: true,
+		headers: {
+	 		crossDomain: true
+	 			}
+		})
 		.then(res => {
-			if (res.statusText !== 'OK') {
+			if (res.status !== 200) {
 				console.log(res.statusText);
 				return Promise.reject(res)
 			}
@@ -201,8 +223,17 @@ export const updateUserFavoritesSuccess = (user) => ({
 })
 
 export const addUserToFavorites = (username) => dispatch => {
-	api.post('users/me/favorites', {
-			username
+
+	return axios({
+			method: 'post',
+			url: `${API_BASE_URL}/users/me/favorites`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			},
+		 	data: {
+		 		username
+		 	}
 		})
 		.then(res => {
 			if (res.status !== 201) {
@@ -210,6 +241,7 @@ export const addUserToFavorites = (username) => dispatch => {
 			}
 			dispatch(updateModalMessage(`${username} followed!`));
 			setTimeout(() => dispatch(updateUserFavoritesSuccess(res.data.user)), 1600);
+			setTimeout(() => dispatch(toggleModal('followUserModal')), 1500);
 		})
 		.then(() => {
 			dispatch(getCommunity());
@@ -217,20 +249,29 @@ export const addUserToFavorites = (username) => dispatch => {
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
 		})
-		setTimeout(() => dispatch(toggleModal('followUserModal')), 1500);
+
 }
 
 export const deleteUserFromFavorites = (username) => dispatch => {
-	console.log(username);
-	api.delete('users/me/favorites', {
-			data: {username}
+
+	return axios({
+			method: 'delete',
+			url: `${API_BASE_URL}/users/me/favorites`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			},
+		 	data: {
+		 		username
+		 	}
 		})
 		.then(res => {
-			if (res.statusText !== 'OK') {
+			if (res.status !== 200) {
 				return Promise.reject(res);
 			}
 			dispatch(updateModalMessage(`${username} unfollowed!`))
 			setTimeout(() => dispatch(updateUserFavoritesSuccess(res.data.user)), 1600);
+			setTimeout(() => dispatch(toggleModal('followUserModal')), 1500);
 		})
 		.then(() => {
 			dispatch(getCommunity());
@@ -238,7 +279,6 @@ export const deleteUserFromFavorites = (username) => dispatch => {
 		.catch(err => {
 			dispatch(updateModalMessage(err.response.data.message));
 		})
-		setTimeout(() => dispatch(toggleModal('followUserModal')), 1500);
 }
 
 export const UPDATE_DISCUSSION_TO_VIEW = 'UPDATE_DISCUSSION_TO_VIEW';
@@ -248,9 +288,17 @@ export const updateDiscussionToView = (discussion) => ({
 })
 
 export const getSingleDiscussion = (id) => dispatch => {
-	api.get(`single-discussion/${id}`)
+
+	return axios({
+			method: 'get',
+			url: `${API_BASE_URL}/single-discussion/${id}`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			}
+		})
 		.then(res => {
-			if (res.statusText !== 'OK') {
+			if (res.status !== 200) {
 				return Promise.reject(res)
 			}
 			return res.data.discussion
@@ -279,11 +327,19 @@ export const postNewComment = (username, comment) => dispatch => {
 		return dispatch(updateCommentFormMessage(demoMsg));
 	} else {
 		dispatch(updateCommentFormMessage('Saving comment...'));
-		api.post('discussions/comment', {
+	return axios({
+			method: 'post',
+			url: `${API_BASE_URL}/discussions/comment`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			},
+		 	data: {
 		 		discussionId: comment.discussionId,
 		 		discussionName: comment.discussionName,
 		 		text: comment.text
-		 	})
+		 	}
+		})
 		 	.then((res) => {
 		 		if (res.status === 201) {
 		 			dispatch(updateCommentFormMessage(''));
@@ -314,22 +370,43 @@ export const getUserSessionSuccess = (user, community, discussions) => ({
 export const getUserSession = () => dispatch => {
 
 	const getUser = () => {
-		return api.get('users/me');
+		return axios({
+			method: 'get',
+			url: `${API_BASE_URL}/users/me`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			}
+		})
 	}
 	
 	const getCommunity =  () => {
-		return api.get('users/me/community');
+		return axios({
+			method: 'get',
+			url: `${API_BASE_URL}/users/me/community`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			}
+		})
 	}
 
 	const getDiscussions = () => {
-		return api.get('discussions');
+		return axios({
+			method: 'get',
+			url: `${API_BASE_URL}/discussions`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 			}
+		})
 	}
 
-	axios.all([getUser(), getCommunity(), getDiscussions()])
+	return axios.all([getUser(), getCommunity(), getDiscussions()])
 		.then(axios.spread((userRes, commRes, discRes) => {
-			if (userRes.statusText !== 'OK' ||
-				commRes.statusText !== 'OK' ||
-				discRes.statusText !== 'OK') {
+			if (userRes.status !== 200 ||
+				commRes.status !== 200 ||
+				discRes.status !== 200) {
 				return Promise.reject(userRes)
 			}
 			return [userRes.data.user, commRes.data.comments, discRes.data.discussions]
@@ -341,77 +418,6 @@ export const getUserSession = () => dispatch => {
 			console.log('error: ', err.response.data.message);
 			window.location.replace('https://artseen-nyc-api.herokuapp.com/login');
 		});   
-}
-
-export const signInUser = (username, password) => dispatch => {
-	dispatch(updateModalMessage('Signing in...'));
- 	api.get('users/login', {
- 			auth: {
- 				username,
- 				password
- 				}
- 		})
-	 	.then((res) => {
-	 		console.log(res)
-	 		if (res.data.user) {
-	 			console.log('made it here, logged in');
-	 			dispatch(getUserSession());
-	 		} else {
-				return Promise.reject();
-			}
-	 	}) 
-	 	.catch(() => {
-			dispatch(updateModalMessage('Invalid Username or Password'));
-		})
-}
-
-export const signUpNewUser = (username, password, location) => dispatch => {
-	dispatch(updateModalMessage('Signing up...'));
- 	api.post('users/sign-up', {
-	 		username,
-	 		password,
-	 		location,
-	 		favoriteUsers: []
-	 	})
-	 	.then((res) => {
-	 		if (res.status === 201) {
-	 			dispatch(signInUser(username, password));
-	 		} else {
-				return Promise.reject(res);
-			}
-	 	}) 
-	 	.catch((err) => {
-			return dispatch(updateModalMessage(err.response.data.message))
-		})
-}
-
-export const createNewDemoUser = () => dispatch => {
-
-	const demoData = {
-		username: `Demo123abc${((Math.random() * 999999999999) + 111111111111).toString()}`,
-		password: 'demo',
-		location: 'New York, New York',
-		about: 'This is a demo profile. Sign up for an account to enable commenting.',
-		favoriteUsers: ['jesseDidThis', 'maggie_mags', 'everything_ryan']
-	}
-	
- 	api.post('users/sign-up', {
-	 		username: demoData.username,
-	 		password: demoData.password,
-	 		location: demoData.location,
-	 		about: demoData.about,
-	 		favoriteUsers: demoData.favoriteUsers
-	 	})
-	 	.then((res) => {
-	 		if (res.status === 201) {
-	 			dispatch(signInUser(demoData.username, demoData.password));
-	 		} else {
-				return Promise.reject(res);
-			}
-	 	}) 
-	 	.catch((err) => {
-			return dispatch(updateModalMessage(err.response.data.message))
-		})
 }
 
 export const RESET_PROFILE_PIC_MODAL = 'RESET_PROFILE_PIC_MODAL';
@@ -431,7 +437,7 @@ export const uploadImage = (image) => dispatch => {
 	let data = new FormData();
 	data.append('file', file);
 	data.append('upload_preset', 'dw4rjy87');
-	axios.post('https://api.cloudinary.com/v1_1/w0932jor82/upload', data)
+	return axios.post('https://api.cloudinary.com/v1_1/w0932jor82/upload', data)
 		.then(res => {
 			dispatch(uploadImageSuccess(res.data.secure_url));
 			dispatch(updateModalMessage(''));
@@ -450,11 +456,19 @@ export const updateUserSettingsSuccess = (user, modal) => ({
 })
 
 export const updateUserSettings = (location, about, profilePicURL, modal) => dispatch => {
-	api.put('users/me', {
-	 		location,
-	 		about,
-	 		profilePicURL
-	 	})
+	return axios({
+			method: 'put',
+			url: `${API_BASE_URL}/users/me`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 	},
+		 	data: {
+		 		location,
+		 		about,
+		 		profilePicURL
+		 	}
+		})
 	 	.then((res) => {
 	 		if (res.status === 200) {
 	 			dispatch(updateUserSettingsSuccess(res.data.user, modal));
@@ -469,7 +483,15 @@ export const updateUserSettings = (location, about, profilePicURL, modal) => dis
 }
 
 export const logOutUser = user => {
-	api.get('users/logout')
+
+	return axios({
+			method: 'get',
+			url: `${API_BASE_URL}/users/logout`,
+			withCredentials: true,
+			headers: {
+		 		crossDomain: true
+		 	}
+		})
 	 	.then(res => {
 			window.location.replace('/');
 		})
