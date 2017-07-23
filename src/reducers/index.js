@@ -34,7 +34,6 @@ const initialState = {
 	prevAction: '',
 	message: '',
 	commentFormMessage: '',
-	stickyStatus: false,
 	buttonsDisabled: []
 };
 
@@ -165,14 +164,6 @@ export const artseenReducer = (state=initialState, action) => {
 		return Object.assign({}, state, {
 			singleDiscussionLoaded: false
 		})
-	} else if (action.type === actions.UPDATE_STICKY) {
-		let stickyStatus = false;
-		if (action.status > 0) {
-			stickyStatus = true;
-		}
-		return Object.assign({}, state, {
-			stickyStatus
-		})
-	}
+	} 
 	return state;
 }

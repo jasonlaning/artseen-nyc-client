@@ -35,7 +35,6 @@ const initialState = {
 	prevAction: '',
 	message: '',
 	commentFormMessage: '',
-	stickyStatus: false,
 	buttonsDisabled: []
 };
 
@@ -224,15 +223,6 @@ describe('artseenReducer', () => {
 			let state;
 			state = artseenReducer(state, actions.resetSingleDiscussion());
 			expect(state.singleDiscussionLoaded).toEqual(false);
-		});
-	});
-
-	describe('updateSticky', () => {
-		it('Should update status of sticky navbar', () => {
-			let state;
-			const status = 1;
-			state = artseenReducer(state, actions.updateSticky(status));
-			expect(state.stickyStatus).toEqual(true);
 		});
 	});
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import {getUserToFollow} from '../../actions';
+import { getUserToFollow } from '../../actions';
 
 import './community-item.css';
 
@@ -14,8 +14,7 @@ export const CommunityItem = (props) => {
 		props.dispatch(getUserToFollow(props.username));
 	}
 
-	return (
-		
+	return (		
 		<li className="community-item">
 			<div className="community-header">
 				<a href="/dashboard" 
@@ -28,16 +27,9 @@ export const CommunityItem = (props) => {
 			<Link to={`/dashboard/discussion/${props.id}`} >
 			<p className="snippet">&ldquo;{props.text}&rdquo;</p>
 			<p className="community-from">from <span className="community-title">{props.discussion.name}</span>
-			</p></Link>
-			
+			</p></Link>			
 		</li>
 	);
 }
 
-const mapStateToProps = (state, props) => ({
-	user: state.user,
-	loggedIn: state.loggedIn,
-	modals: state.modals
-});
-
-export default connect(mapStateToProps)(CommunityItem);
+export default connect()(CommunityItem);

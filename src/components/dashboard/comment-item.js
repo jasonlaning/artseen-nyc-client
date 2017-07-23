@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import {connect} from 'react-redux';
-import {getUserToFollow} from '../../actions';
+import { connect } from 'react-redux';
+import { getUserToFollow } from '../../actions';
 
 import './comment-item.css';
 
@@ -21,10 +21,4 @@ export const CommentItem = (props) => (
 	</li>
 );
 
-const mapStateToProps = (state, props) => ({
-	user: state.user,
-	loggedIn: state.loggedIn,
-	modals: state.modals
-});
-
-export default connect(mapStateToProps)(CommentItem);
+export default connect()(CommentItem);

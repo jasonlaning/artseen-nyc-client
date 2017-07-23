@@ -30,11 +30,6 @@ section p {
   margin: 0 auto;
 }
 
-.hash-anchor {
-  padding-top: 50px;
-  margin-top: -50px;
-}
-
 h1, h2, h3, h4 {
   font-weight: 600;
 }

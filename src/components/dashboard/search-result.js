@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {getDiscussionFromSearch} from '../../actions';
+import { connect } from 'react-redux';
+import { getDiscussionFromSearch } from '../../actions';
 
 export const SearchResult = (props) => {
 

@@ -1,6 +1,4 @@
 import {
-	UPDATE_STICKY,
-	updateSticky,
 	UPDATE_MODAL_MESSAGE,
 	updateModalMessage,
 	UPDATE_COMMENT_FORM_MESSAGE,
@@ -58,15 +56,6 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import { API_BASE_URL } from '../config';
-
-describe('updateSticky', () => {
-    it('Should return the action', () => {
-        const status = 'status';
-        const action = updateSticky(status);
-        expect(action.type).toEqual(UPDATE_STICKY);
-        expect(action.status).toEqual(status);
-    });
-});
 
 describe('updateModalMessage', () => {
     it('Should return the action', () => {

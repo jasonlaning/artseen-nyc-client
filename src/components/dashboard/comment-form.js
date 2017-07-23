@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {postNewComment, updateCommentFormMessage} from '../../actions';
+import { postNewComment, updateCommentFormMessage } from '../../actions';
 import './comment-form.css'
 
 export class CommentForm extends React.Component {

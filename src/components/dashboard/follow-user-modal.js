@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {toggleModal, addUserToFavorites, deleteUserFromFavorites} from '../../actions';
+import { toggleModal, addUserToFavorites, deleteUserFromFavorites } from '../../actions';
 
 import './follow-user-modal.css';
 
@@ -75,7 +75,6 @@ export const FollowUserModal = (props) => {
 
 const mapStateToProps = (state, props) => ({
 	user: state.user,
-	loggedIn: state.loggedIn,
 	userToFollow: state.userToFollow,
 	message: state.message
 });

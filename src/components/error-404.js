@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {updateModalMessage} from '../actions';
+import { connect } from 'react-redux';
+import { updateModalMessage } from '../actions';
 
 export class Error404 extends React.Component {
 

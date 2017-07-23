@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './discussions-item.css';
 
@@ -41,4 +41,4 @@ export const DiscussionsItem = (props) => {
 	);
 }
 
-export default (DiscussionsItem);
+export default DiscussionsItem;

@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 
-import {updateUserSettings, resetProfilePicModal, toggleModal, uploadImage} from '../../actions';
+import { updateUserSettings, resetProfilePicModal, toggleModal, uploadImage } from '../../actions';
 
 import './profile-pic-modal.css';
 

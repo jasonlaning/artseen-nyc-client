@@ -4,12 +4,6 @@ import searchExhibitions from '../components/search-exhibitions';
 
 const {API_BASE_URL} = require('../config');
 
-export const UPDATE_STICKY = 'UPDATE_STICKY';
-export const updateSticky = (status) => ({
-	type: UPDATE_STICKY,
-	status
-})
-
 export const UPDATE_MODAL_MESSAGE = 'UPDATE_MODAL_MESSAGE';
 export const updateModalMessage = (message) => ({
 	type: UPDATE_MODAL_MESSAGE,
@@ -208,7 +202,6 @@ export const getUserToFollow = (username) => dispatch => {
 		})
 		.then(res => {
 			if (res.status !== 200) {
-				console.log(res.statusText);
 				return Promise.reject(res)
 			}
 			dispatch(getUserToFollowSuccess(res.data.user));
@@ -414,7 +407,6 @@ export const getUserSession = () => dispatch => {
 			dispatch(getUserSessionSuccess(...res));
 		})
 		.catch(err => {
-			console.log('error: ', err.response.data.message);
 			window.location.replace('https://artseen-nyc-api.herokuapp.com/login');
 		});   
 }

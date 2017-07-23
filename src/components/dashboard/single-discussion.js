@@ -1,7 +1,7 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getSingleDiscussion, resetSingleDiscussion} from '../../actions';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getSingleDiscussion, resetSingleDiscussion } from '../../actions';
 import Footer from '../footer/footer';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
@@ -47,10 +47,7 @@ export class SingleDiscussion extends React.Component {
 
 const mapStateToProps = (state, props) => ({
 	discussion: state.discussionToView,
-	discussions: state.discussions,
-	loaded: state.singleDiscussionLoaded,
-	prevAction: state.prevAction,
-	message: state.message
+	loaded: state.singleDiscussionLoaded
 })
 
 export default connect(mapStateToProps)(withRouter(SingleDiscussion));

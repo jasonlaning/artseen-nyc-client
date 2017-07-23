@@ -11,21 +11,7 @@
 	font-size: 30px;
 }
 
-.overlay {
-	/*background-color: rgba(0,0,0,.4);*/
-	/*height: 100%;*/
-}
-
-.banner p {
-	padding-top: 20px;
-	display: none;
-}
-
 @media screen and (max-width: 600px) {
-
-	.overlay p {
-		font-size: 22px;
-	}
 
 	.banner {
 		background-size: auto 200px;

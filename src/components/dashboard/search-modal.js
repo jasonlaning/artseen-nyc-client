@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import SearchResult from './search-result';
-import {toggleModal, getExhibitionsForSearch} from '../../actions';
+import { toggleModal, getExhibitionsForSearch } from '../../actions';
 import './search-modal.css';
 
 export class SearchModal extends React.Component {
@@ -87,13 +87,9 @@ export class SearchModal extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-	user: state.user,
 	message: state.message,
-	loggedIn: state.loggedIn,
-	exhibitions: state.exhibitions,
 	searchResults: state.searchResults,
 	discussionIdFromSearch: state.discussionIdFromSearch,
-	discussionToView: state.discussionToView,
 	searchSubmitted: state.searchSubmitted
 });
 

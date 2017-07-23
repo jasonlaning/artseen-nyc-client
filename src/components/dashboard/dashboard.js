@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import NavBar from '../nav-bar/nav-bar';
@@ -10,7 +10,7 @@ import CommunityActivity from './community-activity';
 import Discussions from './discussions';
 import SingleDiscussion from './single-discussion';
 
-import {toggleModal, logOutUser, getUserSession} from '../../actions';
+import { toggleModal, logOutUser, getUserSession } from '../../actions';
 
 import SearchModal from './search-modal';
 import FollowUserModal from './follow-user-modal';
@@ -38,18 +38,14 @@ export const Dashboard = (props) => {
 
 	const onClickLogOut = (e) => {
 		e.preventDefault();
-		console.log('log out function')
 		props.dispatch(logOutUser());
 	}
 
 	const onClickSearch = (e, modal) => {
 		e.preventDefault();
-		console.log(props.modals.burgerModal);
 		if (props.modals.burgerModal) {
-			console.log('here');
 			props.dispatch(toggleModal('burgerModal'));
 		}
-		console.log('here2');
 		props.dispatch(toggleModal(modal));
 	}
 
@@ -72,7 +68,6 @@ export const Dashboard = (props) => {
 		} else if (props.modals.userSettingsModal) {
 			return <UserSettingsModal />
 		} else if (props.modals.profilePicModal) {
-			console.log('here')
 			return <ProfilePicModal />
 		}
 	}
@@ -109,7 +104,6 @@ export const Dashboard = (props) => {
 	}
 
 	return (
-
 			<div className="dashboard">
 				<ReactCSSTransitionGroup 
 					transitionEnterTimeout={300}
@@ -135,11 +129,8 @@ export const Dashboard = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-	user: state.user,
-	discussionToView: state.discussionToView,
 	loggedIn: state.loggedIn,
-	modals: state.modals,
-	state: state
+	modals: state.modals
 });
 
 export default connect(mapStateToProps)(Dashboard);
