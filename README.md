@@ -1,23 +1,27 @@
 # ArtSEEN NYC #
 
-[ArtSEEN NYC](https://artseennyc.netlify.com) is an online art community that helps users to connect with other art patrons in the New York City art scene by facilitating discussions about current exhibitions.
+[ArtSEEN NYC](https://artseennyc.netlify.com) is a community-driven platform for discussing current art exhibitions and connecting with art patrons in New York City.
 
 It is a responsive, full-stack app (MERN). The server application is in a [separate repository](https://github.com/jasonlaning/artseen-nyc-api) and is hosted separately.
 
 ## Features ##
 
-Users can:
-
-- Try a demo account (unique instances with pre-populated settings; commenting is disabled for demo accounts)
-- Sign up for a unique user account, login/logout.
-- Edit profile settings for profile image, location, and "about".
-- Search current art exhibitions in New York (provided by the NY Art Beat API), and initiate a new discussion by posting a comment.
-- View a feed of "All Discussions" that are sorted according to those most recently commented on.
-- Click on discussion links to view an individual discussion and add comments.
-- View user profiles in comment sections and follow or unfollow other users.
-- View a "Community Activity" feed that shows the most recent comments by 'followed' users (including the user's own comments). Profiles are also clickable in this section in order to follow or unfollow, and the listings are sorted by most recent at the top.
-- Community Activity and All Discussions feeds display 10 entries at a time, and the user can click "load more entries" at the end of each feed in order to load another 10.
-- The layout is fully responsive, and the UI is optimized for mobile, tablet and desktop.
+### Search Art Exhibitions ###
+Find art exhibitions by searching current listings (powered by the NY Art Beat API). Click on a search result to view exhibition stub, then start a discussion by posting a comment. Exhibitions that have at least one comment move to the “All Discussions” feed.
+### Discussions and Comments ###
+Discussions in the "All Discussions" feed are sorted with the most recently commented on at the top. Click on an individual discussion to view comments and add your own. The Discussions feed shows 10 discussions at a time, with a clickable button at the bottom to load more discussions if they are available.
+### View User Profiles and Follow Your Favorites ###
+Click on user profile images or usernames on either the All Discussions feed or Community Activity feed to view another user's profile image, location, and “about” section. Follow or unfollow other users to add or remove them from your Community Activity feed.
+### Community Activity Feed ###
+Community Activity displays the most recent comments from users you've followed. This includes your own comments, so you can keep track of what you've posted. The Community Activity feed displays 10 comments at a time, with a clickable button at bottom to load additional comments if they are available.
+### User Settings ###
+Upload a new profile photo, or edit location and “about” sections to control what others see when they view your profile.
+### Try a Demo ###
+Not ready to sign up? Try a demo account instead. Demo accounts are unique instances with pre-populated settings. Commenting is disabled for demo accounts.
+### Sign Up ###
+Sign up for a unique, secure user account with a username and password.
+### Responsive Layout ###
+The layout is fully responsive, and the UI is optimized for mobile, tablet and desktop viewports.
 
 ## Screenshots ##
 
@@ -34,7 +38,7 @@ Users can:
 - HTML5
 - CSS3
 
-Also uses Moment for date manipulation, React Dropzone for uploading images, and React Stickynode for sticking the nav bar to the top of the browser on scroll.
+Also uses Moment for date manipulation, React Dropzone for uploading images, and React Stickynode for sticking the nav bar to the top of the browser window on scroll.
 
 ### Back End ###
 
