@@ -9,7 +9,7 @@ export const About = (props) => (
 			<div className="wrapper">
 				<h1>Discuss art, join a community.</h1>
 		        <p>ArtSeen NYC is a platform for discussing current art exhibitions and connecting with{ " " } 
-		        art patrons in New York City:</p>
+		        the art community in New York City:</p>
 		  		<ol>
 		  			<li>
 		  				<h4>Search Exhibitions</h4>
