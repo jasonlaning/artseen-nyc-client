@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getSingleDiscussion, resetSingleDiscussion } from '../../actions';
-import Footer from '../footer/footer';
 import ExhibitionHeading from './exhibition-heading';
 import Comments from './comments';
 import CommentForm from './comment-form';
@@ -31,7 +30,6 @@ export class SingleDiscussion extends React.Component {
 							length={this.props.discussion.comments.length} />
 						<Comments comments={this.props.discussion.comments}/>
 						<CommentForm />
-						<Footer />
 					</div>
 				)
 			} 
