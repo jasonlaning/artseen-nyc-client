@@ -1,6 +1,6 @@
 # ArtSEEN NYC #
 
-[ArtSEEN NYC](https://artseennyc.netlify.com) is a community-driven platform for discussing current art exhibitions and connecting with art patrons in New York City.
+[ArtSEEN NYC](https://artseennyc.netlify.com) is a platform for discussing current art exhibitions and connecting with the art community in New York City.
 
 It is a responsive, full-stack app (MERN). The server application is in a [separate repository](https://github.com/jasonlaning/artseen-nyc-api) and is hosted separately.
 
