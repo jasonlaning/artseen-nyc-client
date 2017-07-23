@@ -13,3 +13,19 @@ footer {
 p.footer-text {
 	text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+
+	p.footer-text {
+		font-size: 12px;
+	}
+
+} 
+
+@media screen and (max-width: 330px) {
+
+	p.footer-text {
+		font-size: 11px;
+	}
+	
+} 
