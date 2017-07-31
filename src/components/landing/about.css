@@ -1,14 +1,12 @@
 #about ol {
-	list-style-type: decimal;
-	margin: 0 auto;
+	margin: 40px auto 0 auto;
 	font-size: 22px;
 	font-weight: bold;
-	width: 70%;
+	width: 90%;
 }
 
 #about ol h4 {
-	margin-top: 25px;
-	font-size: inherit;
+	font-size: 110%;
 }
 
 #about ol p {
@@ -17,8 +15,15 @@
 	margin: 0;
 }
 
+#about li {
+	padding: 40px;
+	border-top: 4px dotted #ccc;
+}
+
 .about-sign-up {
+	margin-top: 80px;
 	font-weight: normal;
+	text-align: center;
 }
 
 h4.about-sign-up a {
@@ -46,12 +51,8 @@ h4.about-sign-up a:hover {
 	}
 
 	#about ol {
-		width: 80%;
 		font-size: 18px;
-	}
-
-	#about ol h4 {
-		margin-top: 20px;
+		width: 100%;
 	}
 
 	#about h1 {
