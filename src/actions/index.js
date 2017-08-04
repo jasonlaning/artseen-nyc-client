@@ -77,20 +77,14 @@ export const getExhibitionsForSearch = (searchTerms) => dispatch => {
 	dispatch(updateModalMessage('Searching...'));
 	return axios({
 		method: 'get',
-		url: 'https://crossorigin.me/http://www.nyartbeat.com/list/event_free.en.xml'
+		url: `${API_BASE_URL}/search`
 	})
-		.then(res => {
-			parseString(res.data, (err, result) => {
-				if (err) {
-					dispatch(updateModalMessage('Server Error'));
-					console.log(err);
-				} else {
-					const exhibitions = result.Events.Event;
+		.then(result => {
+			console.log(result);
+					const exhibitions = result.data.result.Events.Event;
 					const searchResults = searchExhibitions(searchTerms, exhibitions);
 					dispatch(getSearchResultsSuccess(searchResults));
 					dispatch(updateModalMessage(''));
-				}
-			})
 		})
 		.catch(err => {
 			console.log(err);
