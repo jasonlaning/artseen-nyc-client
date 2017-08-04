@@ -1,4 +1,3 @@
-import {parseString} from 'xml2js';
 import axios from 'axios';
 import searchExhibitions from '../components/search-exhibitions';
 
